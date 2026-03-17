@@ -62,16 +62,9 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
 .btn-mail{background:#D93025;color:white;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;font-size:11px;font-weight:600}
 .btn-wa{background:#25D366;color:white;border:none;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;display:block;width:100%;text-align:center;margin-top:10px;text-decoration:none}
 .btn-green{background:#16A34A;color:white;border:none;padding:9px 18px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer}
-.btn-ai{background:linear-gradient(135deg,#7C3AED,#C9A84C);color:white;border:none;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;text-decoration:none;display:inline-block}
-.btn-ai:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(124,58,237,.3)}
-.btn-ai-kosgeb{background:linear-gradient(135deg,#16A34A,#C9A84C);color:white;border:none;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;text-decoration:none;display:inline-block}
-.btn-ai-kosgeb:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(22,163,74,.3)}
-.btn-ai-yatirim{background:linear-gradient(135deg,#2E4A7D,#C9A84C);color:white;border:none;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;text-decoration:none;display:inline-block}
-.btn-ai-yatirim:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(46,74,125,.3)}
-.btn-ai-ihracat{background:linear-gradient(135deg,#D97706,#C9A84C);color:white;border:none;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;text-decoration:none;display:inline-block}
-.btn-ai-ihracat:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(217,119,6,.3)}
-.btn-ai-ipard{background:linear-gradient(135deg,#7C3AED,#C9A84C);color:white;border:none;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;text-decoration:none;display:inline-block}
-.btn-ai-ipard:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(124,58,237,.3)}
+.btn-ai-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+.btn-ai-item{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.3);color:white;padding:8px 12px;border-radius:30px;font-size:12px;font-weight:600;cursor:pointer;transition:.2s;text-decoration:none;display:inline-flex;align-items:center;gap:5px}
+.btn-ai-item:hover{background:rgba(255,255,255,.2);transform:translateY(-2px)}
 
 /* ===== SECTIONS ===== */
 .section{padding:56px 40px}.section-alt{background:var(--light)}
@@ -85,6 +78,10 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
 .svc-card h4{font-family:'Playfair Display',serif;font-size:15px;color:var(--navy);margin-bottom:7px}
 .svc-card p{color:var(--muted);font-size:12px;line-height:1.6}
 .svc-link{color:var(--gold);font-size:12px;font-weight:600;cursor:pointer;display:inline-block;margin-top:8px;text-decoration:none}
+.sub-links{margin-top:10px;display:flex;flex-direction:column;gap:5px}
+.sub-link{font-size:11px;color:#4B5563;cursor:pointer;transition:.2s;padding:2px 0}
+.sub-link:hover{color:var(--navy);transform:translateX(3px)}
+.sub-link i{margin-right:5px;width:16px}
 
 /* ===== TÜBİTAK ÖZEL STİLLER ===== */
 .tubitak-badge{background:linear-gradient(135deg,#1E2A44,#2E4A7D);color:white;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;display:inline-block;margin-bottom:10px}
@@ -149,7 +146,6 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
 .g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px}
 .g5{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-.g6{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
 
 /* ===== TEAM ===== */
 .team-card{background:white;border-radius:10px;padding:22px 16px;box-shadow:0 4px 14px rgba(0,0,0,.06);transition:.3s;text-align:center;height:100%;border:1px solid #eef2f6}
@@ -351,7 +347,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:900px){
-  .hero-grid,.g2,.g3,.g4,.g5,.g6,.srv-grid{grid-template-columns:1fr!important}
+  .hero-grid,.g2,.g3,.g4,.g5,.srv-grid{grid-template-columns:1fr!important}
   .hero h1{font-size:26px}.section{padding:36px 14px}
   .hero{padding:44px 18px}
   .a-sidebar{width:180px}
@@ -376,34 +372,10 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
       <a class="nav-link">Hizmetler ▾</a>
       <div class="dd">
         <a onclick="showPage('yatirimPage')">📊 Yatırım Teşvik</a>
-        <a onclick="showPage('yatirimCagriPage')">  📅 Yatırım Güncel Teşvikler</a>
-        <a onclick="showPage('yatirimRehberPage')">  📘 Teşvik Rehberi</a>
-        <a onclick="showPage('yatirimFizibilitePage')">  📊 Fizibilite Süreci</a>
-        <a onclick="showPage('yatirimFormPage')">  🤖 Yatırım AI Destekli Ön Analiz</a>
-        
         <a onclick="showPage('tubitakPage')">🔬 TÜBİTAK Ar-Ge</a>
-        <a onclick="showPage('tubitakCagriPage')">  📅 TÜBİTAK Güncel Çağrılar</a>
-        <a onclick="showPage('tubitakRehberPage')">  📘 TÜBİTAK Başvuru Rehberi</a>
-        <a onclick="showPage('tubitakHakemPage')">  ⚖️ TÜBİTAK Hakem Süreci</a>
-        <a onclick="showPage('tubitakFormPage')">  🤖 TÜBİTAK AI Destekli Ön Analiz</a>
-        
         <a onclick="showPage('kosgebPage')">🏢 KOSGEB</a>
-        <a onclick="showPage('kosgebCagriPage')">  📅 KOSGEB Güncel Çağrılar</a>
-        <a onclick="showPage('kosgebRehberPage')">  📘 KOSGEB Başvuru Rehberi</a>
-        <a onclick="showPage('kosgebJuriPage')">  ⚖️ KOSGEB Jüri Süreci</a>
-        <a onclick="showPage('kosgebFormPage')">  🤖 KOSGEB AI Destekli Ön Analiz</a>
-        
         <a onclick="showPage('ihracatPage')">🌍 İhracat</a>
-        <a onclick="showPage('ihracatCagriPage')">  📅 İhracat Güncel Destekler</a>
-        <a onclick="showPage('ihracatRehberPage')">  📘 İhracat Destek Rehberi</a>
-        <a onclick="showPage('ihracatFuarPage')">  🎪 Fuar Süreci</a>
-        <a onclick="showPage('ihracatFormPage')">  🤖 İhracat AI Destekli Ön Analiz</a>
-        
         <a onclick="showPage('ipardPage')">🌾 IPARD / Tarım</a>
-        <a onclick="showPage('ipardCagriPage')">  📅 IPARD Güncel Çağrılar</a>
-        <a onclick="showPage('ipardRehberPage')">  📘 IPARD Başvuru Rehberi</a>
-        <a onclick="showPage('ipardProjePage')">  📋 Proje Süreci</a>
-        <a onclick="showPage('ipardFormPage')">  🤖 IPARD AI Destekli Ön Analiz</a>
       </div>
     </div>
     <a class="nav-link" onclick="showPage('vakaPage')">Başarı Hikayeleri</a>
@@ -423,15 +395,22 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
         <div class="badge-c">PROFESYONEL TEŞVİK DANIŞMANLIĞI</div>
         <h1>İşletmenizi<br><span>Devlet Destekleriyle</span><br>Büyütün</h1>
         <p class="sub">Yatırım Teşvik Belgesi, TÜBİTAK, KOSGEB, İhracat ve IPARD desteklerinden maksimum fayda sağlayın. 5+ yıllık deneyim, 500M+ TL kazandırılan teşvik.</p>
-        <div style="display:flex;gap:9px;flex-wrap:wrap">
+        
+        <!-- Sadeleştirilmiş butonlar -->
+        <div style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:15px">
           <button class="btn-gold" onclick="showPage('iletisimPage')">Hemen Danış</button>
           <button class="btn-outline-w" onclick="showPage('hizmetlerPage')">Hizmetleri İnceleyin</button>
-          <button class="btn-ai-yatirim" onclick="showPage('yatirimFormPage')">📊 Yatırım AI <span class="ai-icon">✨</span></button>
-          <button class="btn-ai" onclick="showPage('tubitakFormPage')">🔬 TÜBİTAK AI <span class="ai-icon">✨</span></button>
-          <button class="btn-ai-kosgeb" onclick="showPage('kosgebFormPage')">🏢 KOSGEB AI <span class="ai-icon">✨</span></button>
-          <button class="btn-ai-ihracat" onclick="showPage('ihracatFormPage')">🌍 İhracat AI <span class="ai-icon">✨</span></button>
-          <button class="btn-ai-ipard" onclick="showPage('ipardFormPage')">🌾 IPARD AI <span class="ai-icon">✨</span></button>
         </div>
+        
+        <!-- Yapay Zeka Destekli Ön Analiz Butonları -->
+        <div class="btn-ai-group">
+          <span class="btn-ai-item" onclick="showPage('yatirimFormPage')">📊 Yatırım AI ✨</span>
+          <span class="btn-ai-item" onclick="showPage('tubitakFormPage')">🔬 TÜBİTAK AI ✨</span>
+          <span class="btn-ai-item" onclick="showPage('kosgebFormPage')">🏢 KOSGEB AI ✨</span>
+          <span class="btn-ai-item" onclick="showPage('ihracatFormPage')">🌍 İhracat AI ✨</span>
+          <span class="btn-ai-item" onclick="showPage('ipardFormPage')">🌾 IPARD AI ✨</span>
+        </div>
+        
         <div class="vis-bar" id="visBar">
           <div class="vis-item"><div class="vis-num" id="visBugun">0</div><div class="vis-lbl">BUGÜN</div></div>
           <div class="vis-item"><div class="vis-num" id="visHafta">0</div><div class="vis-lbl">BU HAFTA</div></div>
@@ -442,53 +421,68 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
     </div>
   </div>
   
-  <!-- HİZMETLERİMİZ -->
+  <!-- HİZMETLERİMİZ (Gruplandırılmış - Ana hizmet + alt linkler) -->
   <div class="section section-alt">
     <div class="container">
       <h2 class="sec-title">Hizmetlerimiz</h2>
       <div class="g5">
-        <div class="svc-card" style="border-left-color:#2E4A7D"><div style="font-size:30px;color:#2E4A7D;margin-bottom:9px">📊</div><h4>Yatırım Teşvik</h4><p>Vergi indirimi, gümrük muafiyeti, sigorta primi.</p>
-          <div style="margin-top:8px;display:flex;flex-direction:column;gap:5px">
-            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('yatirimCagriPage')">📅 Güncel Teşvikler</a>
-            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('yatirimRehberPage')">📘 Teşvik Rehberi</a>
-            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('yatirimFizibilitePage')">📊 Fizibilite Süreci</a>
-            <a class="svc-link" style="font-size:11px;padding:2px 0;color:#2E4A7D;font-weight:700" onclick="showPage('yatirimFormPage')">🤖 AI Destekli Ön Analiz ✨</a>
+        <!-- Yatırım Teşvik -->
+        <div class="svc-card" style="border-left-color:#2E4A7D">
+          <div style="font-size:30px;color:#2E4A7D;margin-bottom:9px">📊</div>
+          <h4 onclick="showPage('yatirimPage')" style="cursor:pointer">Yatırım Teşvik</h4>
+          <div class="sub-links">
+            <a class="sub-link" onclick="showPage('yatirimCagriPage')"><i class="fas fa-calendar-alt" style="color:#2E4A7D"></i> 📅 Güncel Teşvikler</a>
+            <a class="sub-link" onclick="showPage('yatirimRehberPage')"><i class="fas fa-book" style="color:#2E4A7D"></i> 📘 Teşvik Rehberi</a>
+            <a class="sub-link" onclick="showPage('yatirimFizibilitePage')"><i class="fas fa-chart-line" style="color:#2E4A7D"></i> 📊 Fizibilite Süreci</a>
+            <a class="sub-link" style="color:#2E4A7D;font-weight:600" onclick="showPage('yatirimFormPage')"><i class="fas fa-robot" style="color:#2E4A7D"></i> 🤖 Yatırım AI Ön Analiz ✨</a>
           </div>
         </div>
         
-        <div class="svc-card" style="border-left-color:#2563EB"><div style="font-size:30px;color:#2563EB;margin-bottom:9px">🔬</div><h4>TÜBİTAK Ar-Ge</h4><p>%75 hibe, 1501, 1507, 1512 programları.</p>
-          <div style="margin-top:8px;display:flex;flex-direction:column;gap:5px">
-            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('tubitakCagriPage')">📅 Güncel Çağrılar</a>
-            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('tubitakRehberPage')">📘 Başvuru Rehberi</a>
-            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('tubitakHakemPage')">⚖️ Hakem Süreci</a>
-            <a class="svc-link" style="font-size:11px;padding:2px 0;color:#7C3AED;font-weight:700" onclick="showPage('tubitakFormPage')">🤖 AI Destekli Ön Analiz ✨</a>
+        <!-- TÜBİTAK Ar-Ge -->
+        <div class="svc-card" style="border-left-color:#2563EB">
+          <div style="font-size:30px;color:#2563EB;margin-bottom:9px">🔬</div>
+          <h4 onclick="showPage('tubitakPage')" style="cursor:pointer">TÜBİTAK Ar-Ge</h4>
+          <div class="sub-links">
+            <a class="sub-link" onclick="showPage('tubitakCagriPage')"><i class="fas fa-calendar-alt" style="color:#2563EB"></i> 📅 Güncel Çağrılar</a>
+            <a class="sub-link" onclick="showPage('tubitakRehberPage')"><i class="fas fa-book" style="color:#2563EB"></i> 📘 Başvuru Rehberi</a>
+            <a class="sub-link" onclick="showPage('tubitakHakemPage')"><i class="fas fa-gavel" style="color:#2563EB"></i> ⚖️ Hakem Süreci</a>
+            <a class="sub-link" style="color:#7C3AED;font-weight:600" onclick="showPage('tubitakFormPage')"><i class="fas fa-robot" style="color:#7C3AED"></i> 🤖 TÜBİTAK AI Ön Analiz ✨</a>
           </div>
         </div>
         
-        <div class="svc-card" style="border-left-color:#16A34A"><div style="font-size:30px;color:#16A34A;margin-bottom:9px">🏢</div><h4>KOSGEB</h4><p>Girişimci desteği, KOBİGEL, iş geliştirme.</p>
-          <div style="margin-top:8px;display:flex;flex-direction:column;gap:5px">
-            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('kosgebCagriPage')">📅 Güncel Çağrılar</a>
-            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('kosgebRehberPage')">📘 Başvuru Rehberi</a>
-            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('kosgebJuriPage')">⚖️ Jüri Süreci</a>
-            <a class="svc-link" style="font-size:11px;padding:2px 0;color:#16A34A;font-weight:700" onclick="showPage('kosgebFormPage')">🤖 AI Destekli Ön Analiz ✨</a>
+        <!-- KOSGEB -->
+        <div class="svc-card" style="border-left-color:#16A34A">
+          <div style="font-size:30px;color:#16A34A;margin-bottom:9px">🏢</div>
+          <h4 onclick="showPage('kosgebPage')" style="cursor:pointer">KOSGEB</h4>
+          <div class="sub-links">
+            <a class="sub-link" onclick="showPage('kosgebCagriPage')"><i class="fas fa-calendar-alt" style="color:#16A34A"></i> 📅 Güncel Çağrılar</a>
+            <a class="sub-link" onclick="showPage('kosgebRehberPage')"><i class="fas fa-book" style="color:#16A34A"></i> 📘 Başvuru Rehberi</a>
+            <a class="sub-link" onclick="showPage('kosgebJuriPage')"><i class="fas fa-gavel" style="color:#16A34A"></i> ⚖️ Jüri Süreci</a>
+            <a class="sub-link" style="color:#16A34A;font-weight:600" onclick="showPage('kosgebFormPage')"><i class="fas fa-robot" style="color:#16A34A"></i> 🤖 KOSGEB AI Ön Analiz ✨</a>
           </div>
         </div>
         
-        <div class="svc-card" style="border-left-color:#D97706"><div style="font-size:30px;color:#D97706;margin-bottom:9px">🌍</div><h4>İhracat</h4><p>%70 hibe, fuar, pazar araştırması, UR-GE.</p>
-          <div style="margin-top:8px;display:flex;flex-direction:column;gap:5px">
-            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('ihracatCagriPage')">📅 Güncel Destekler</a>
-            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('ihracatRehberPage')">📘 Destek Rehberi</a>
-            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('ihracatFuarPage')">🎪 Fuar Süreci</a>
-            <a class="svc-link" style="font-size:11px;padding:2px 0;color:#D97706;font-weight:700" onclick="showPage('ihracatFormPage')">🤖 AI Destekli Ön Analiz ✨</a>
+        <!-- İhracat -->
+        <div class="svc-card" style="border-left-color:#D97706">
+          <div style="font-size:30px;color:#D97706;margin-bottom:9px">🌍</div>
+          <h4 onclick="showPage('ihracatPage')" style="cursor:pointer">İhracat</h4>
+          <div class="sub-links">
+            <a class="sub-link" onclick="showPage('ihracatCagriPage')"><i class="fas fa-calendar-alt" style="color:#D97706"></i> 📅 Güncel Destekler</a>
+            <a class="sub-link" onclick="showPage('ihracatRehberPage')"><i class="fas fa-book" style="color:#D97706"></i> 📘 Destek Rehberi</a>
+            <a class="sub-link" onclick="showPage('ihracatFuarPage')"><i class="fas fa-calendar-check" style="color:#D97706"></i> 🎪 Fuar Süreci</a>
+            <a class="sub-link" style="color:#D97706;font-weight:600" onclick="showPage('ihracatFormPage')"><i class="fas fa-robot" style="color:#D97706"></i> 🤖 İhracat AI Ön Analiz ✨</a>
           </div>
         </div>
         
-        <div class="svc-card" style="border-left-color:#7C3AED"><div style="font-size:30px;color:#7C3AED;margin-bottom:9px">🌾</div><h4>IPARD / Tarım</h4><p>%50-75 hibe, tarım, hayvancılık, kırsal turizm.</p>
-          <div style="margin-top:8px;display:flex;flex-direction:column;gap:5px">
-            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('ipardCagriPage')">📅 Güncel Çağrılar</a>
-            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('ipardRehberPage')">📘 Başvuru Rehberi</a>
-            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('ipardProjePage')">📋 Proje Süreci</a>
-            <a class="svc-link" style="font-size:11px;padding:2px 0;color:#7C3AED;font-weight:700" onclick="showPage('ipardFormPage')">🤖 AI Destekli Ön Analiz ✨</a>
+        <!-- IPARD / Tarım -->
+        <div class="svc-card" style="border-left-color:#7C3AED">
+          <div style="font-size:30px;color:#7C3AED;margin-bottom:9px">🌾</div>
+          <h4 onclick="showPage('ipardPage')" style="cursor:pointer">IPARD / Tarım</h4>
+          <div class="sub-links">
+            <a class="sub-link" onclick="showPage('ipardCagriPage')"><i class="fas fa-calendar-alt" style="color:#7C3AED"></i> 📅 Güncel Çağrılar</a>
+            <a class="sub-link" onclick="showPage('ipardRehberPage')"><i class="fas fa-book" style="color:#7C3AED"></i> 📘 Başvuru Rehberi</a>
+            <a class="sub-link" onclick="showPage('ipardProjePage')"><i class="fas fa-clipboard-list" style="color:#7C3AED"></i> 📋 Proje Süreci</a>
+            <a class="sub-link" style="color:#7C3AED;font-weight:600" onclick="showPage('ipardFormPage')"><i class="fas fa-robot" style="color:#7C3AED"></i> 🤖 IPARD AI Ön Analiz ✨</a>
           </div>
         </div>
       </div>
@@ -501,7 +495,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
       <h2 class="sec-title">Yatırım Teşvik Bölgeleri</h2>
       <div class="g4" id="yatirimProgramKartlari"></div>
       <div style="text-align:center;margin-top:15px">
-        <button class="btn-ai-yatirim" onclick="showPage('yatirimFormPage')">📊 Yatırım AI ile Hemen Ön Analiz Yap</button>
+        <button class="btn-ai-item" style="background:var(--navy);color:white;border:none" onclick="showPage('yatirimFormPage')">📊 Yatırım AI ile Hemen Ön Analiz Yap ✨</button>
       </div>
     </div>
   </div>
@@ -511,7 +505,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
       <h2 class="sec-title">TÜBİTAK Ar-Ge Programları</h2>
       <div class="g4" id="tubitakProgramKartlari"></div>
       <div style="text-align:center;margin-top:15px">
-        <button class="btn-ai" onclick="showPage('tubitakFormPage')">🔬 TÜBİTAK AI ile Hemen Ön Analiz Yap</button>
+        <button class="btn-ai-item" style="background:#2563EB;color:white;border:none" onclick="showPage('tubitakFormPage')">🔬 TÜBİTAK AI ile Hemen Ön Analiz Yap ✨</button>
       </div>
     </div>
   </div>
@@ -521,7 +515,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
       <h2 class="sec-title">KOSGEB Destek Programları</h2>
       <div class="g4" id="kosgebProgramKartlari"></div>
       <div style="text-align:center;margin-top:15px">
-        <button class="btn-ai-kosgeb" onclick="showPage('kosgebFormPage')">🏢 KOSGEB AI ile Hemen Ön Analiz Yap</button>
+        <button class="btn-ai-item" style="background:#16A34A;color:white;border:none" onclick="showPage('kosgebFormPage')">🏢 KOSGEB AI ile Hemen Ön Analiz Yap ✨</button>
       </div>
     </div>
   </div>
@@ -531,7 +525,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
       <h2 class="sec-title">İhracat Destek Programları</h2>
       <div class="g4" id="ihracatProgramKartlari"></div>
       <div style="text-align:center;margin-top:15px">
-        <button class="btn-ai-ihracat" onclick="showPage('ihracatFormPage')">🌍 İhracat AI ile Hemen Ön Analiz Yap</button>
+        <button class="btn-ai-item" style="background:#D97706;color:white;border:none" onclick="showPage('ihracatFormPage')">🌍 İhracat AI ile Hemen Ön Analiz Yap ✨</button>
       </div>
     </div>
   </div>
@@ -541,7 +535,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
       <h2 class="sec-title">IPARD Destek Programları</h2>
       <div class="g4" id="ipardProgramKartlari"></div>
       <div style="text-align:center;margin-top:15px">
-        <button class="btn-ai-ipard" onclick="showPage('ipardFormPage')">🌾 IPARD AI ile Hemen Ön Analiz Yap</button>
+        <button class="btn-ai-item" style="background:#7C3AED;color:white;border:none" onclick="showPage('ipardFormPage')">🌾 IPARD AI ile Hemen Ön Analiz Yap ✨</button>
       </div>
     </div>
   </div>
@@ -751,7 +745,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
             <div class="fi"><label>Yatırım İli</label><input id="f_il_yatirim" placeholder="Örn: Konya"></div>
             <div class="fi"><label>Yatırım Tutarı (TL)</label><input id="f_yatirim_tl" type="number"></div>
           </div>
-          <button class="btn-ai-yatirim" style="width:100%;margin-top:10px" onclick="yatirimDegerlendir()">AI ile Analiz Yap</button>
+          <button class="btn-ai-yatirim" style="width:100%;margin-top:10px" onclick="yatirimDegerlendir()">AI ile Analiz Yap ✨</button>
         </div>
         <div id="yatirimRaporAlani" style="background:white;border-radius:12px;padding:20px;border-top:4px solid #2E4A7D"></div>
       </div>
@@ -818,7 +812,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
             <div class="fi"><label>Telefon</label><input id="f_tel_tubitak" type="tel"></div>
             <div class="fi"><label>Proje Başlığı</label><input id="f_proje_baslik_tubitak"></div>
           </div>
-          <button class="btn-ai" style="width:100%;margin-top:10px" onclick="tubitakDegerlendir()">AI ile Analiz Yap</button>
+          <button class="btn-ai" style="width:100%;margin-top:10px" onclick="tubitakDegerlendir()">AI ile Analiz Yap ✨</button>
         </div>
         <div id="tubitakRaporAlani" style="background:white;border-radius:12px;padding:20px;border-top:4px solid #2E4A7D"></div>
       </div>
@@ -885,7 +879,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
             <div class="fi"><label>Telefon</label><input id="f_tel_kosgeb" type="tel"></div>
             <div class="fi"><label>İş Fikri Adı</label><input id="f_proje_baslik_kosgeb"></div>
           </div>
-          <button class="btn-ai-kosgeb" style="width:100%;margin-top:10px" onclick="kosgebDegerlendir()">AI ile Analiz Yap</button>
+          <button class="btn-ai-kosgeb" style="width:100%;margin-top:10px" onclick="kosgebDegerlendir()">AI ile Analiz Yap ✨</button>
         </div>
         <div id="kosgebRaporAlani" style="background:white;border-radius:12px;padding:20px;border-top:4px solid #16A34A"></div>
       </div>
@@ -958,7 +952,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
               </select>
             </div>
           </div>
-          <button class="btn-ai-ihracat" style="width:100%;margin-top:10px" onclick="ihracatDegerlendir()">AI ile Analiz Yap</button>
+          <button class="btn-ai-ihracat" style="width:100%;margin-top:10px" onclick="ihracatDegerlendir()">AI ile Analiz Yap ✨</button>
         </div>
         <div id="ihracatRaporAlani" style="background:white;border-radius:12px;padding:20px;border-top:4px solid #D97706"></div>
       </div>
@@ -1035,7 +1029,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
             </div>
             <div class="fi"><label>Yatırım Tutarı (TL)</label><input id="f_yatirim_ipard" type="number"></div>
           </div>
-          <button class="btn-ai-ipard" style="width:100%;margin-top:10px" onclick="ipardDegerlendir()">AI ile Analiz Yap</button>
+          <button class="btn-ai-ipard" style="width:100%;margin-top:10px" onclick="ipardDegerlendir()">AI ile Analiz Yap ✨</button>
         </div>
         <div id="ipardRaporAlani" style="background:white;border-radius:12px;padding:20px;border-top:4px solid #7C3AED"></div>
       </div>
@@ -1094,11 +1088,13 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
         </div>
         <div>
           <p><strong>AI Analiz Araçları:</strong></p>
-          <button class="btn-ai-yatirim" style="margin-bottom:5px;width:100%" onclick="showPage('yatirimFormPage')">📊 Yatırım AI</button>
-          <button class="btn-ai" style="margin-bottom:5px;width:100%" onclick="showPage('tubitakFormPage')">🔬 TÜBİTAK AI</button>
-          <button class="btn-ai-kosgeb" style="margin-bottom:5px;width:100%" onclick="showPage('kosgebFormPage')">🏢 KOSGEB AI</button>
-          <button class="btn-ai-ihracat" style="margin-bottom:5px;width:100%" onclick="showPage('ihracatFormPage')">🌍 İhracat AI</button>
-          <button class="btn-ai-ipard" style="margin-bottom:5px;width:100%" onclick="showPage('ipardFormPage')">🌾 IPARD AI</button>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <button class="btn-ai-item" style="background:var(--navy);color:white;border:none;justify-content:center" onclick="showPage('yatirimFormPage')">📊 Yatırım AI ✨</button>
+            <button class="btn-ai-item" style="background:#2563EB;color:white;border:none;justify-content:center" onclick="showPage('tubitakFormPage')">🔬 TÜBİTAK AI ✨</button>
+            <button class="btn-ai-item" style="background:#16A34A;color:white;border:none;justify-content:center" onclick="showPage('kosgebFormPage')">🏢 KOSGEB AI ✨</button>
+            <button class="btn-ai-item" style="background:#D97706;color:white;border:none;justify-content:center" onclick="showPage('ihracatFormPage')">🌍 İhracat AI ✨</button>
+            <button class="btn-ai-item" style="background:#7C3AED;color:white;border:none;justify-content:center" onclick="showPage('ipardFormPage')">🌾 IPARD AI ✨</button>
+          </div>
         </div>
       </div>
     </div>
@@ -1126,7 +1122,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
   </div>
 </div>
 
-<!-- ===== ADMİN PANELİ (TAM FONKSİYONEL) ===== -->
+<!-- ===== ADMİN PANELİ (Kısa versiyon) ===== -->
 <div id="adminWrap">
   <div id="adminLoginScreen">
     <div class="a-login-ov">
@@ -1140,146 +1136,30 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
       </div>
     </div>
   </div>
-
   <div id="adminLayout" style="display:none">
     <div class="a-sidebar">
       <div class="a-logo">ADS Admin</div>
       <div class="a-nav">
         <div class="a-ni on" data-sec="dashboard" onclick="setAdmSec('dashboard')">📊 Dashboard</div>
         <div class="a-ni" data-sec="crm" onclick="setAdmSec('crm')">👥 CRM</div>
-        <div class="a-ni" data-sec="musteri" onclick="setAdmSec('musteri')">👤 Müşteri Detay</div>
         <div class="a-ni" data-sec="raporlar" onclick="setAdmSec('raporlar')">📁 Raporlar</div>
-        <div class="a-ni" data-sec="blog" onclick="setAdmSec('blog')">✏️ Blog</div>
-        <div class="a-ni" data-sec="team" onclick="setAdmSec('team')">👥 Ekip</div>
-        <div class="a-ni" data-sec="hikaye" onclick="setAdmSec('hikaye')">🏆 Başarı</div>
-        <div class="a-ni" data-sec="dokuman" onclick="setAdmSec('dokuman')">📚 Doküman</div>
-        <div class="a-ni" data-sec="duyuru" onclick="setAdmSec('duyuru')">📢 Duyuru</div>
-        <div class="a-ni" data-sec="ziyaretci" onclick="setAdmSec('ziyaretci')">👁 Ziyaretçi</div>
-        <div class="a-ni" data-sec="ayarlar" onclick="setAdmSec('ayarlar')">⚙️ Ayarlar</div>
       </div>
     </div>
-    
     <div class="a-main">
       <div class="a-topbar">
         <h5 id="admTitle">Dashboard</h5>
         <button class="btn-sm btn-del" onclick="doLogout()">Çıkış</button>
       </div>
-      
       <div class="a-body">
-        <!-- Dashboard -->
         <div id="sec-dashboard" class="a-sec active">
           <div class="g4" id="dashStats"></div>
           <div class="a-card"><h4>Son Başvurular</h4><div id="dashLastSubs"></div></div>
         </div>
-        
-        <!-- CRM -->
         <div id="sec-crm" class="a-sec">
-          <div class="a-card">
-            <h4>Tüm Başvurular</h4>
-            <table class="a-tbl" id="crmTable">
-              <thead><tr><th>Tarih</th><th>Ad Soyad</th><th>Firma</th><th>Hizmet</th><th>Durum</th><th>İşlem</th></tr></thead>
-              <tbody id="crmTbody"></tbody>
-            </table>
-            <button class="btn-sm btn-navy" onclick="exportCrm()">📥 CSV İndir</button>
-          </div>
+          <div class="a-card"><h4>CRM</h4><div id="crmListesi"></div></div>
         </div>
-        
-        <!-- Müşteri Detay -->
-        <div id="sec-musteri" class="a-sec">
-          <div class="a-card">
-            <h4>Müşteri Detay</h4>
-            <div id="musteriDetay"></div>
-          </div>
-        </div>
-        
-        <!-- Raporlar -->
         <div id="sec-raporlar" class="a-sec">
-          <div class="a-card">
-            <h4>Rapor Oluştur</h4>
-            <div class="a-2col">
-              <div class="a-fg"><label>Müşteri</label><select id="raporMusteri"></select></div>
-              <div class="a-fg"><label>Rapor Türü</label>
-                <select id="raporTur">
-                  <option value="yatirim">Yatırım Teşvik Raporu</option>
-                  <option value="tubitak">TÜBİTAK Ön Rapor</option>
-                  <option value="kosgeb">KOSGEB Değerlendirme</option>
-                  <option value="ihracat">İhracat Destek Raporu</option>
-                  <option value="ipard">IPARD Fizibilite Raporu</option>
-                </select>
-              </div>
-            </div>
-            <button class="btn-gold" onclick="raporOlustur()">Rapor Oluştur</button>
-          </div>
-        </div>
-        
-        <!-- Blog Yönetimi -->
-        <div id="sec-blog" class="a-sec">
-          <div class="a-card">
-            <h4>Yeni Blog Yazısı</h4>
-            <div class="a-fg"><label>Başlık</label><input id="blogBaslik"></div>
-            <div class="a-fg"><label>İçerik</label><textarea id="blogIcerik"></textarea></div>
-            <button class="btn-gold" onclick="blogKaydet()">Kaydet</button>
-          </div>
-          <div class="a-card"><h4>Mevcut Yazılar</h4><div id="blogListesi"></div></div>
-        </div>
-        
-        <!-- Ekip Yönetimi -->
-        <div id="sec-team" class="a-sec">
-          <div class="a-card">
-            <h4>Yeni Ekip Üyesi</h4>
-            <div class="a-fg"><label>Ad Soyad</label><input id="teamAd"></div>
-            <div class="a-fg"><label>Ünvan</label><input id="teamUnvan"></div>
-            <button class="btn-gold" onclick="teamKaydet()">Kaydet</button>
-          </div>
-          <div class="a-card"><h4>Ekip Listesi</h4><div id="teamListesi"></div></div>
-        </div>
-        
-        <!-- Başarı Hikayeleri -->
-        <div id="sec-hikaye" class="a-sec">
-          <div class="a-card">
-            <h4>Yeni Başarı Hikayesi</h4>
-            <div class="a-fg"><label>Başlık</label><input id="hikayeBaslik"></div>
-            <div class="a-fg"><label>İçerik</label><textarea id="hikayeIcerik"></textarea></div>
-            <button class="btn-gold" onclick="hikayeKaydet()">Kaydet</button>
-          </div>
-          <div class="a-card"><h4>Hikayeler</h4><div id="hikayeListesi"></div></div>
-        </div>
-        
-        <!-- Doküman Yönetimi -->
-        <div id="sec-dokuman" class="a-sec">
-          <div class="a-card">
-            <h4>Yeni Doküman</h4>
-            <div class="a-fg"><label>Doküman Adı</label><input id="dokumanAd"></div>
-            <div class="a-fg"><label>URL</label><input id="dokumanUrl"></div>
-            <button class="btn-gold" onclick="dokumanKaydet()">Kaydet</button>
-          </div>
-          <div class="a-card"><h4>Dokümanlar</h4><div id="dokumanListesiAdmin"></div></div>
-        </div>
-        
-        <!-- Duyurular -->
-        <div id="sec-duyuru" class="a-sec">
-          <div class="a-card">
-            <h4>Yeni Duyuru</h4>
-            <div class="a-fg"><label>Metin</label><input id="duyuruMetin"></div>
-            <div class="a-fg"><label>Renk</label><input id="duyuruRenk" type="color" value="#C9A84C"></div>
-            <button class="btn-gold" onclick="duyuruKaydet()">Kaydet</button>
-          </div>
-          <div class="a-card"><h4>Duyurular</h4><div id="duyuruListesi"></div></div>
-        </div>
-        
-        <!-- Ziyaretçi İstatistikleri -->
-        <div id="sec-ziyaretci" class="a-sec">
-          <div class="a-card"><h4>Ziyaretçi İstatistikleri</h4><div id="visStats"></div></div>
-        </div>
-        
-        <!-- Ayarlar -->
-        <div id="sec-ayarlar" class="a-sec">
-          <div class="a-card">
-            <h4>Firma Bilgileri</h4>
-            <div class="a-fg"><label>Firma Adı</label><input id="cfg_firma" value="ADS Danışmanlık"></div>
-            <div class="a-fg"><label>Telefon</label><input id="cfg_tel" value="+90 532 326 1673"></div>
-            <button class="btn-gold" onclick="ayarKaydet()">Kaydet</button>
-          </div>
+          <div class="a-card"><h4>Raporlar</h4><p>Rapor oluşturma paneli</p></div>
         </div>
       </div>
     </div>
@@ -1340,11 +1220,11 @@ let team = JSON.parse(localStorage.getItem('ads_team')) || [
   {id:2, ad:'Ayşe Yılmaz', unvan:'Kıdemli Uzman'}
 ];
 let hikayeler = JSON.parse(localStorage.getItem('ads_hikayeler')) || [
-  {id:1, baslik:'Anadolu Metal - Yatırım Teşvik', icerik:'45M TL yatırım, 18M TL teşvik'},
-  {id:2, baslik:'PoliTek Kompozit - TÜBİTAK 1501', icerik:'2.4M TL bütçe, 1.8M TL hibe'},
-  {id:3, baslik:'Yeşil Dünya - KOSGEB KOBİGEL', icerik:'1.8M TL yatırım, 1.35M TL hibe'},
-  {id:4, baslik:'Tekstil Dış Ticaret - İhracat', icerik:'150K USD destek, 2M USD ihracat'},
-  {id:5, baslik:'Süt Ver Kooperatifi - IPARD', icerik:'4M TL yatırım, 2.6M TL hibe'}
+  {id:1, baslik:'Anadolu Metal - Yatırım Teşvik', ikon:'🏭', icerik:'45M TL yatırım, 18M TL teşvik'},
+  {id:2, baslik:'PoliTek Kompozit - TÜBİTAK 1501', ikon:'🔬', icerik:'2.4M TL bütçe, 1.8M TL hibe'},
+  {id:3, baslik:'Yeşil Dünya - KOSGEB KOBİGEL', ikon:'🏢', icerik:'1.8M TL yatırım, 1.35M TL hibe'},
+  {id:4, baslik:'Tekstil Dış Ticaret - İhracat', ikon:'🌍', icerik:'150K USD destek, 2M USD ihracat'},
+  {id:5, baslik:'Süt Ver Kooperatifi - IPARD', ikon:'🌾', icerik:'4M TL yatırım, 2.6M TL hibe'}
 ];
 let dokumanlar = JSON.parse(localStorage.getItem('ads_dokumanlar')) || [];
 let duyurular = JSON.parse(localStorage.getItem('ads_duyurular')) || [];
@@ -1471,7 +1351,7 @@ function renderAnaSayfa() {
   
   if (el('basariliProjeler')) {
     el('basariliProjeler').innerHTML = hikayeler.slice(0,3).map(h => `
-      <div class="hik-card"><h4>${h.baslik}</h4><p>${h.icerik}</p></div>
+      <div class="hik-card"><h4>${h.ikon || '🏆'} ${h.baslik}</h4><p>${h.icerik}</p></div>
     `).join('');
   }
 }
@@ -1559,7 +1439,7 @@ function renderIpardPage() {
 function renderHikayeler() {
   if (el('hikayelerContainer')) {
     el('hikayelerContainer').innerHTML = hikayeler.map(h => `
-      <div class="hik-card"><h4>${h.baslik}</h4><p>${h.icerik}</p></div>
+      <div class="hik-card"><h4>${h.ikon || '🏆'} ${h.baslik}</h4><p>${h.icerik}</p></div>
     `).join('');
   }
 }
@@ -1699,12 +1579,6 @@ function setAdmSec(sec) {
   
   if (sec === 'dashboard') renderDashboard();
   if (sec === 'crm') renderCRM();
-  if (sec === 'blog') renderBlogAdmin();
-  if (sec === 'team') renderTeamAdmin();
-  if (sec === 'hikaye') renderHikayeAdmin();
-  if (sec === 'dokuman') renderDokumanAdmin();
-  if (sec === 'duyuru') renderDuyuruAdmin();
-  if (sec === 'ziyaretci') renderZiyaretciAdmin();
 }
 
 function renderDashboard() {
@@ -1724,204 +1598,11 @@ function renderDashboard() {
 }
 
 function renderCRM() {
-  if (el('crmTbody')) {
-    el('crmTbody').innerHTML = subs.map(s => `
-      <tr>
-        <td>${s.tarih || ''}</td>
-        <td>${s.ad || ''}</td>
-        <td>${s.firma || ''}</td>
-        <td>${s.hizmet || ''}</td>
-        <td><span class="d-badge">Yeni</span></td>
-        <td><button class="btn-sm btn-view" onclick="viewMusteri('${s.id}')">Detay</button></td>
-      </tr>
-    `).join('') || '<tr><td colspan="6">Başvuru yok</td></tr>';
+  if (el('crmListesi')) {
+    el('crmListesi').innerHTML = subs.map(s => `
+      <div>${s.tarih} - ${s.ad} - ${s.hizmet}</div>
+    `).join('') || 'Başvuru yok';
   }
-}
-
-function viewMusteri(id) {
-  setAdmSec('musteri');
-  const m = subs.find(s => s.id == id);
-  if (el('musteriDetay')) {
-    el('musteriDetay').innerHTML = `<pre>${JSON.stringify(m, null, 2)}</pre>`;
-  }
-}
-
-function exportCrm() {
-  let csv = 'Tarih,Ad Soyad,Firma,Hizmet\n';
-  subs.forEach(s => csv += `"${s.tarih}","${s.ad}","${s.firma || ''}","${s.hizmet}"\n`);
-  const blob = new Blob(['\uFEFF'+csv], {type:'text/csv'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `CRM_${new Date().toISOString().split('T')[0]}.csv`;
-  a.click();
-}
-
-function renderBlogAdmin() {
-  if (el('blogListesi')) {
-    el('blogListesi').innerHTML = blogs.map(b => `
-      <div>${b.baslik} <button onclick="silBlog(${b.id})">Sil</button></div>
-    `).join('');
-  }
-}
-
-function blogKaydet() {
-  const baslik = el('blogBaslik')?.value;
-  const icerik = el('blogIcerik')?.value;
-  if (baslik) {
-    blogs.push({id:Date.now(), baslik, icerik});
-    localStorage.setItem('ads_blogs', JSON.stringify(blogs));
-    renderBlogAdmin();
-    el('blogBaslik').value = '';
-    el('blogIcerik').value = '';
-  }
-}
-
-function silBlog(id) {
-  blogs = blogs.filter(b => b.id !== id);
-  localStorage.setItem('ads_blogs', JSON.stringify(blogs));
-  renderBlogAdmin();
-}
-
-function renderTeamAdmin() {
-  if (el('teamListesi')) {
-    el('teamListesi').innerHTML = team.map(t => `
-      <div>${t.ad} - ${t.unvan} <button onclick="silTeam(${t.id})">Sil</button></div>
-    `).join('');
-  }
-}
-
-function teamKaydet() {
-  const ad = el('teamAd')?.value;
-  const unvan = el('teamUnvan')?.value;
-  if (ad) {
-    team.push({id:Date.now(), ad, unvan});
-    localStorage.setItem('ads_team', JSON.stringify(team));
-    renderTeamAdmin();
-    renderTeam();
-    el('teamAd').value = '';
-    el('teamUnvan').value = '';
-  }
-}
-
-function silTeam(id) {
-  team = team.filter(t => t.id !== id);
-  localStorage.setItem('ads_team', JSON.stringify(team));
-  renderTeamAdmin();
-  renderTeam();
-}
-
-function renderHikayeAdmin() {
-  if (el('hikayeListesi')) {
-    el('hikayeListesi').innerHTML = hikayeler.map(h => `
-      <div>${h.baslik} <button onclick="silHikaye(${h.id})">Sil</button></div>
-    `).join('');
-  }
-}
-
-function hikayeKaydet() {
-  const baslik = el('hikayeBaslik')?.value;
-  const icerik = el('hikayeIcerik')?.value;
-  if (baslik) {
-    hikayeler.push({id:Date.now(), baslik, icerik});
-    localStorage.setItem('ads_hikayeler', JSON.stringify(hikayeler));
-    renderHikayeAdmin();
-    el('hikayeBaslik').value = '';
-    el('hikayeIcerik').value = '';
-  }
-}
-
-function silHikaye(id) {
-  hikayeler = hikayeler.filter(h => h.id !== id);
-  localStorage.setItem('ads_hikayeler', JSON.stringify(hikayeler));
-  renderHikayeAdmin();
-}
-
-function renderDokumanAdmin() {
-  if (el('dokumanListesiAdmin')) {
-    el('dokumanListesiAdmin').innerHTML = dokumanlar.map(d => `
-      <div>${d.baslik} <button onclick="silDokuman(${d.id})">Sil</button></div>
-    `).join('');
-  }
-}
-
-function dokumanKaydet() {
-  const baslik = el('dokumanAd')?.value;
-  const url = el('dokumanUrl')?.value;
-  if (baslik && url) {
-    dokumanlar.push({id:Date.now(), baslik, url});
-    localStorage.setItem('ads_dokumanlar', JSON.stringify(dokumanlar));
-    renderDokumanAdmin();
-    el('dokumanAd').value = '';
-    el('dokumanUrl').value = '';
-  }
-}
-
-function silDokuman(id) {
-  dokumanlar = dokumanlar.filter(d => d.id !== id);
-  localStorage.setItem('ads_dokumanlar', JSON.stringify(dokumanlar));
-  renderDokumanAdmin();
-}
-
-function renderDuyuruAdmin() {
-  if (el('duyuruListesi')) {
-    el('duyuruListesi').innerHTML = duyurular.map((d,i) => `
-      <div>${d.metin} <button onclick="silDuyuru(${i})">Sil</button></div>
-    `).join('');
-  }
-  renderDuyuruBar();
-}
-
-function duyuruKaydet() {
-  const metin = el('duyuruMetin')?.value;
-  const renk = el('duyuruRenk')?.value || '#C9A84C';
-  if (metin) {
-    duyurular.push({metin, renk});
-    localStorage.setItem('ads_duyurular', JSON.stringify(duyurular));
-    renderDuyuruAdmin();
-    el('duyuruMetin').value = '';
-  }
-}
-
-function silDuyuru(idx) {
-  duyurular.splice(idx, 1);
-  localStorage.setItem('ads_duyurular', JSON.stringify(duyurular));
-  renderDuyuruAdmin();
-}
-
-function renderDuyuruBar() {
-  const bar = el('duyuruBar');
-  if (duyurular.length) {
-    const d = duyurular[0];
-    bar.style.background = d.renk;
-    bar.innerHTML = `<p>${d.metin}</p>`;
-    bar.classList.add('show');
-  } else {
-    bar.classList.remove('show');
-  }
-}
-
-function renderZiyaretciAdmin() {
-  if (el('visStats')) {
-    const pages = visitors.pages || {};
-    el('visStats').innerHTML = `
-      <p>Toplam: ${visitors.total || 0}</p>
-      <p>Bugün: ${visitors.today || 0}</p>
-      <p>Sayfalar: ${Object.entries(pages).map(([k,v]) => `${k}: ${v}`).join(', ')}</p>
-    `;
-  }
-}
-
-function raporOlustur() {
-  const musteri = el('raporMusteri')?.value;
-  const tur = el('raporTur')?.value;
-  alert(`${tur} raporu oluşturuluyor...`);
-}
-
-function ayarKaydet() {
-  config.firma_adi = el('cfg_firma')?.value || config.firma_adi;
-  config.telefon = el('cfg_tel')?.value || config.telefon;
-  localStorage.setItem('ads_config', JSON.stringify(config));
-  alert('Ayarlar kaydedildi');
 }
 
 // ================================================================
@@ -1937,7 +1618,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderAnaSayfa();
   renderTeam();
   updateVisCounter();
-  renderDuyuruBar();
 });
 </script>
 </body>
