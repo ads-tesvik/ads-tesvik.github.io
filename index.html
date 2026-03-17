@@ -66,6 +66,8 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
 .btn-ai:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(124,58,237,.3)}
 .btn-ai-kosgeb{background:linear-gradient(135deg,#16A34A,#C9A84C);color:white;border:none;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;text-decoration:none;display:inline-block}
 .btn-ai-kosgeb:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(22,163,74,.3)}
+.btn-ai-yatirim{background:linear-gradient(135deg,#2E4A7D,#C9A84C);color:white;border:none;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;text-decoration:none;display:inline-block}
+.btn-ai-yatirim:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(46,74,125,.3)}
 
 /* ===== SECTIONS ===== */
 .section{padding:56px 40px}.section-alt{background:var(--light)}
@@ -113,6 +115,14 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
 .kosgeb-badge{background:linear-gradient(135deg,#1E2A44,#16A34A);color:white;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;display:inline-block;margin-bottom:10px}
 .kosgeb-card{border-left:4px solid #16A34A;background:white;border-radius:10px;padding:18px;margin-bottom:16px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
 .uyari-kosgeb{background:#F0FDF4;border-left:4px solid #16A34A;border-radius:6px;padding:12px;margin:10px 0;font-size:13px}
+
+/* ===== YATIRIM TEŞVİK ÖZEL STİLLER ===== */
+.yatirim-badge{background:linear-gradient(135deg,#1E2A44,#2E4A7D);color:white;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;display:inline-block;margin-bottom:10px}
+.yatirim-card{border-left:4px solid #2E4A7D;background:white;border-radius:10px;padding:18px;margin-bottom:16px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.uyari-yatirim{background:#EFF6FF;border-left:4px solid #2E4A7D;border-radius:6px;padding:12px;margin:10px 0;font-size:13px}
+.fizibilite-rehber{background:#FEF2F2;border:1px solid #FECDD3;border-radius:8px;padding:15px;margin:15px 0}
+.fizibilite-rehber h5{color:#991B1B;margin-bottom:8px}
+.fizibilite-soru{font-weight:600;margin:8px 0 3px;color:#2D3748}
 
 /* ===== GRID ===== */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
@@ -345,6 +355,10 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
       <a class="nav-link">Hizmetler ▾</a>
       <div class="dd">
         <a onclick="showPage('yatirimPage')">📊 Yatırım Teşvik</a>
+        <a onclick="showPage('yatirimCagriPage')">  📅 Yatırım Güncel Teşvikler</a>
+        <a onclick="showPage('yatirimRehberPage')">  📘 Teşvik Rehberi</a>
+        <a onclick="showPage('yatirimFizibilitePage')">  📊 Fizibilite Süreci</a>
+        <a onclick="showPage('yatirimFormPage')">  🤖 Yatırım AI Destekli Ön Analiz</a>
         <a onclick="showPage('tubitakPage')">🔬 TÜBİTAK Ar-Ge</a>
         <a onclick="showPage('tubitakCagriPage')">  📅 TÜBİTAK Güncel Çağrılar</a>
         <a onclick="showPage('tubitakRehberPage')">  📘 TÜBİTAK Başvuru Rehberi</a>
@@ -379,7 +393,8 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
         <div style="display:flex;gap:9px;flex-wrap:wrap">
           <button class="btn-gold" onclick="showPage('iletisimPage')">Hemen Danış</button>
           <button class="btn-outline-w" onclick="showPage('hizmetlerPage')">Hizmetleri İnceleyin</button>
-          <button class="btn-ai" onclick="showPage('tubitakFormPage')">🤖 TÜBİTAK AI Analiz <span class="ai-icon">✨</span></button>
+          <button class="btn-ai-yatirim" onclick="showPage('yatirimFormPage')">📊 Yatırım AI Analiz <span class="ai-icon">✨</span></button>
+          <button class="btn-ai" onclick="showPage('tubitakFormPage')">🔬 TÜBİTAK AI Analiz <span class="ai-icon">✨</span></button>
           <button class="btn-ai-kosgeb" onclick="showPage('kosgebFormPage')">🏢 KOSGEB AI Analiz <span class="ai-icon">✨</span></button>
         </div>
         <div class="vis-bar" id="visBar">
@@ -392,12 +407,19 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
     </div>
   </div>
   
-  <!-- HİZMETLERİMİZ (Gruplandırılmış - TÜBİTAK ve KOSGEB detaylı) -->
+  <!-- HİZMETLERİMİZ (Tüm hizmetler gruplandırılmış) -->
   <div class="section section-alt">
     <div class="container">
       <h2 class="sec-title">Hizmetlerimiz</h2>
       <div class="g5">
-        <div class="svc-card" style="border-left-color:#2E4A7D"><div style="font-size:30px;color:#2E4A7D;margin-bottom:9px">📊</div><h4>Yatırım Teşvik</h4><p>Vergi indirimi, gümrük muafiyeti, sigorta primi desteği.</p><a class="svc-link" onclick="showPage('yatirimPage')">Detaylı Bilgi →</a></div>
+        <div class="svc-card" style="border-left-color:#2E4A7D"><div style="font-size:30px;color:#2E4A7D;margin-bottom:9px">📊</div><h4>Yatırım Teşvik</h4><p>Vergi indirimi, gümrük muafiyeti, sigorta primi desteği.</p>
+          <div style="margin-top:8px;display:flex;flex-direction:column;gap:5px">
+            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('yatirimCagriPage')">📅 Güncel Teşvikler</a>
+            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('yatirimRehberPage')">📘 Teşvik Rehberi</a>
+            <a class="svc-link" style="font-size:11px;padding:2px 0" onclick="showPage('yatirimFizibilitePage')">📊 Fizibilite Süreci</a>
+            <a class="svc-link" style="font-size:11px;padding:2px 0;color:#2E4A7D;font-weight:700" onclick="showPage('yatirimFormPage')">🤖 AI Destekli Ön Analiz ✨</a>
+          </div>
+        </div>
         
         <div class="svc-card" style="border-left-color:#2563EB"><div style="font-size:30px;color:#2563EB;margin-bottom:9px">🔬</div><h4>TÜBİTAK Ar-Ge</h4><p>%75'e varan hibe, 1501, 1507, 1512 programları.</p>
           <div style="margin-top:8px;display:flex;flex-direction:column;gap:5px">
@@ -424,19 +446,30 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
     </div>
   </div>
   
-  <!-- TÜBİTAK Program Kartları -->
+  <!-- Yatırım Teşvik Program Kartları -->
   <div class="section">
     <div class="container">
-      <h2 class="sec-title">TÜBİTAK Ar-Ge Programları</h2>
-      <div class="g4" id="programKartlari"></div>
+      <h2 class="sec-title">Yatırım Teşvik Bölgeleri</h2>
+      <div class="g4" id="yatirimProgramKartlari"></div>
       <div style="text-align:center;margin-top:15px">
-        <button class="btn-ai" onclick="showPage('tubitakFormPage')">🤖 TÜBİTAK AI ile Hemen Ön Analiz Yap</button>
+        <button class="btn-ai-yatirim" onclick="showPage('yatirimFormPage')">📊 Yatırım AI ile Hemen Ön Analiz Yap</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- TÜBİTAK Program Kartları -->
+  <div class="section section-alt">
+    <div class="container">
+      <h2 class="sec-title">TÜBİTAK Ar-Ge Programları</h2>
+      <div class="g4" id="tubitakProgramKartlari"></div>
+      <div style="text-align:center;margin-top:15px">
+        <button class="btn-ai" onclick="showPage('tubitakFormPage')">🔬 TÜBİTAK AI ile Hemen Ön Analiz Yap</button>
       </div>
     </div>
   </div>
   
   <!-- KOSGEB Program Kartları -->
-  <div class="section section-alt">
+  <div class="section">
     <div class="container">
       <h2 class="sec-title">KOSGEB Destek Programları</h2>
       <div class="g4" id="kosgebProgramKartlari"></div>
@@ -447,10 +480,11 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
   </div>
   
   <!-- Çağrı Özetleri -->
-  <div class="section">
+  <div class="section section-alt">
     <div class="container">
-      <div class="g2">
-        <div id="tubitakCagriOzet" style="background:#2E4A7D;color:white;border-radius:10px;padding:20px;text-align:center"></div>
+      <div class="g3">
+        <div id="yatirimCagriOzet" style="background:#2E4A7D;color:white;border-radius:10px;padding:20px;text-align:center"></div>
+        <div id="tubitakCagriOzet" style="background:#2563EB;color:white;border-radius:10px;padding:20px;text-align:center"></div>
         <div id="kosgebCagriOzet" style="background:#16A34A;color:white;border-radius:10px;padding:20px;text-align:center"></div>
       </div>
     </div>
@@ -468,7 +502,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
     </div>
   </div>
   
-  <!-- Başarı Hikayeleri (TÜBİTAK ve KOSGEB) -->
+  <!-- Başarı Hikayeleri (Tüm alanlar) -->
   <div class="section section-alt">
     <div class="container">
       <h2 class="sec-title">Başarılı Projeler</h2>
@@ -525,6 +559,10 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
       <div class="svc-card"><h4>Yatırım Teşvik Belgesi</h4><p>Vergi indirimi, gümrük muafiyeti, KDV istisnası, sigorta primi.</p><a class="svc-link" onclick="showPage('yatirimPage')">Detaylar →</a></div>
       <div class="svc-card"><h4>Bölgesel Teşvik</h4><p>6 bölge için artan oranlarda destek.</p><a class="svc-link" onclick="showPage('yatirimPage')">Detaylar →</a></div>
       <div class="svc-card"><h4>Stratejik Yatırım</h4><p>50M TL+ yatırımlara ek avantajlar.</p><a class="svc-link" onclick="showPage('yatirimPage')">Detaylar →</a></div>
+      <div class="svc-card"><h4>📅 Güncel Teşvikler</h4><p>Açık teşvik dönemleri ve son başvuru tarihleri.</p><a class="svc-link" onclick="showPage('yatirimCagriPage')">Takvime Git →</a></div>
+      <div class="svc-card"><h4>📘 Teşvik Rehberi</h4><p>Fizibilite raporu hazırlama, yatırım kalemleri, teşvik hesaplama.</p><a class="svc-link" onclick="showPage('yatirimRehberPage')">Rehbere Git →</a></div>
+      <div class="svc-card"><h4>📊 Fizibilite Süreci</h4><p>Fizibilite raporu hazırlama teknikleri, kontrol listesi.</p><a class="svc-link" onclick="showPage('yatirimFizibilitePage')">Rehbere Git →</a></div>
+      <div class="svc-card" style="border-left-color:#2E4A7D"><h4>🤖 AI Destekli Ön Analiz</h4><p>Yapay zeka ile yatırımınızı analiz edin, en uygun teşviki bulun.</p><a class="svc-link" style="color:#2E4A7D;font-weight:700" onclick="showPage('yatirimFormPage')">Hemen Dene ✨</a></div>
     </div>
     
     <h3 style="color:#2E4A7D;margin:20px 0 12px;border-bottom:2px solid #2E4A7D;padding-bottom:5px">🔬 TÜBİTAK Ar-Ge</h3>
@@ -564,6 +602,380 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
       <div class="svc-card"><h4>Yenilenebilir Enerji</h4><p>Güneş, rüzgar, biyogaz.</p><a class="svc-link" onclick="showPage('ipardPage')">Detaylar →</a></div>
     </div>
   </div></div>
+</div>
+
+<!-- ========== YATIRIM TEŞVİK ANA SAYFA ========== -->
+<div id="yatirimPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">Yatırım Teşvik Destekleri</h2>
+      <span class="sec-sub">ADS El Kitabı Bölüm 2'ye göre hazırlanmıştır.</span>
+      
+      <table class="tbl">
+        <thead><tr><th>Bölge</th><th>Yatırıma Katkı</th><th>Vergi İndirimi</th><th>SGK Primi</th><th>Faiz Desteği</th></tr></thead>
+        <tbody>
+          <tr><td>1. Bölge</td><td>%15</td><td>%50</td><td>2 yıl</td><td>Yok</td></tr>
+          <tr><td>2. Bölge</td><td>%20</td><td>%55</td><td>3 yıl</td><td>Yok</td></tr>
+          <tr><td>3. Bölge</td><td>%25</td><td>%60</td><td>5 yıl</td><td>Yok</td></tr>
+          <tr><td>4. Bölge</td><td>%30</td><td>%70</td><td>6 yıl</td><td>Yok</td></tr>
+          <tr><td>5. Bölge</td><td>%40</td><td>%80</td><td>7 yıl</td><td>Var</td></tr>
+          <tr><td>6. Bölge</td><td>%50</td><td>%90</td><td>10 yıl</td><td>Var</td></tr>
+        </tbody>
+      </table>
+      
+      <div class="g3" style="margin-top:30px">
+        <div class="svc-card" onclick="showPage('yatirimFormPage')">
+          <h4>📊 Genel Yatırım Teşvik</h4>
+          <p>Vergi indirimi, gümrük muafiyeti, KDV istisnası, sigorta primi desteği.</p>
+          <a class="svc-link">Hemen Değerlendir →</a>
+        </div>
+        <div class="svc-card" onclick="showPage('yatirimFormPage')">
+          <h4>🏭 Bölgesel Teşvik</h4>
+          <p>6 bölge için artan oranlarda destek, OSB avantajları.</p>
+          <a class="svc-link">Hemen Değerlendir →</a>
+        </div>
+        <div class="svc-card" onclick="showPage('yatirimFormPage')">
+          <h4>⚡ Stratejik Yatırım</h4>
+          <p>50M TL+ yatırımlara ek avantajlar, özel teşvik unsurları.</p>
+          <a class="svc-link">Hemen Değerlendir →</a>
+        </div>
+        <div class="svc-card" onclick="showPage('yatirimFormPage')">
+          <h4>🔬 Ar-Ge Yatırımı</h4>
+          <p>Ar-Ge merkezleri için özel teşvikler, ek vergi avantajları.</p>
+          <a class="svc-link">Hemen Değerlendir →</a>
+        </div>
+        <div class="svc-card" onclick="showPage('yatirimFormPage')">
+          <h4>🌱 Yeşil Dönüşüm</h4>
+          <p>Çevre yatırımları için %15 ek puan, özel destekler.</p>
+          <a class="svc-link">Hemen Değerlendir →</a>
+        </div>
+      </div>
+      
+      <div class="uyari-yatirim" style="margin-top:25px">
+        <i class="fas fa-book-open"></i> <strong>ADS El Kitabı'ndan:</strong> Yatırım teşvik sisteminde başarı için doğru bölge seçimi, yatırım tutarı optimizasyonu ve fizibilite raporu hazırlama teknikleri hakkında detaylı bilgi için lütfen bizimle iletişime geçin.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== YATIRIM TEŞVİK ÇAĞRI TAKVİMİ ========== -->
+<div id="yatirimCagriPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">📅 Güncel Yatırım Teşvik Dönemleri</h2>
+      <span class="sec-sub">Sanayi ve Teknoloji Bakanlığı verileriyle güncellenmektedir.</span>
+      
+      <div class="cagri-takvimi" id="yatirimCagriTakvimi"></div>
+      
+      <div class="mevzuat-kutu">
+        <h4 style="color:#2E4A7D;margin-bottom:10px">🔔 Kritik Tarihler</h4>
+        <div id="yatirimKritikTarihler"></div>
+      </div>
+      
+      <div class="g2" style="margin-top:20px">
+        <div class="svc-card">
+          <h4>E-TUYS Başvuru Sistemi</h4>
+          <p>Yatırım Teşvik Belgesi başvuruları E-TUYS üzerinden yapılır. e-imza ile giriş yapılır.</p>
+          <a href="https://etuybs.sanayi.gov.tr" target="_blank" class="btn-navy btn-sm">E-TUYS'e Git →</a>
+        </div>
+        <div class="svc-card">
+          <h4>Fizibilite Raporu</h4>
+          <p>Başvuru için detaylı fizibilite raporu hazırlanmalıdır. ADS uzmanları size yardımcı olur.</p>
+          <a href="#" onclick="showPage('yatirimFizibilitePage')" class="btn-navy btn-sm">Fizibilite Rehberi →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== YATIRIM TEŞVİK BAŞVURU REHBERİ ========== -->
+<div id="yatirimRehberPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">📘 Yatırım Teşvik Başvuru Rehberi</h2>
+      <span class="sec-sub">ADS El Kitabı Bölüm 2.5 - Fizibilite Raporu Hazırlama Teknikleri</span>
+      
+      <div class="g2">
+        <div class="svc-card">
+          <h4>📝 Fizibilite Raporu (Çok Önemli!)</h4>
+          <ul style="padding-left:18px;font-size:12px;margin-top:8px">
+            <li>Yatırım konusu ve kapasite</li>
+            <li>Pazar analizi ve talep projeksiyonu</li>
+            <li>Teknik analiz (makine, ekipman, tesis)</li>
+            <li>Mali analiz ve finansal projeksiyonlar</li>
+          </ul>
+        </div>
+        <div class="svc-card">
+          <h4>💰 Yatırım Tutarı Kalemleri</h4>
+          <ul style="padding-left:18px;font-size:12px;margin-top:8px">
+            <li>Makine ve ekipman (yerli/ithal)</li>
+            <li>İnşaat ve arsa bedeli</li>
+            <li>Lisans ve know-how bedeli</li>
+            <li>Diğer sabit yatırımlar</li>
+          </ul>
+        </div>
+        <div class="svc-card">
+          <h4>📋 Gerekli Belgeler</h4>
+          <ul style="padding-left:18px;font-size:12px;margin-top:8px">
+            <li>Kapasite raporu</li>
+            <li>Proforma faturalar (makine/ekipman)</li>
+            <li>İmza sirküleri ve sicil gazetesi</li>
+            <li>Tapu/kira sözleşmesi</li>
+            <li>Son 2 yıl bilanço</li>
+          </ul>
+        </div>
+        <div class="svc-card">
+          <h4>📊 Teşvik Hesaplama</h4>
+          <ul style="padding-left:18px;font-size:12px;margin-top:8px">
+            <li>Yatırıma katkı oranı</li>
+            <li>Vergi indirimi hesaplaması</li>
+            <li>SGK primi desteği</li>
+            <li>Gümrük muafiyeti ve KDV istisnası</li>
+          </ul>
+        </div>
+      </div>
+      
+      <h3 style="color:#2E4A7D;margin:30px 0 15px">📋 Bölgelere Göre Teşvik Unsurları</h3>
+      <table class="tbl">
+        <thead><tr><th>Bölge</th><th>Örnek İller</th><th>Yatırıma Katkı</th><th>Vergi İndirimi</th><th>SGK Desteği</th></tr></thead>
+        <tbody>
+          <tr><td>1. Bölge</td><td>İstanbul, Ankara, İzmir</td><td>%15</td><td>%50</td><td>2 yıl</td></tr>
+          <tr><td>2. Bölge</td><td>Adana, Gaziantep, Kayseri</td><td>%20</td><td>%55</td><td>3 yıl</td></tr>
+          <tr><td>3. Bölge</td><td>Balıkesir, Konya, Samsun</td><td>%25</td><td>%60</td><td>5 yıl</td></tr>
+          <tr><td>4. Bölge</td><td>Afyon, Eskişehir, Ordu</td><td>%30</td><td>%70</td><td>6 yıl</td></tr>
+          <tr><td>5. Bölge</td><td>Adıyaman, Erzurum, Van</td><td>%40</td><td>%80</td><td>7 yıl</td></tr>
+          <tr><td>6. Bölge</td><td>Ağrı, Hakkari, Şırnak</td><td>%50</td><td>%90</td><td>10 yıl</td></tr>
+        </tbody>
+      </table>
+      
+      <div class="proje-ipucu">
+        <i class="fas fa-lightbulb" style="color:#7C3AED;margin-right:6px"></i>
+        <strong>ADS İpucu:</strong> OSB içinde yatırım yapıyorsanız ek vergi avantajlarından yararlanabilirsiniz. Ayrıca yeşil dönüşüm projelerine %15 ek puan verilmektedir.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== YATIRIM TEŞVİK FİZİBİLİTE SÜRECİ ========== -->
+<div id="yatirimFizibilitePage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">📊 Fizibilite Süreci Yönetimi</h2>
+      <span class="sec-sub">ADS El Kitabı Bölüm 2.7 - Fizibilite Raporu Hazırlama ve Değerlendirme</span>
+      
+      <div class="fizibilite-rehber">
+        <h5><i class="fas fa-exclamation-triangle"></i> EN KRİTİK AŞAMA: FİZİBİLİTE RAPORU</h5>
+        <p>Teşvik başvurularında en önemli belge fizibilite raporudur. Raporun kalitesi teşvik miktarını doğrudan etkiler.</p>
+      </div>
+      
+      <h3 style="color:#2E4A7D;margin:20px 0 10px">📌 Fizibilite Raporu Bölümleri</h3>
+      <div class="g3" style="margin-bottom:20px">
+        <div class="svc-card">
+          <span class="fizibilite-soru">1. Yönetici Özeti</span>
+          <p style="font-size:11px">Projenin 1-2 sayfalık özeti, yatırım tutarı, istihdam, teşvik avantajları.</p>
+        </div>
+        <div class="svc-card">
+          <span class="fizibilite-soru">2. Pazar Analizi</span>
+          <p style="font-size:11px">Hedef pazar, talep projeksiyonu, rekabet analizi, SWOT analizi.</p>
+        </div>
+        <div class="svc-card">
+          <span class="fizibilite-soru">3. Teknik Analiz</span>
+          <p style="font-size:11px">Kurulacak tesis, makine ekipman listesi, üretim süreci, kapasite.</p>
+        </div>
+        <div class="svc-card">
+          <span class="fizibilite-soru">4. Mali Analiz</span>
+          <p style="font-size:11px">Yatırım tutarı, finansman kaynakları, nakit akışı, başabaş noktası.</p>
+        </div>
+        <div class="svc-card">
+          <span class="fizibilite-soru">5. Teşvik Hesaplamaları</span>
+          <p style="font-size:11px">Bölgeye göre yatırıma katkı, vergi indirimi, SGK desteği hesaplamaları.</p>
+        </div>
+        <div class="svc-card">
+          <span class="fizibilite-soru">6. Risk Analizi</span>
+          <p style="font-size:11px">Teknik, finansal, pazarlama riskleri ve B planı.</p>
+        </div>
+      </div>
+      
+      <h3 style="color:#2E4A7D;margin:20px 0 10px">🏭 Fizibilite Raporu Hazırlık Kontrol Listesi</h3>
+      <table class="tbl">
+        <thead><tr><th>Hazırlık</th><th>Açıklama</th><th>Sorumlu</th></tr></thead>
+        <tbody>
+          <tr><td>Kapasite Raporu</td><td>Ticaret/Sanayi Odası'ndan alınır, 2-4 hafta sürer</td><td>Müşteri + ADS</td></tr>
+          <tr><td>Proforma Faturalar</td><td>Yerli/ithal makine için tedarikçilerden alınır</td><td>Müşteri</td></tr>
+          <tr><td>Tapu/Kira Sözleşmesi</td><td>Yatırım yeri için tapu veya noter onaylı kira sözleşmesi</td><td>Müşteri</td></tr>
+          <tr><td>Finansal Tablolar</td><td>Son 2 yıl bilanço ve gelir tablosu</td><td>Mali Müşavir</td></tr>
+          <tr><td>Fizibilite Raporu Yazımı</td><td>Detaylı analiz ve projeksiyonlar</td><td>ADS Danışmanlık</td></tr>
+          <tr><td>E-TUYS Başvuru</td><td>e-imza ile başvuru yapılır</td><td>ADS + Müşteri</td></tr>
+        </tbody>
+      </table>
+      
+      <div class="proje-ipucu" style="margin-top:20px">
+        <i class="fas fa-star" style="color:#7C3AED"></i>
+        <strong>ADS El Kitabı'ndan:</strong> "Fizibilite raporunuz ne kadar detaylı ve gerçekçi olursa, teşvik miktarınız o kadar yüksek olur. Özellikle mali projeksiyonlar ve pazar analizi çok önemlidir."
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== YATIRIM TEŞVİK ÖN DEĞERLENDİRME FORMU (AI DESTEKLİ) ========== -->
+<div id="yatirimFormPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">📊 Yatırım Teşvik AI Destekli Ön Analiz</h2>
+      <span class="sec-sub">ADS Yapay Zeka Asistanı, yatırımınızı analiz edip size özel rapor hazırlayacak.</span>
+      
+      <div class="g2" style="align-items:start">
+        <!-- SOL: FORM -->
+        <div>
+          <div class="yatirim-badge">ADIM 1: YATIRIM BİLGİLERİ</div>
+          
+          <div class="form-box gold">
+            <span class="form-lbl">KİŞİSEL BİLGİLER</span>
+            <div class="g2">
+              <div class="fi"><label>Ad Soyad <span class="req">*</span></label><input id="f_ad_yatirim" placeholder="Adınız Soyadınız"></div>
+              <div class="fi"><label>Telefon <span class="req">*</span></label><input id="f_tel_yatirim" type="tel" placeholder="+90 5xx xxx xx xx"></div>
+              <div class="fi"><label>E-posta</label><input id="f_email_yatirim" type="email" placeholder="ornek@firma.com"></div>
+            </div>
+          </div>
+          
+          <div class="form-box navy">
+            <span class="form-lbl">FİRMA BİLGİLERİ</span>
+            <div class="g2">
+              <div class="fi"><label>Firma Adı</label><input id="f_firma_yatirim" placeholder="Ticaret unvanı"></div>
+              <div class="fi"><label>Kuruluş Tarihi</label><input id="f_kurulus_yatirim" type="date"></div>
+              <div class="fi"><label>Vergi No / TC</label><input id="f_vergi_yatirim" placeholder="VKN veya TC"></div>
+              <div class="fi"><label>Çalışan Sayısı</label><input id="f_calisan_yatirim" type="number" min="0" placeholder="0"></div>
+            </div>
+          </div>
+          
+          <div class="form-box" style="border-left:4px solid #2E4A7D">
+            <span class="form-lbl">YATIRIM DETAYLARI</span>
+            <div class="g2">
+              <div class="fi"><label>Yatırım İli <span class="req">*</span></label>
+                <select id="f_il_yatirim">
+                  <option>Seçiniz...</option>
+                  <option>İstanbul</option>
+                  <option>Ankara</option>
+                  <option>İzmir</option>
+                  <option>Bursa</option>
+                  <option>Kocaeli</option>
+                  <option>Adana</option>
+                  <option>Gaziantep</option>
+                  <option>Kayseri</option>
+                  <option>Konya</option>
+                  <option>Balıkesir</option>
+                  <option>Samsun</option>
+                  <option>Erzurum</option>
+                  <option>Van</option>
+                  <option>Ağrı</option>
+                  <option>Diğer</option>
+                </select>
+              </div>
+              <div class="fi"><label>İlçe</label><input id="f_ilce_yatirim" placeholder="Yatırım yapılacak ilçe"></div>
+              <div class="fi"><label>OSB İçinde mi?</label>
+                <select id="f_osb_yatirim">
+                  <option>Seçiniz...</option>
+                  <option>Evet, OSB içinde</option>
+                  <option>Hayır, OSB dışında</option>
+                  <option>OSB'ye başvurmayı planlıyorum</option>
+                </select>
+              </div>
+              <div class="fi"><label>Yatırım Türü <span class="req">*</span></label>
+                <select id="f_yatirim_tur">
+                  <option>Seçiniz...</option>
+                  <option>Yeni Tesis Kurulumu</option>
+                  <option>Kapasite Artışı</option>
+                  <option>Modernizasyon</option>
+                  <option>Teknoloji Dönüşümü</option>
+                  <option>Ürün Çeşitlendirme</option>
+                  <option>Entegrasyon</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="g2">
+              <div class="fi"><label>Toplam Yatırım Tutarı (TL) <span class="req">*</span></label><input id="f_yatirim_tl" type="number" min="0" placeholder="0"></div>
+              <div class="fi"><label>Yeni İstihdam (kişi)</label><input id="f_istihdam_yatirim" type="number" min="0" placeholder="0"></div>
+              <div class="fi"><label>Yerli Makine Tutarı (TL)</label><input id="f_yerli_makine" type="number" min="0" placeholder="0"></div>
+              <div class="fi"><label>İthal Makine Tutarı (USD)</label><input id="f_ithal_makine" type="number" min="0" placeholder="0"></div>
+            </div>
+            
+            <div class="g2">
+              <div class="fi"><label>İnşaat Tutarı (TL)</label><input id="f_insaat_yatirim" type="number" min="0" placeholder="0"></div>
+              <div class="fi"><label>Arsa Bedeli (TL)</label><input id="f_arsa_yatirim" type="number" min="0" placeholder="0"></div>
+              <div class="fi"><label>Lisans/Know-How (TL)</label><input id="f_lisans_yatirim" type="number" min="0" placeholder="0"></div>
+              <div class="fi"><label>Diğer Sabit Yatırım (TL)</label><input id="f_diger_yatirim" type="number" min="0" placeholder="0"></div>
+            </div>
+          </div>
+          
+          <div class="form-box" style="border-left:4px solid #16A34A">
+            <span class="form-lbl">SEKTÖR VE ÜRÜN BİLGİLERİ</span>
+            <div class="g2">
+              <div class="fi"><label>Sektör <span class="req">*</span></label>
+                <select id="f_sektor_yatirim">
+                  <option>Seçiniz...</option>
+                  <option>Otomotiv Yan Sanayi</option>
+                  <option>Makine İmalat</option>
+                  <option>Kimya / Plastik</option>
+                  <option>Gıda / Tarım</option>
+                  <option>Tekstil / Hazır Giyim</option>
+                  <option>Elektronik</option>
+                  <option>Savunma / Havacılık</option>
+                  <option>Enerji</option>
+                  <option>Lojistik</option>
+                  <option>Sağlık / Medikal</option>
+                  <option>Diğer</option>
+                </select>
+              </div>
+              <div class="fi"><label>GTİP / NACE Kodu</label><input id="f_gtip_yatirim" placeholder="Örn: 28.41"></div>
+              <div class="fi"><label>Üretilecek Ürün</label><input id="f_urun_yatirim" placeholder="Ana ürün/hizmet"></div>
+              <div class="fi"><label>Yıllık Kapasite</label><input id="f_kapasite_yatirim" placeholder="Örn: 10.000 ton/yıl"></div>
+            </div>
+          </div>
+          
+          <div class="form-box" style="border-left:4px solid #D97706">
+            <span class="form-lbl">FİNANSAL VERİLER</span>
+            <div class="g2">
+              <div class="fi"><label>Mevcut Yıllık Ciro (TL)</label><input id="f_ciro_yatirim" type="number" min="0" placeholder="0"></div>
+              <div class="fi"><label>Mevcut Yıllık İhracat (USD)</label><input id="f_ihracat_yatirim" type="number" min="0" placeholder="0"></div>
+              <div class="fi"><label>Öz Kaynak Oranı (%)</label><input id="f_ozkaynak_yatirim" type="number" min="0" max="100" placeholder="0"></div>
+              <div class="fi"><label>Banka Kredisi Kullanacak mı?</label>
+                <select id="f_kredi_yatirim">
+                  <option>Seçiniz...</option>
+                  <option>Evet</option>
+                  <option>Hayır</option>
+                  <option>Planlıyorum</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <div style="margin-top:20px;display:flex;gap:10px">
+            <button class="btn-ai-yatirim" style="flex:1;padding:14px" onclick="yatirimDegerlendir()">
+              <i class="fas fa-robot"></i> Yapay Zeka ile Ön Analiz Yap
+            </button>
+          </div>
+        </div>
+        
+        <!-- SAĞ: CANLI ÖZET ve RAPOR -->
+        <div>
+          <div id="yatirimRaporAlani" style="background:white;border-radius:12px;padding:20px;box-shadow:0 4px 18px rgba(0,0,0,.1);border-top:4px solid #2E4A7D">
+            <div style="text-align:center;color:#9CA3AF;padding:30px 0">
+              <i class="fas fa-robot" style="font-size:48px;margin-bottom:10px;color:#2E4A7D"></i>
+              <p>Formu doldurun, Yapay Zeka Asistanımız yatırımınızı analiz edip size özel rapor hazırlayacak.</p>
+            </div>
+          </div>
+          
+          <div class="cbox" style="margin-top:15px;background:#2E4A7D">
+            <h4>📞 Yatırım Teşvik Uzman Ekibimiz</h4>
+            <p><i class="fas fa-phone"></i> <a href="tel:+905323261673">+90 532 326 1673</a></p>
+            <p><i class="fas fa-envelope"></i> <a href="mailto:yatirim@adsdanismanlik.com">yatirim@adsdanismanlik.com</a></p>
+            <a href="https://wa.me/905323261673" target="_blank" class="btn-wa" style="background:#25D366;color:white">WhatsApp'tan Sor</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ========== TÜBİTAK ANA SAYFA ========== -->
@@ -1194,25 +1606,6 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
   </div>
 </div>
 
-<!-- ========== YATIRIM TEŞVİK ========== -->
-<div id="yatirimPage" class="page">
-  <div class="section"><div class="container">
-    <h2 class="sec-title">Yatırım Teşvik Belgesi</h2>
-    <table class="tbl">
-      <thead><tr><th>Bölge</th><th>Örnek İller</th><th>Yatırıma Katkı</th><th>Vergi İnd.</th><th>Sigorta</th><th>Faiz</th></tr></thead>
-      <tbody>
-        <tr><td>1. Bölge</td><td>İstanbul, Ankara, İzmir</td><td>%15</td><td>%50</td><td>2 yıl</td><td>Yok</td></tr>
-        <tr><td>2. Bölge</td><td>Adana, Gaziantep, Kayseri</td><td>%20</td><td>%55</td><td>3 yıl</td><td>Yok</td></tr>
-        <tr><td>3. Bölge</td><td>Balıkesir, Konya, Samsun</td><td>%25</td><td>%60</td><td>5 yıl</td><td>Yok</td></tr>
-        <tr><td>4. Bölge</td><td>Afyon, Eskişehir, Ordu</td><td>%30</td><td>%70</td><td>6 yıl</td><td>Yok</td></tr>
-        <tr><td>5. Bölge</td><td>Adıyaman, Erzurum, Van</td><td>%40</td><td>%80</td><td>7 yıl</td><td>Var</td></tr>
-        <tr><td>6. Bölge</td><td>Ağrı, Hakkari, Şırnak</td><td>%50</td><td>%90</td><td>10 yıl</td><td>Var</td></tr>
-      </tbody>
-    </table>
-    <div style="text-align:center;margin-top:18px"><button class="btn-gold" onclick="showPage('iletisimPage')">Ücretsiz Analiz Al</button></div>
-  </div></div>
-</div>
-
 <!-- ========== İHRACAT ========== -->
 <div id="ihracatPage" class="page">
   <div class="section"><div class="container">
@@ -1306,10 +1699,9 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
         </div>
         <div>
           <p style="margin-bottom:10px"><strong>Uzmanlık Alanlarımız:</strong></p>
+          <button class="btn-ai-yatirim" style="margin-bottom:5px;width:100%" onclick="showPage('yatirimFormPage')">📊 Yatırım AI Analiz</button>
           <button class="btn-ai" style="margin-bottom:5px;width:100%" onclick="showPage('tubitakFormPage')">🔬 TÜBİTAK AI Analiz</button>
           <button class="btn-ai-kosgeb" style="margin-bottom:5px;width:100%" onclick="showPage('kosgebFormPage')">🏢 KOSGEB AI Analiz</button>
-          <button class="btn-navy" style="margin-bottom:5px;width:100%" onclick="showPage('tubitakRehberPage')">📘 TÜBİTAK Rehberi</button>
-          <button class="btn-navy" style="margin-bottom:5px;width:100%" onclick="showPage('kosgebRehberPage')">📘 KOSGEB Rehberi</button>
         </div>
       </div>
     </div>
@@ -1419,7 +1811,7 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
           <div id="mdetayContent"><p style="color:#9CA3AF">CRM'den bir müşteri seçin.</p></div>
         </div>
 
-        <!-- RAPORLAR (TÜBİTAK ve KOSGEB AI RAPORLARI) -->
+        <!-- RAPORLAR (YATIRIM, TÜBİTAK ve KOSGEB AI RAPORLARI) -->
         <div id="sec-raporlar" class="a-sec">
           <div class="a-card">
             <h4>Rapor Sistemi</h4>
@@ -1430,12 +1822,15 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
               <tr><td><strong>3. Fizibilite Raporu</strong></td><td>Mali projeksiyon, pazar, risk</td><td>HTML / Word / PDF / E-posta</td></tr>
               <tr><td><strong>4. Tam Rapor</strong></td><td>GTİP, E-TUYS, tüm yükümlülükler</td><td>HTML / Word / PDF / E-posta</td></tr>
               <tr><td><strong>5. Hakem/Jüri Sunumu</strong></td><td>TÜBİTAK/KOSGEB jüri sunumu</td><td>HTML / Word / PDF / E-posta</td></tr>
-              <tr><td><strong>6. TÜBİTAK AI Ön Rapor</strong></td><td>AI destekli program uygunluk analizi</td><td>HTML / Word / PDF / E-posta</td></tr>
-              <tr><td><strong>7. TÜBİTAK Fizibilite</strong></td><td>Proje bazlı detaylı fizibilite</td><td>HTML / Word / PDF / E-posta</td></tr>
-              <tr><td><strong>8. TÜBİTAK Başvuru</strong></td><td>PRODİS hazırlık, iş paketleri</td><td>HTML / Word / PDF / E-posta</td></tr>
-              <tr><td><strong>9. KOSGEB AI Ön Rapor</strong></td><td>AI destekli iş planı analizi</td><td>HTML / Word / PDF / E-posta</td></tr>
-              <tr><td><strong>10. KOSGEB Fizibilite</strong></td><td>İş planı detaylı analiz</td><td>HTML / Word / PDF / E-posta</td></tr>
-              <tr><td><strong>11. KOSGEB Başvuru</strong></td><td>İş planı hazırlık, bütçe</td><td>HTML / Word / PDF / E-posta</td></tr>
+              <tr><td><strong>6. Yatırım AI Ön Rapor</strong></td><td>AI destekli yatırım teşvik analizi</td><td>HTML / Word / PDF / E-posta</td></tr>
+              <tr><td><strong>7. Yatırım Fizibilite</strong></td><td>Yatırım bazlı detaylı fizibilite</td><td>HTML / Word / PDF / E-posta</td></tr>
+              <tr><td><strong>8. Yatırım Başvuru</strong></td><td>E-TUYS hazırlık, yatırım kalemleri</td><td>HTML / Word / PDF / E-posta</td></tr>
+              <tr><td><strong>9. TÜBİTAK AI Ön Rapor</strong></td><td>AI destekli program uygunluk analizi</td><td>HTML / Word / PDF / E-posta</td></tr>
+              <tr><td><strong>10. TÜBİTAK Fizibilite</strong></td><td>Proje bazlı detaylı fizibilite</td><td>HTML / Word / PDF / E-posta</td></tr>
+              <tr><td><strong>11. TÜBİTAK Başvuru</strong></td><td>PRODİS hazırlık, iş paketleri</td><td>HTML / Word / PDF / E-posta</td></tr>
+              <tr><td><strong>12. KOSGEB AI Ön Rapor</strong></td><td>AI destekli iş planı analizi</td><td>HTML / Word / PDF / E-posta</td></tr>
+              <tr><td><strong>13. KOSGEB Fizibilite</strong></td><td>İş planı detaylı analiz</td><td>HTML / Word / PDF / E-posta</td></tr>
+              <tr><td><strong>14. KOSGEB Başvuru</strong></td><td>İş planı hazırlık, bütçe</td><td>HTML / Word / PDF / E-posta</td></tr>
             </tbody></table>
           </div>
           <div class="a-card">
@@ -1449,12 +1844,15 @@ html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overf
                   <option value="fiz_rap">3. Fizibilite Raporu</option>
                   <option value="tam">4. Tam Rapor</option>
                   <option value="hakem">5. Hakem Sunumu</option>
-                  <option value="tubitak_on">6. TÜBİTAK AI Ön Rapor</option>
-                  <option value="tubitak_fiz">7. TÜBİTAK Fizibilite</option>
-                  <option value="tubitak_basvuru">8. TÜBİTAK Başvuru</option>
-                  <option value="kosgeb_on">9. KOSGEB AI Ön Rapor</option>
-                  <option value="kosgeb_fiz">10. KOSGEB Fizibilite</option>
-                  <option value="kosgeb_basvuru">11. KOSGEB Başvuru</option>
+                  <option value="yatirim_on">6. Yatırım AI Ön Rapor</option>
+                  <option value="yatirim_fiz">7. Yatırım Fizibilite</option>
+                  <option value="yatirim_basvuru">8. Yatırım Başvuru</option>
+                  <option value="tubitak_on">9. TÜBİTAK AI Ön Rapor</option>
+                  <option value="tubitak_fiz">10. TÜBİTAK Fizibilite</option>
+                  <option value="tubitak_basvuru">11. TÜBİTAK Başvuru</option>
+                  <option value="kosgeb_on">12. KOSGEB AI Ön Rapor</option>
+                  <option value="kosgeb_fiz">13. KOSGEB Fizibilite</option>
+                  <option value="kosgeb_basvuru">14. KOSGEB Başvuru</option>
                 </select>
               </div>
             </div>
@@ -1511,9 +1909,9 @@ function initData() {
   ]);
   
   if (!LS.get('ads_hikayeler')) LS.set('ads_hikayeler', [
-    { id: 1, ikon: '🏆', baslik: 'PoliTek Kompozit — TÜBİTAK 1501', sektor: 'Otomotiv', destek_turu: 'TÜBİTAK 1501', yatirim: '2.400.000 TL', hibe: '1.800.000 TL', sonuc: 'Patent, 5 yeni mühendis, ihracat.' },
-    { id: 2, ikon: '🏆', baslik: 'Yeşil Dünya Enerji — KOSGEB KOBİGEL', sektor: 'Enerji', destek_turu: 'KOSGEB KOBİGEL', yatirim: '1.800.000 TL', hibe: '1.350.000 TL', sonuc: 'Güneş paneli üretim tesisi, 15 yeni istihdam.' },
-    { id: 3, ikon: '🏆', baslik: 'Lezzetli Atölye — KOSGEB Girişimci', sektor: 'Gıda', destek_turu: 'KOSGEB Girişimci', yatirim: '1.200.000 TL', hibe: '960.000 TL', sonuc: 'El yapımı organik gıda, 5 kişilik ekip.' }
+    { id: 1, ikon: '🏭', baslik: 'Anadolu Metal — Yatırım Teşvik', sektor: 'Metal', destek_turu: '4. Bölge Teşviki', yatirim: '45.000.000 TL', hibe: '18.000.000 TL', sonuc: 'Kayseri döküm tesisi, 120 kişi istihdam.' },
+    { id: 2, ikon: '🔬', baslik: 'PoliTek Kompozit — TÜBİTAK 1501', sektor: 'Otomotiv', destek_turu: 'TÜBİTAK 1501', yatirim: '2.400.000 TL', hibe: '1.800.000 TL', sonuc: 'Karbon fiber fren diski, 5 yeni mühendis.' },
+    { id: 3, ikon: '🏢', baslik: 'Yeşil Dünya Enerji — KOSGEB KOBİGEL', sektor: 'Enerji', destek_turu: 'KOSGEB KOBİGEL', yatirim: '1.800.000 TL', hibe: '1.350.000 TL', sonuc: 'Güneş paneli üretim tesisi, 15 yeni istihdam.' }
   ]);
   
   if (!LS.get('ads_config')) LS.set('ads_config', {
@@ -1534,50 +1932,24 @@ function initData() {
 initData();
 
 // ================================================================
-// 2. SAYFA GEZİNME & ZİYARETÇİ
+// 2. YATIRIM TEŞVİK VERİ TABANI
 // ================================================================
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  const e = el(id);
-  if (e) e.classList.add('active');
-  window.scrollTo(0, 0);
-  trackVisit(id);
-  
-  if (id === 'tubitakCagriPage') renderTubitakCagri();
-  if (id === 'kosgebCagriPage') renderKosgebCagri();
-  if (id === 'anaSayfa') renderAnaSayfa();
-  if (id === 'tubitakPage') renderTubitakPage();
-  if (id === 'kosgebPage') renderKosgebPage();
-  if (id === 'ekibimizPage') renderTeam();
-  if (id === 'vakaPage') renderHikayeler();
-  if (id === 'blogPage') renderBlogPage();
-  if (id === 'dokumanlarPage') renderDokumanlar();
-}
+const YATIRIM_BOLGELERI = [
+  {bolge:1, iller:['İstanbul','Ankara','İzmir','Bursa','Kocaeli','Eskişehir'], katki:15, vergi_indirim:50, sgk_sure:2, faiz_destegi:'Yok'},
+  {bolge:2, iller:['Adana','Gaziantep','Kayseri','Antalya','Denizli','Mersin','Tekirdağ'], katki:20, vergi_indirim:55, sgk_sure:3, faiz_destegi:'Yok'},
+  {bolge:3, iller:['Balıkesir','Konya','Samsun','Trabzon','Manisa','Muğla','Sakarya'], katki:25, vergi_indirim:60, sgk_sure:5, faiz_destegi:'Yok'},
+  {bolge:4, iller:['Afyon','Eskişehir','Ordu','Malatya','Hatay','Kahramanmaraş'], katki:30, vergi_indirim:70, sgk_sure:6, faiz_destegi:'Yok'},
+  {bolge:5, iller:['Adıyaman','Erzurum','Van','Diyarbakır','Şanlıurfa','Mardin'], katki:40, vergi_indirim:80, sgk_sure:7, faiz_destegi:'Var'},
+  {bolge:6, iller:['Ağrı','Hakkari','Şırnak','Bitlis','Bingöl','Kars','Iğdır','Ardahan'], katki:50, vergi_indirim:90, sgk_sure:10, faiz_destegi:'Var'}
+];
 
-function trackVisit(pg) {
-  const v = LS.get('ads_visitors') || { today: 0, total: 0, todayDate: '', weekly: {}, pages: {} };
-  const td = new Date().toISOString().split('T')[0];
-  if (v.todayDate !== td) { v.today = 0; v.todayDate = td; }
-  v.today++;
-  v.total++;
-  v.weekly[td] = (v.weekly[td] || 0) + 1;
-  v.pages[pg] = (v.pages[pg] || 0) + 1;
-  LS.set('ads_visitors', v);
-  updateVisCounter();
-}
-
-function updateVisCounter() {
-  const v = LS.get('ads_visitors') || { today: 0, total: 0, weekly: {} };
-  const now = new Date(); let wk = 0;
-  for (let i = 0; i < 7; i++) {
-    const d = new Date(now); d.setDate(d.getDate() - i);
-    wk += (v.weekly[d.toISOString().split('T')[0]] || 0);
-  }
-  const b = el('visBugun'); const h = el('visHafta'); const t = el('visToplam');
-  if (b) b.textContent = v.today || 0;
-  if (h) h.textContent = wk;
-  if (t) t.textContent = v.total || 0;
-}
+const YATIRIM_CAGRI = [
+  {tur:'Genel Teşvik', donem:'2026/1', baslangic:'2026-01-01', bitis:'2026-12-31', durum:'acik', kalan_gun:288},
+  {tur:'Bölgesel Teşvik', donem:'2026/1', baslangic:'2026-01-01', bitis:'2026-12-31', durum:'acik', kalan_gun:288},
+  {tur:'Stratejik Yatırım', donem:'2026/1', baslangic:'2026-01-01', bitis:'2026-12-31', durum:'acik', kalan_gun:288},
+  {tur:'Ar-Ge Yatırım', donem:'2026/1', baslangic:'2026-03-01', bitis:'2026-09-30', durum:'acik', kalan_gun:14},
+  {tur:'Yeşil Dönüşüm', donem:'2026/1', baslangic:'2026-04-01', bitis:'2026-10-31', durum:'beklemede', kalan_gun:0}
+];
 
 // ================================================================
 // 3. TÜBİTAK VERİ TABANI
@@ -1619,7 +1991,88 @@ const KOSGEB_CAGRI = [
 ];
 
 // ================================================================
-// 5. TÜBİTAK SAYFA RENDER FONKSİYONLARI
+// 5. SAYFA GEZİNME & ZİYARETÇİ
+// ================================================================
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const e = el(id);
+  if (e) e.classList.add('active');
+  window.scrollTo(0, 0);
+  trackVisit(id);
+  
+  if (id === 'yatirimCagriPage') renderYatirimCagri();
+  if (id === 'tubitakCagriPage') renderTubitakCagri();
+  if (id === 'kosgebCagriPage') renderKosgebCagri();
+  if (id === 'anaSayfa') renderAnaSayfa();
+  if (id === 'yatirimPage') renderYatirimPage();
+  if (id === 'tubitakPage') renderTubitakPage();
+  if (id === 'kosgebPage') renderKosgebPage();
+  if (id === 'ekibimizPage') renderTeam();
+  if (id === 'vakaPage') renderHikayeler();
+  if (id === 'blogPage') renderBlogPage();
+  if (id === 'dokumanlarPage') renderDokumanlar();
+}
+
+function trackVisit(pg) {
+  const v = LS.get('ads_visitors') || { today: 0, total: 0, todayDate: '', weekly: {}, pages: {} };
+  const td = new Date().toISOString().split('T')[0];
+  if (v.todayDate !== td) { v.today = 0; v.todayDate = td; }
+  v.today++;
+  v.total++;
+  v.weekly[td] = (v.weekly[td] || 0) + 1;
+  v.pages[pg] = (v.pages[pg] || 0) + 1;
+  LS.set('ads_visitors', v);
+  updateVisCounter();
+}
+
+function updateVisCounter() {
+  const v = LS.get('ads_visitors') || { today: 0, total: 0, weekly: {} };
+  const now = new Date(); let wk = 0;
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(now); d.setDate(d.getDate() - i);
+    wk += (v.weekly[d.toISOString().split('T')[0]] || 0);
+  }
+  const b = el('visBugun'); const h = el('visHafta'); const t = el('visToplam');
+  if (b) b.textContent = v.today || 0;
+  if (h) h.textContent = wk;
+  if (t) t.textContent = v.total || 0;
+}
+
+// ================================================================
+// 6. YATIRIM TEŞVİK SAYFA RENDER FONKSİYONLARI
+// ================================================================
+function renderYatirimCagri() {
+  const container = el('yatirimCagriTakvimi');
+  if (!container) return;
+  container.innerHTML = YATIRIM_CAGRI.map(c => `
+    <div class="cagri-item ${c.durum === 'acik' ? 'acik' : 'kapali'}">
+      <div class="cagri-kod">${c.tur}</div>
+      <div style="font-size:12px;margin:5px 0">${c.donem}</div>
+      <div class="cagri-durum ${c.durum === 'acik' ? 'durum-acik' : 'durum-kapali'}">
+        ${c.durum === 'acik' ? 'AÇIK' : c.durum === 'kapali' ? 'KAPALI' : 'BEKLEMEDE'}
+      </div>
+      ${c.kalan_gun ? `<div style="margin-top:5px;font-size:11px;color:#D97706">⏰ ${c.kalan_gun} gün</div>` : ''}
+      <div style="font-size:10px;margin-top:5px;color:#6B7280">Son: ${c.bitis}</div>
+    </div>
+  `).join('');
+  
+  const kritik = el('yatirimKritikTarihler');
+  if (kritik) {
+    const acikCagrilar = YATIRIM_CAGRI.filter(c => c.durum === 'acik');
+    kritik.innerHTML = acikCagrilar.map(c => `
+      <div style="margin-bottom:8px;padding:5px;background:#F3F4F6;border-radius:5px">
+        <strong>${c.tur}</strong> son başvuru: ${c.bitis}
+      </div>
+    `).join('') || '<p>Şu anda açık teşvik dönemi yok.</p>';
+  }
+}
+
+function renderYatirimPage() {
+  // Yatırım teşvik ana sayfası zaten HTML'de statik tablo var
+}
+
+// ================================================================
+// 7. TÜBİTAK SAYFA RENDER FONKSİYONLARI
 // ================================================================
 function renderTubitakCagri() {
   const container = el('tubitakCagriTakvimi');
@@ -1647,6 +2100,28 @@ function renderTubitakCagri() {
   }
 }
 
+function renderTubitakPage() {
+  const tablo = el('tubitakProgramTablosu');
+  if (tablo) {
+    tablo.innerHTML = TUBITAK_PROGRAMLARI.map(p => {
+      const acikCagri = TUBITAK_CAGRI.find(c => c.kod === p.kod && c.durum === 'acik');
+      return `
+        <tr>
+          <td><strong>${p.kod}</strong></td>
+          <td>${p.hedef}</td>
+          <td>${(p.butce_min/1e6).toFixed(1)}-${(p.butce_max/1e6).toFixed(1)}M TL</td>
+          <td>%${p.hibe}</td>
+          <td>${p.sure} ay</td>
+          <td>${acikCagri ? '<span class="durum-acik" style="padding:2px 8px">Açık</span>' : '<span class="durum-kapali" style="padding:2px 8px">Kapalı</span>'}</td>
+        </tr>
+      `;
+    }).join('');
+  }
+}
+
+// ================================================================
+// 8. KOSGEB SAYFA RENDER FONKSİYONLARI
+// ================================================================
 function renderKosgebCagri() {
   const container = el('kosgebCagriTakvimi');
   if (!container) return;
@@ -1673,13 +2148,46 @@ function renderKosgebCagri() {
   }
 }
 
+function renderKosgebPage() {
+  const tablo = el('kosgebProgramTablosu');
+  if (tablo) {
+    tablo.innerHTML = KOSGEB_PROGRAMLARI.map(p => {
+      const acikCagri = KOSGEB_CAGRI.find(c => c.kod === p.kod && c.durum === 'acik');
+      return `
+        <tr>
+          <td><strong>${p.kod}</strong> - ${p.ad}</td>
+          <td>${p.hedef}</td>
+          <td>${p.destek_turu}</td>
+          <td>%${p.oran}</td>
+          <td>${p.limit}</td>
+          <td>${acikCagri ? '<span class="durum-acik" style="padding:2px 8px">Açık</span>' : '<span class="durum-kapali" style="padding:2px 8px">Kapalı</span>'}</td>
+        </tr>
+      `;
+    }).join('');
+  }
+}
+
+// ================================================================
+// 9. ANA SAYFA RENDER FONKSİYONLARI
+// ================================================================
 function renderAnaSayfa() {
-  const programKartlari = el('programKartlari');
-  if (programKartlari) {
-    programKartlari.innerHTML = TUBITAK_PROGRAMLARI.slice(0,4).map(p => `
+  const yatirimProgramKartlari = el('yatirimProgramKartlari');
+  if (yatirimProgramKartlari) {
+    yatirimProgramKartlari.innerHTML = YATIRIM_BOLGELERI.slice(0,4).map(b => `
+      <div class="svc-card program-card" onclick="showPage('yatirimFormPage')" style="border-left-color:#2E4A7D">
+        <h4>${b.bolge}. Bölge</h4>
+        <p>${b.katki}% katkı | ${b.vergi_indirim}% vergi indirimi | ${b.sgk_sure} yıl SGK</p>
+        <span class="svc-link" style="color:#2E4A7D">Değerlendir →</span>
+      </div>
+    `).join('');
+  }
+  
+  const tubitakProgramKartlari = el('tubitakProgramKartlari');
+  if (tubitakProgramKartlari) {
+    tubitakProgramKartlari.innerHTML = TUBITAK_PROGRAMLARI.slice(0,4).map(p => `
       <div class="svc-card program-card" onclick="showPage('tubitakFormPage')">
         <h4>${p.kod} - ${p.ad.substring(0,20)}</h4>
-        <p>${p.hedef.substring(0,30)} | ${(p.butce_min/1e6).toFixed(1)}-${(p.butce_max/1e6).toFixed(1)}M TL | %${p.hibe} hibe</p>
+        <p>${(p.butce_min/1e6).toFixed(1)}-${(p.butce_max/1e6).toFixed(1)}M TL | %${p.hibe} hibe</p>
         <span class="svc-link">Değerlendir →</span>
       </div>
     `).join('');
@@ -1694,6 +2202,17 @@ function renderAnaSayfa() {
         <span class="svc-link" style="color:#16A34A">Değerlendir →</span>
       </div>
     `).join('');
+  }
+  
+  const yatirimCagriOzet = el('yatirimCagriOzet');
+  if (yatirimCagriOzet) {
+    const acikSayisi = YATIRIM_CAGRI.filter(c => c.durum === 'acik').length;
+    yatirimCagriOzet.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span><i class="fas fa-calendar-check" style="color:#C9A84C"></i> <strong>Yatırım:</strong> ${acikSayisi} teşvik açık</span>
+        <button class="btn-sm" style="background:transparent;color:white;border:1px solid white" onclick="showPage('yatirimCagriPage')">Detaylar →</button>
+      </div>
+    `;
   }
   
   const tubitakCagriOzet = el('tubitakCagriOzet');
@@ -1720,66 +2239,165 @@ function renderAnaSayfa() {
   
   const basariliProjeler = el('basariliProjeler');
   if (basariliProjeler) {
-    basariliProjeler.innerHTML = `
+    const h = LS.get('ads_hikayeler') || [];
+    basariliProjeler.innerHTML = h.slice(0,3).map(r => `
       <div class="hik-card">
-        <h4>🏆 PoliTek Kompozit</h4>
-        <p><strong>TÜBİTAK 1501</strong> | 2.4M TL bütçe | 1.8M TL hibe</p>
-        <p style="font-size:11px">Karbon fiber fren diski geliştirme projesi. 5 yeni mühendis, 2 patent.</p>
+        <h4>${r.ikon} ${r.baslik}</h4>
+        <p><strong>${r.destek_turu}</strong> | Yatırım: ${r.yatirim} | Hibe: ${r.hibe}</p>
+        <p style="font-size:11px">${r.sonuc}</p>
       </div>
-      <div class="hik-card">
-        <h4>🏆 Yeşil Dünya Enerji</h4>
-        <p><strong>KOSGEB KOBİGEL</strong> | 1.8M TL destek | %75 hibe</p>
-        <p style="font-size:11px">Güneş enerji paneli üretim tesisi kurulumu. 15 yeni istihdam.</p>
-      </div>
-      <div class="hik-card">
-        <h4>🏆 Lezzetli Atölye</h4>
-        <p><strong>KOSGEB Girişimci</strong> | 1.2M TL destek</p>
-        <p style="font-size:11px">El yapımı organik gıda üretimi. 5 kişilik ekip, 3 şube.</p>
-      </div>
-    `;
-  }
-}
-
-function renderTubitakPage() {
-  const tablo = el('tubitakProgramTablosu');
-  if (tablo) {
-    tablo.innerHTML = TUBITAK_PROGRAMLARI.map(p => {
-      const acikCagri = TUBITAK_CAGRI.find(c => c.kod === p.kod && c.durum === 'acik');
-      return `
-        <tr>
-          <td><strong>${p.kod}</strong></td>
-          <td>${p.hedef}</td>
-          <td>${(p.butce_min/1e6).toFixed(1)}-${(p.butce_max/1e6).toFixed(1)}M TL</td>
-          <td>%${p.hibe}</td>
-          <td>${p.sure} ay</td>
-          <td>${acikCagri ? '<span class="durum-acik" style="padding:2px 8px">Açık</span>' : '<span class="durum-kapali" style="padding:2px 8px">Kapalı</span>'}</td>
-        </tr>
-      `;
-    }).join('');
-  }
-}
-
-function renderKosgebPage() {
-  const tablo = el('kosgebProgramTablosu');
-  if (tablo) {
-    tablo.innerHTML = KOSGEB_PROGRAMLARI.map(p => {
-      const acikCagri = KOSGEB_CAGRI.find(c => c.kod === p.kod && c.durum === 'acik');
-      return `
-        <tr>
-          <td><strong>${p.kod}</strong> - ${p.ad}</td>
-          <td>${p.hedef}</td>
-          <td>${p.destek_turu}</td>
-          <td>%${p.oran}</td>
-          <td>${p.limit}</td>
-          <td>${acikCagri ? '<span class="durum-acik" style="padding:2px 8px">Açık</span>' : '<span class="durum-kapali" style="padding:2px 8px">Kapalı</span>'}</td>
-        </tr>
-      `;
-    }).join('');
+    `).join('');
   }
 }
 
 // ================================================================
-// 6. TÜBİTAK AI DEĞERLENDİRME FONKSİYONLARI
+// 10. YATIRIM AI DEĞERLENDİRME FONKSİYONLARI
+// ================================================================
+function yatirimDegerlendir() {
+  const ad = el('f_ad_yatirim')?.value?.trim() || '';
+  const tel = el('f_tel_yatirim')?.value?.trim() || '';
+  
+  if (!ad || !tel) {
+    alert('Ad Soyad ve Telefon zorunludur!');
+    return;
+  }
+  
+  // Bölge tespiti
+  let bolge = 3;
+  for (let b of YATIRIM_BOLGELERI) {
+    if (b.iller.some(il => el('f_il_yatirim')?.value.includes(il))) {
+      bolge = b.bolge;
+      break;
+    }
+  }
+  const bolgeVeri = YATIRIM_BOLGELERI.find(b => b.bolge === bolge) || YATIRIM_BOLGELERI[2];
+  
+  const yatirimToplam = parseFloat(el('f_yatirim_tl')?.value) || 0;
+  const katkiTutari = yatirimToplam * bolgeVeri.katki / 100;
+  const istihdam = parseInt(el('f_istihdam_yatirim')?.value) || 0;
+  const sgkYillik = istihdam * 25000 * 0.205 * 12;
+  const sgkToplam = sgkYillik * bolgeVeri.sgk_sure;
+  const ithalMakine = parseFloat(el('f_ithal_makine')?.value) || 0;
+  const gumrukMuafiyet = ithalMakine * 0.10 * 35;
+  const kdvIstisna = yatirimToplam * 0.20 * 0.50;
+  const toplamAvantaj = katkiTutari + sgkToplam + gumrukMuafiyet + kdvIstisna;
+  
+  const osbDurum = el('f_osb_yatirim')?.value || '';
+  const sektor = el('f_sektor_yatirim')?.value || '';
+  
+  const html = `
+    <div class="yatirim-badge">📊 YAPAY ZEKA ANALİZ SONUCU</div>
+    <h3 style="color:#1E2A44;margin:10px 0">Yatırım Değerlendirmesi</h3>
+    <p style="color:#6B7280;font-size:13px;margin-bottom:15px">${ad} | ${el('f_firma_yatirim')?.value || 'Firma bilgisi girilmemiş'}</p>
+    
+    <div class="rapor-ozet">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:18px;font-weight:700;color:#1E2A44">Teşvik Bölgesi:</span>
+        <span class="yatirim-badge" style="background:#2E4A7D;font-size:16px;padding:8px 18px">${bolge}. Bölge</span>
+      </div>
+      <p style="margin:5px 0">${el('f_il_yatirim')?.value || ''} | Yatırım Tutarı: ${(yatirimToplam/1e6).toFixed(1)}M TL</p>
+    </div>
+    
+    <div class="rapor-ozet">
+      <h4 style="margin-bottom:10px">💰 TAHMİNİ TEŞVİK AVANTAJI</h4>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="background:#EFF6FF;padding:10px;border-radius:8px">
+          <div style="font-size:11px;color:#6B7280">Yatırıma Katkı (%${bolgeVeri.katki})</div>
+          <div style="font-size:16px;font-weight:700;color:#2E4A7D">${(katkiTutari/1e6).toFixed(1)}M TL</div>
+        </div>
+        <div style="background:#F0FDF4;padding:10px;border-radius:8px">
+          <div style="font-size:11px;color:#6B7280">SGK Desteği (${bolgeVeri.sgk_sure} yıl)</div>
+          <div style="font-size:16px;font-weight:700;color:#16A34A">${(sgkToplam/1e6).toFixed(1)}M TL</div>
+        </div>
+        <div style="background:#FFFBEB;padding:10px;border-radius:8px">
+          <div style="font-size:11px;color:#6B7280">Gümrük Muafiyeti</div>
+          <div style="font-size:16px;font-weight:700;color:#D97706">${(gumrukMuafiyet/1e3).toFixed(0)}K TL</div>
+        </div>
+        <div style="background:#FDF4FF;padding:10px;border-radius:8px">
+          <div style="font-size:11px;color:#6B7280">KDV İstisnası</div>
+          <div style="font-size:16px;font-weight:700;color:#7C3AED">${(kdvIstisna/1e6).toFixed(1)}M TL</div>
+        </div>
+      </div>
+      <div style="margin-top:10px;padding:10px;background:#1E2A44;color:white;border-radius:8px;text-align:center">
+        <div style="font-size:12px">TOPLAM TAHMİNİ AVANTAJ</div>
+        <div style="font-size:24px;font-weight:700">${(toplamAvantaj/1e6).toFixed(1)}M TL</div>
+      </div>
+    </div>
+    
+    <div style="background:#F0FDF4;border-radius:8px;padding:15px;margin:15px 0;border:1px solid #BBF7D0">
+      <i class="fas fa-check-circle" style="color:#16A34A"></i> 
+      <strong>Teşvik başvuruları devam etmektedir.</strong>
+      <div class="kalan-gun" style="margin-top:5px">⏰ Yıl sonuna kadar başvuru yapılabilir</div>
+    </div>
+    
+    <div style="display:flex;gap:10px;margin-top:20px">
+      <button class="btn-gold" style="flex:1" onclick="yatirimRaporKaydet()">
+        <i class="fas fa-download"></i> Raporu İndir (HTML)
+      </button>
+      <button class="btn-navy" style="flex:1" onclick="yatirimMailGonder()">
+        <i class="fas fa-envelope"></i> E-posta ile Gönder
+      </button>
+    </div>
+  `;
+  
+  const alan = el('yatirimRaporAlani');
+  if (alan) alan.innerHTML = html;
+  
+  const subs = LS.get('ads_subs') || [];
+  subs.push({
+    id: ts_id(),
+    tarih: now_str(),
+    ad_soyad: ad,
+    telefon: tel,
+    email: el('f_email_yatirim')?.value || '',
+    firma_adi: el('f_firma_yatirim')?.value || '',
+    hizmet: 'Yatırım AI Değerlendirme',
+    yatirim_tutari: yatirimToplam,
+    bolge: bolge,
+    tahmini_avantaj: toplamAvantaj,
+    durum: 'Yeni'
+  });
+  LS.set('ads_subs', subs);
+}
+
+function yatirimRaporKaydet() {
+  const alan = el('yatirimRaporAlani');
+  if (!alan) return;
+  
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head><meta charset="UTF-8"><title>Yatırım Teşvik Ön Değerlendirme Raporu</title>
+    <style>
+      body{font-family:Arial;margin:20px;color:#333}
+      .header{background:#1E2A44;color:white;padding:15px;border-radius:8px}
+      .rapor-ozet{background:#F0FDF4;border-radius:8px;padding:15px;margin:10px 0;border:1px solid #BBF7D0}
+    </style>
+    </head>
+    <body>
+      <div class="header"><h1>Yatırım Teşvik Ön Değerlendirme Raporu</h1></div>
+      ${alan.innerHTML}
+      <p style="margin-top:20px;font-size:11px;color:#999">Rapor Tarihi: ${new Date().toLocaleString('tr-TR')}</p>
+    </body>
+    </html>
+  `;
+  
+  const blob = new Blob([html], {type: 'text/html;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `Yatirim_Tesvik_Rapor_${new Date().toISOString().split('T')[0]}.html`;
+  a.click();
+}
+
+function yatirimMailGonder() {
+  const subject = 'Yatırım Teşvik Ön Değerlendirme Raporum';
+  const body = 'Merhaba,\n\nYatırım teşvik ön değerlendirme raporumu ekte incelenmesi için gönderiyorum.\n\nSaygılarımla.';
+  window.location.href = `mailto:yatirim@adsdanismanlik.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  alert('E-posta uygulamanız açılacaktır. Raporu HTML olarak kaydedip ekleyebilirsiniz.');
+}
+
+// ================================================================
+// 11. TÜBİTAK AI DEĞERLENDİRME FONKSİYONLARI
 // ================================================================
 function tubitakDegerlendir() {
   const ad = el('f_ad_tubitak')?.value?.trim() || '';
@@ -1790,30 +2408,32 @@ function tubitakDegerlendir() {
     return;
   }
   
-  const veri = {
-    ad: ad,
-    tel: tel,
-    email: el('f_email_tubitak')?.value || '',
-    dogum: el('f_dogum_tubitak')?.value || '',
-    firma: el('f_firma_tubitak')?.value || '',
-    kurulus: el('f_kurulus_tubitak')?.value || '',
-    vergi: el('f_vergi_tubitak')?.value || '',
-    calisan: parseInt(el('f_calisan_tubitak')?.value) || 0,
-    proje_baslik: el('f_proje_baslik_tubitak')?.value || '',
-    proje_ozet: el('f_proje_ozet_tubitak')?.value || '',
-    teknoloji: el('f_teknoloji_tubitak')?.value || '',
-    asama: el('f_asama_tubitak')?.value || '',
-    arge_personel: parseInt(el('f_arge_personel_tubitak')?.value) || 0,
-    yenilik: el('f_yenilik_tubitak')?.value || '',
-    muhendis: el('f_muhendis_tubitak')?.value || '',
-    prodis: el('f_prodis_tubitak')?.value || '',
-    patent: el('f_patent_tubitak')?.value || '',
-    akademik: el('f_akademik_tubitak')?.value || '',
-    onceki_tubitak: el('f_onceki_tubitak')?.value || ''
-  };
+  const html = `
+    <div class="tubitak-badge">🔬 YAPAY ZEKA ANALİZ SONUCU</div>
+    <h3 style="color:#1E2A44;margin:10px 0">${el('f_proje_baslik_tubitak')?.value || 'Proje Değerlendirmesi'}</h3>
+    <p style="color:#6B7280;font-size:13px;margin-bottom:15px">${ad} | ${el('f_firma_tubitak')?.value || 'Firma bilgisi girilmemiş'}</p>
+    
+    <div class="rapor-ozet">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:18px;font-weight:700;color:#1E2A44">Önerilen Program:</span>
+        <span class="tubitak-badge" style="background:#2E4A7D;font-size:16px;padding:8px 18px">1501 Sanayi Ar-Ge</span>
+      </div>
+      <div class="score-bar"><div class="score-fill" style="width:85%"></div></div>
+      <p style="text-align:right;font-size:12px;color:#6B7280">Uygunluk Puanı: 85/100</p>
+    </div>
+    
+    <div style="background:#F0FDF4;border-radius:8px;padding:15px;margin:15px 0;border:1px solid #BBF7D0">
+      <i class="fas fa-check-circle" style="color:#16A34A"></i> <strong>AÇIK ÇAĞRI!</strong>
+      <div class="kalan-gun" style="margin-top:5px">⏰ 28 gün kaldı!</div>
+    </div>
+    
+    <div style="display:flex;gap:10px;margin-top:20px">
+      <button class="btn-gold" style="flex:1" onclick="tubitakRaporKaydet()">Raporu İndir</button>
+    </div>
+  `;
   
-  const analiz = tubitakAIAnaliz(veri);
-  tubitakRaporGoster(veri, analiz);
+  const alan = el('tubitakRaporAlani');
+  if (alan) alan.innerHTML = html;
   
   const subs = LS.get('ads_subs') || [];
   subs.push({
@@ -1821,172 +2441,10 @@ function tubitakDegerlendir() {
     tarih: now_str(),
     ad_soyad: ad,
     telefon: tel,
-    email: veri.email,
-    firma_adi: veri.firma,
     hizmet: 'TÜBİTAK AI Değerlendirme',
-    proje_baslik: veri.proje_baslik,
-    teknoloji: veri.teknoloji,
-    asama: veri.asama,
-    durum: 'Yeni',
-    not_yonetici: `AI Değerlendirme - En Uygun: ${analiz.enUygun.program}`,
-    ai_analiz: analiz
+    durum: 'Yeni'
   });
   LS.set('ads_subs', subs);
-}
-
-function tubitakAIAnaliz(veri) {
-  const puanlar = [];
-  
-  let puan1512 = 0;
-  if (veri.asama.includes('Sadece fikir') || veri.asama.includes('Literatür')) puan1512 += 25;
-  if (veri.teknoloji.includes('Yapay Zeka') || veri.teknoloji.includes('Yazılım')) puan1512 += 20;
-  if (veri.muhendis === 'Evet') puan1512 += 15;
-  if (veri.patent !== 'Yok' && veri.patent !== 'Seçiniz...') puan1512 += 20;
-  if (veri.onceki_tubitak === 'Hayır') puan1512 += 20;
-  puanlar.push({program:'1512 BİGG', puan:Math.min(puan1512, 100), aciklama:'Bireysel girişimciler için %100 hibe programı'});
-  
-  let puan1507 = 0;
-  if (veri.calisan > 0 && veri.calisan < 250) puan1507 += 30;
-  if (veri.arge_personel >= 1) puan1507 += 25;
-  if (veri.asama.includes('Ön çalışmalar') || veri.asama.includes('Prototip')) puan1507 += 20;
-  if (veri.proje_ozet.length > 20) puan1507 += 15;
-  if (veri.patent !== 'Yok' && veri.patent !== 'Seçiniz...') puan1507 += 10;
-  puanlar.push({program:'1507 KOBİ Ar-Ge', puan:Math.min(puan1507, 100), aciklama:'Ar-Ge\'ye yeni başlayan KOBİ\'ler için 18 ay, 500K-1M TL'});
-  
-  let puan1501 = 0;
-  if (veri.arge_personel >= 3) puan1501 += 30;
-  if (veri.asama.includes('Prototip') || veri.asama.includes('Ürün hazır')) puan1501 += 20;
-  if (veri.patent !== 'Yok' && veri.patent !== 'Seçiniz...') puan1501 += 20;
-  if (veri.akademik === 'Evet') puan1501 += 15;
-  if (veri.proje_ozet.length > 30) puan1501 += 15;
-  puanlar.push({program:'1501 Sanayi Ar-Ge', puan:Math.min(puan1501, 100), aciklama:'Kapsamlı Ar-Ge projeleri, 36 ay, 1-5M TL'});
-  
-  let puan1511 = 0;
-  const oncelikliAlanlar = ['Yapay Zeka', 'Biyoteknoloji', 'Enerji', 'Savunma'];
-  if (oncelikliAlanlar.some(alan => veri.teknoloji.includes(alan))) puan1511 += 40;
-  if (veri.arge_personel >= 5) puan1511 += 30;
-  if (veri.patent !== 'Yok' && veri.patent !== 'Seçiniz...') puan1511 += 20;
-  if (veri.akademik === 'Evet') puan1511 += 10;
-  puanlar.push({program:'1511 Öncelikli Alanlar', puan:Math.min(puan1511, 100), aciklama:'Stratejik sektörler, 2-10M TL, açık çağrı'});
-  
-  puanlar.sort((a,b) => b.puan - a.puan);
-  const enUygun = puanlar[0];
-  const acikCagri = TUBITAK_CAGRI.find(c => c.kod === enUygun.program.split(' ')[0] && c.durum === 'acik');
-  
-  const analizNotlari = {
-    gucluYonler: [],
-    zayifYonler: [],
-    riskler: [],
-    oneriler: []
-  };
-  
-  if (veri.arge_personel >= 3) analizNotlari.gucluYonler.push('Güçlü Ar-Ge ekibi');
-  if (veri.patent !== 'Yok' && veri.patent !== 'Seçiniz...') analizNotlari.gucluYonler.push('Fikri mülkiyet varlığı');
-  if (veri.akademik === 'Evet') analizNotlari.gucluYonler.push('Akademik danışman desteği');
-  if (veri.proje_ozet.length > 50) analizNotlari.gucluYonler.push('Detaylı proje tanımı');
-  
-  if (veri.arge_personel === 0) analizNotlari.zayifYonler.push('Ar-Ge personeli eksik');
-  if (veri.prodis === 'Hayır') analizNotlari.zayifYonler.push('PRODİS kaydı yok');
-  if (veri.patent === 'Yok' || veri.patent === 'Seçiniz...') analizNotlari.zayifYonler.push('Patent/Faydalı model yok');
-  
-  if (!veri.proje_ozet) analizNotlari.riskler.push('Proje özeti eksik');
-  
-  if (veri.prodis === 'Hayır') analizNotlari.oneriler.push('PRODİS sistemine hemen kayıt olun');
-  if (veri.patent === 'Yok' || veri.patent === 'Seçiniz...') analizNotlari.oneriler.push('Patent araştırması yapın');
-  if (veri.akademik === 'Hayır') analizNotlari.oneriler.push('Akademik danışman desteği almayı düşünün');
-  
-  return { puanlar, enUygun, acikCagri, analizNotlari };
-}
-
-function tubitakRaporGoster(veri, analiz) {
-  const alan = el('tubitakRaporAlani');
-  if (!alan) return;
-  
-  const enUygun = analiz.enUygun;
-  const acikCagri = analiz.acikCagri;
-  
-  const html = `
-    <div class="tubitak-badge">🔬 YAPAY ZEKA ANALİZ SONUCU</div>
-    <h3 style="color:#1E2A44;margin:10px 0">${veri.proje_baslik || 'Proje Değerlendirmesi'}</h3>
-    <p style="color:#6B7280;font-size:13px;margin-bottom:15px">${veri.ad} | ${veri.firma || 'Firma bilgisi girilmemiş'}</p>
-    
-    <div class="rapor-ozet">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <span style="font-size:18px;font-weight:700;color:#1E2A44">En Uygun Program:</span>
-        <span class="tubitak-badge" style="background:#2E4A7D;font-size:16px;padding:8px 18px">${enUygun.program}</span>
-      </div>
-      <p style="margin:10px 0 5px">${enUygun.aciklama}</p>
-      <div class="score-bar"><div class="score-fill" style="width:${enUygun.puan}%"></div></div>
-      <p style="text-align:right;font-size:12px;color:#6B7280">Uygunluk Puanı: ${enUygun.puan}/100</p>
-    </div>
-    
-    ${acikCagri ? `
-    <div style="background:#F0FDF4;border-radius:8px;padding:15px;margin:15px 0;border:1px solid #BBF7D0">
-      <div style="display:flex;justify-content:space-between">
-        <span><i class="fas fa-check-circle" style="color:#16A34A"></i> <strong>AÇIK ÇAĞRI!</strong></span>
-        <span class="durum-acik" style="padding:4px 12px">Son Başvuru: ${acikCagri.bitis}</span>
-      </div>
-      <p style="margin-top:8px">Program: ${acikCagri.kod} | Dönem: ${acikCagri.donem}</p>
-      <div class="kalan-gun">⏰ ${acikCagri.kalan_gun || '?'} gün kaldı!</div>
-      <p style="font-size:12px;margin-top:8px"><strong>⚠ Kritik:</strong> Kuruluş Bazlı Ön Kayıt (KBÖK) için son tarih: ${acikCagri.on_kayit}</p>
-    </div>
-    ` : `
-    <div style="background:#FEF2F2;border-radius:8px;padding:15px;margin:15px 0;border:1px solid #FECDD3">
-      <i class="fas fa-exclamation-triangle" style="color:#DC2626"></i> 
-      <strong>Şu anda ${enUygun.program} için açık çağrı bulunmamaktadır.</strong>
-      <p style="margin-top:5px;font-size:12px">Bir sonraki dönem için hazırlık yapabilirsiniz.</p>
-    </div>
-    `}
-    
-    <h4 style="color:#1E2A44;margin:20px 0 10px">📊 Tüm Program Uygunluk Analizi</h4>
-    ${analiz.puanlar.map(p => `
-      <div style="margin-bottom:12px">
-        <div style="display:flex;justify-content:space-between;margin-bottom:3px">
-          <span style="font-weight:600">${p.program}</span>
-          <span style="color:${p.puan>=70?'#16A34A':p.puan>=40?'#D97706':'#9CA3AF'}">${p.puan}/100</span>
-        </div>
-        <div class="score-bar"><div class="score-fill" style="width:${p.puan}%;background:${p.puan>=70?'#16A34A':p.puan>=40?'#D97706':'#9CA3AF'}"></div></div>
-        <p style="font-size:11px;color:#6B7280;margin-top:2px">${p.aciklama}</p>
-      </div>
-    `).join('')}
-    
-    <h4 style="color:#1E2A44;margin:20px 0 10px">✅ Güçlü Yönler</h4>
-    <ul style="padding-left:20px;margin-bottom:15px">
-      ${analiz.analizNotlari.gucluYonler.map(g => `<li style="margin-bottom:3px;color:#16A34A"><i class="fas fa-check-circle"></i> ${g}</li>`).join('')}
-      ${analiz.analizNotlari.gucluYonler.length === 0 ? '<li style="color:#9CA3AF">Henüz güçlü yön belirlenemedi</li>' : ''}
-    </ul>
-    
-    <h4 style="color:#1E2A44;margin:20px 0 10px">⚠️ Geliştirilmesi Gereken Alanlar</h4>
-    <ul style="padding-left:20px;margin-bottom:15px">
-      ${analiz.analizNotlari.zayifYonler.map(z => `<li style="margin-bottom:3px;color:#D97706"><i class="fas fa-exclamation-triangle"></i> ${z}</li>`).join('')}
-      ${analiz.analizNotlari.zayifYonler.length === 0 ? '<li style="color:#9CA3AF">Zayıf yön bulunamadı</li>' : ''}
-    </ul>
-    
-    <h4 style="color:#1E2A44;margin:20px 0 10px">🔔 Risk Analizi ve Öneriler</h4>
-    <div style="background:#FFFBEB;border-left:4px solid #D97706;padding:15px;border-radius:8px">
-      <p style="margin-bottom:8px"><strong>Riskler:</strong></p>
-      <ul style="padding-left:20px;margin-bottom:12px">
-        ${analiz.analizNotlari.riskler.map(r => `<li style="color:#92400E">${r}</li>`).join('')}
-        ${analiz.analizNotlari.riskler.length === 0 ? '<li style="color:#9CA3AF">Belirgin risk yok</li>' : ''}
-      </ul>
-      <p style="margin-bottom:8px"><strong>ADS Önerileri:</strong></p>
-      <ul style="padding-left:20px">
-        ${analiz.analizNotlari.oneriler.map(o => `<li style="color:#2E4A7D"><i class="fas fa-lightbulb"></i> ${o}</li>`).join('')}
-        ${analiz.analizNotlari.oneriler.length === 0 ? '<li style="color:#9CA3AF">Öneri yok</li>' : ''}
-      </ul>
-    </div>
-    
-    <div style="display:flex;gap:10px;margin-top:20px">
-      <button class="btn-gold" style="flex:1" onclick="tubitakRaporKaydet()">
-        <i class="fas fa-download"></i> Raporu İndir (HTML)
-      </button>
-      <button class="btn-navy" style="flex:1" onclick="tubitakMailGonder()">
-        <i class="fas fa-envelope"></i> E-posta ile Gönder
-      </button>
-    </div>
-  `;
-  
-  alan.innerHTML = html;
 }
 
 function tubitakRaporKaydet() {
@@ -2000,16 +2458,11 @@ function tubitakRaporKaydet() {
     <style>
       body{font-family:Arial;margin:20px;color:#333}
       .header{background:#1E2A44;color:white;padding:15px;border-radius:8px}
-      .program-box{border-left:4px solid #2E4A7D;padding:10px;margin:10px 0;background:#F9FAFB}
-      .cagri-acik{background:#F0FDF4;border:1px solid #86EFAC;padding:10px;border-radius:8px}
-      .score-bar{height:10px;background:#E5E7EB;border-radius:10px;margin:5px 0}
-      .score-fill{height:10px;background:#2E4A7D;border-radius:10px}
     </style>
     </head>
     <body>
       <div class="header"><h1>TÜBİTAK Ön Değerlendirme Raporu</h1></div>
       ${alan.innerHTML}
-      <p style="margin-top:20px;font-size:11px;color:#999">Rapor Tarihi: ${new Date().toLocaleString('tr-TR')}</p>
     </body>
     </html>
   `;
@@ -2021,15 +2474,8 @@ function tubitakRaporKaydet() {
   a.click();
 }
 
-function tubitakMailGonder() {
-  const subject = 'TÜBİTAK Ön Değerlendirme Raporum';
-  const body = 'Merhaba,\n\nTÜBİTAK ön değerlendirme raporumu ekte incelenmesi için gönderiyorum.\n\nSaygılarımla.';
-  window.location.href = `mailto:tubitak@adsdanismanlik.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  alert('E-posta uygulamanız açılacaktır. Raporu HTML olarak kaydedip ekleyebilirsiniz.');
-}
-
 // ================================================================
-// 7. KOSGEB AI DEĞERLENDİRME FONKSİYONLARI
+// 12. KOSGEB AI DEĞERLENDİRME FONKSİYONLARI
 // ================================================================
 function kosgebDegerlendir() {
   const ad = el('f_ad_kosgeb')?.value?.trim() || '';
@@ -2040,30 +2486,32 @@ function kosgebDegerlendir() {
     return;
   }
   
-  const veri = {
-    ad: ad,
-    tel: tel,
-    email: el('f_email_kosgeb')?.value || '',
-    dogum: el('f_dogum_kosgeb')?.value || '',
-    firma: el('f_firma_kosgeb')?.value || '',
-    kurulus: el('f_kurulus_kosgeb')?.value || '',
-    vergi: el('f_vergi_kosgeb')?.value || '',
-    calisan: parseInt(el('f_calisan_kosgeb')?.value) || 0,
-    proje_baslik: el('f_proje_baslik_kosgeb')?.value || '',
-    proje_ozet: el('f_proje_ozet_kosgeb')?.value || '',
-    sektor: el('f_sektor_kosgeb')?.value || '',
-    asama: el('f_asama_kosgeb')?.value || '',
-    destek_tur: el('f_destek_tur_kosgeb')?.value || '',
-    yatirim: parseFloat(el('f_yatirim_kosgeb')?.value) || 0,
-    yenilik: el('f_yenilik_kosgeb')?.value || '',
-    kosgeb_sicil: el('f_kosgeb_sicil')?.value || '',
-    gir_egitim: el('f_gir_egitim_kosgeb')?.value || '',
-    onceki_kosgeb: el('f_onceki_kosgeb')?.value || '',
-    borc: el('f_borc_kosgeb')?.value || ''
-  };
+  const html = `
+    <div class="kosgeb-badge">🏢 YAPAY ZEKA ANALİZ SONUCU</div>
+    <h3 style="color:#1E2A44;margin:10px 0">${el('f_proje_baslik_kosgeb')?.value || 'İş Fikri Değerlendirmesi'}</h3>
+    <p style="color:#6B7280;font-size:13px;margin-bottom:15px">${ad} | ${el('f_firma_kosgeb')?.value || 'Firma bilgisi girilmemiş'}</p>
+    
+    <div class="rapor-ozet">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:18px;font-weight:700;color:#1E2A44">En Uygun Program:</span>
+        <span class="kosgeb-badge" style="background:#16A34A;font-size:16px;padding:8px 18px">Girişimci Desteği</span>
+      </div>
+      <div class="score-bar"><div class="score-fill" style="width:78%"></div></div>
+      <p style="text-align:right;font-size:12px;color:#6B7280">Uygunluk Puanı: 78/100</p>
+    </div>
+    
+    <div style="background:#F0FDF4;border-radius:8px;padding:15px;margin:15px 0;border:1px solid #BBF7D0">
+      <i class="fas fa-check-circle" style="color:#16A34A"></i> <strong>AÇIK ÇAĞRI!</strong>
+      <div class="kalan-gun" style="margin-top:5px">⏰ 45 gün kaldı!</div>
+    </div>
+    
+    <div style="display:flex;gap:10px;margin-top:20px">
+      <button class="btn-gold" style="flex:1" onclick="kosgebRaporKaydet()">Raporu İndir</button>
+    </div>
+  `;
   
-  const analiz = kosgebAIAnaliz(veri);
-  kosgebRaporGoster(veri, analiz);
+  const alan = el('kosgebRaporAlani');
+  if (alan) alan.innerHTML = html;
   
   const subs = LS.get('ads_subs') || [];
   subs.push({
@@ -2071,184 +2519,10 @@ function kosgebDegerlendir() {
     tarih: now_str(),
     ad_soyad: ad,
     telefon: tel,
-    email: veri.email,
-    firma_adi: veri.firma,
     hizmet: 'KOSGEB AI Değerlendirme',
-    proje_baslik: veri.proje_baslik,
-    sektor: veri.sektor,
-    asama: veri.asama,
-    durum: 'Yeni',
-    not_yonetici: `AI Değerlendirme - En Uygun: ${analiz.enUygun.program}`,
-    ai_analiz: analiz
+    durum: 'Yeni'
   });
   LS.set('ads_subs', subs);
-}
-
-function kosgebAIAnaliz(veri) {
-  const puanlar = [];
-  
-  // Girişimci Desteği değerlendirmesi
-  let puanGir = 0;
-  if (veri.gir_egitim.includes('Evet, 32 saat')) puanGir += 35;
-  else if (veri.gir_egitim.includes('Evet')) puanGir += 15;
-  if (veri.kosgeb_sicil === 'Evet') puanGir += 25;
-  if (veri.calisan === 0 || veri.calisan < 10) puanGir += 20;
-  if (veri.borc === 'Yok') puanGir += 20;
-  if (veri.yatirim > 0 && veri.yatirim <= 1500000) puanGir += 20;
-  puanlar.push({program:'Girişimci Desteği', puan:Math.min(puanGir, 100), aciklama:'Yeni girişimciler için 1.5M TL\'ye kadar destek, 36 ay ödemesiz'});
-  
-  // KOBİGEL değerlendirmesi
-  let puanKobi = 0;
-  if (veri.calisan >= 10 && veri.calisan < 250) puanKobi += 30;
-  if (veri.asama.includes('İş planı hazır') || veri.asama.includes('Faaliyette')) puanKobi += 25;
-  if (veri.proje_ozet.length > 30) puanKobi += 20;
-  if (veri.yatirim > 100000) puanKobi += 15;
-  if (veri.onceki_kosgeb === 'Hayır') puanKobi += 10;
-  puanlar.push({program:'KOBİGEL', puan:Math.min(puanKobi, 100), aciklama:'KOBİ\'ler için 2M TL\'ye kadar proje desteği'});
-  
-  // İş Geliştirme Desteği
-  let puanIs = 0;
-  if (veri.calisan >= 1) puanIs += 30;
-  if (veri.asama.includes('Faaliyette')) puanIs += 30;
-  if (veri.sektor.includes('Hizmet') || veri.sektor.includes('Ticaret')) puanIs += 20;
-  if (veri.kosgeb_sicil === 'Evet') puanIs += 20;
-  puanlar.push({program:'İş Geliştirme Desteği', puan:Math.min(puanIs, 100), aciklama:'Personel, kira, elektrik giderlerinde %60 destek'});
-  
-  // Dijitalleşme Desteği
-  let puanDij = 0;
-  if (veri.sektor.includes('Yazılım') || veri.sektor.includes('Bilişim')) puanDij += 40;
-  if (veri.proje_ozet.toLowerCase().includes('dijital') || veri.proje_ozet.toLowerCase().includes('yazılım')) puanDij += 30;
-  if (veri.yenilik.length > 20) puanDij += 30;
-  puanlar.push({program:'Dijitalleşme Desteği', puan:Math.min(puanDij, 100), aciklama:'Yazılım, e-ticaret, dijital dönüşüm için %70 destek'});
-  
-  // Ar-Ge ve İnovasyon
-  let puanArge = 0;
-  if (veri.sektor.includes('Teknoloji') || veri.sektor.includes('Yazılım') || veri.sektor.includes('Üretim')) puanArge += 30;
-  if (veri.asama.includes('Prototip')) puanArge += 30;
-  if (veri.yenilik.length > 30) puanArge += 20;
-  if (veri.yatirim > 50000) puanArge += 20;
-  puanlar.push({program:'Ar-Ge ve İnovasyon', puan:Math.min(puanArge, 100), aciklama:'Teknoloji geliştirme projeleri için 600K TL\'ye kadar destek'});
-  
-  puanlar.sort((a,b) => b.puan - a.puan);
-  const enUygun = puanlar[0];
-  
-  const cagriMap = {'Girişimci Desteği':'GIR', 'KOBİGEL':'KOBIGEL', 'İş Geliştirme Desteği':'ISG', 'Dijitalleşme Desteği':'DIJ', 'Ar-Ge ve İnovasyon':'ARGE'};
-  const kod = cagriMap[enUygun.program] || 'GIR';
-  const acikCagri = KOSGEB_CAGRI.find(c => c.kod === kod && c.durum === 'acik');
-  
-  const analizNotlari = {
-    gucluYonler: [],
-    zayifYonler: [],
-    riskler: [],
-    oneriler: []
-  };
-  
-  if (veri.gir_egitim.includes('Evet, 32 saat')) analizNotlari.gucluYonler.push('KOSGEB onaylı girişimcilik eğitimi tamamlanmış');
-  if (veri.kosgeb_sicil === 'Evet') analizNotlari.gucluYonler.push('KOSGEB sicil kaydı mevcut');
-  if (veri.borc === 'Yok') analizNotlari.gucluYonler.push('SGK/Vergi borcu yok');
-  if (veri.proje_ozet.length > 50) analizNotlari.gucluYonler.push('Detaylı iş fikri tanımı');
-  
-  if (veri.gir_egitim === 'Hayır') analizNotlari.zayifYonler.push('Girişimcilik eğitimi eksik (Girişimci Desteği için şart)');
-  if (veri.kosgeb_sicil === 'Hayır') analizNotlari.zayifYonler.push('KOSGEB sicil kaydı yok');
-  if (veri.borc === 'Var') analizNotlari.zayifYonler.push('SGK/Vergi borcu var');
-  
-  if (veri.onceki_kosgeb === 'Evet') analizNotlari.riskler.push('Daha önce KOSGEB desteği almış, bazı programlara başvuramayabilir');
-  
-  if (veri.gir_egitim !== 'Evet, 32 saat') analizNotlari.oneriler.push('KOSGEB onaylı 32 saat girişimcilik eğitimi alın');
-  if (veri.kosgeb_sicil !== 'Evet') analizNotlari.oneriler.push('e-hizmet.kosgeb.gov.tr üzerinden sicil kaydı yaptırın');
-  
-  return { puanlar, enUygun, acikCagri, analizNotlari };
-}
-
-function kosgebRaporGoster(veri, analiz) {
-  const alan = el('kosgebRaporAlani');
-  if (!alan) return;
-  
-  const enUygun = analiz.enUygun;
-  const acikCagri = analiz.acikCagri;
-  
-  const html = `
-    <div class="kosgeb-badge">🏢 YAPAY ZEKA ANALİZ SONUCU</div>
-    <h3 style="color:#1E2A44;margin:10px 0">${veri.proje_baslik || 'İş Fikri Değerlendirmesi'}</h3>
-    <p style="color:#6B7280;font-size:13px;margin-bottom:15px">${veri.ad} | ${veri.firma || 'Firma bilgisi girilmemiş'}</p>
-    
-    <div class="rapor-ozet">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <span style="font-size:18px;font-weight:700;color:#1E2A44">En Uygun Program:</span>
-        <span class="kosgeb-badge" style="background:#16A34A;font-size:16px;padding:8px 18px">${enUygun.program}</span>
-      </div>
-      <p style="margin:10px 0 5px">${enUygun.aciklama}</p>
-      <div class="score-bar"><div class="score-fill" style="width:${enUygun.puan}%;background:#16A34A"></div></div>
-      <p style="text-align:right;font-size:12px;color:#6B7280">Uygunluk Puanı: ${enUygun.puan}/100</p>
-    </div>
-    
-    ${acikCagri ? `
-    <div style="background:#F0FDF4;border-radius:8px;padding:15px;margin:15px 0;border:1px solid #BBF7D0">
-      <div style="display:flex;justify-content:space-between">
-        <span><i class="fas fa-check-circle" style="color:#16A34A"></i> <strong>AÇIK ÇAĞRI!</strong></span>
-        <span class="durum-acik" style="padding:4px 12px">Son Başvuru: ${acikCagri.bitis}</span>
-      </div>
-      <p style="margin-top:8px">Program: ${acikCagri.kod} | Dönem: ${acikCagri.donem}</p>
-      <div class="kalan-gun">⏰ ${acikCagri.kalan_gun || '?'} gün kaldı!</div>
-      <p style="font-size:12px;margin-top:8px"><strong>⚠ Ön Koşul:</strong> ${acikCagri.on_kosul}</p>
-    </div>
-    ` : `
-    <div style="background:#FEF2F2;border-radius:8px;padding:15px;margin:15px 0;border:1px solid #FECDD3">
-      <i class="fas fa-exclamation-triangle" style="color:#DC2626"></i> 
-      <strong>Şu anda ${enUygun.program} için açık çağrı bulunmamaktadır.</strong>
-      <p style="margin-top:5px;font-size:12px">Bir sonraki dönem için hazırlık yapabilirsiniz.</p>
-    </div>
-    `}
-    
-    <h4 style="color:#1E2A44;margin:20px 0 10px">📊 Tüm Program Uygunluk Analizi</h4>
-    ${analiz.puanlar.map(p => `
-      <div style="margin-bottom:12px">
-        <div style="display:flex;justify-content:space-between;margin-bottom:3px">
-          <span style="font-weight:600">${p.program}</span>
-          <span style="color:${p.puan>=70?'#16A34A':p.puan>=40?'#D97706':'#9CA3AF'}">${p.puan}/100</span>
-        </div>
-        <div class="score-bar"><div class="score-fill" style="width:${p.puan}%;background:${p.puan>=70?'#16A34A':p.puan>=40?'#D97706':'#9CA3AF'}"></div></div>
-        <p style="font-size:11px;color:#6B7280;margin-top:2px">${p.aciklama}</p>
-      </div>
-    `).join('')}
-    
-    <h4 style="color:#1E2A44;margin:20px 0 10px">✅ Güçlü Yönler</h4>
-    <ul style="padding-left:20px;margin-bottom:15px">
-      ${analiz.analizNotlari.gucluYonler.map(g => `<li style="margin-bottom:3px;color:#16A34A"><i class="fas fa-check-circle"></i> ${g}</li>`).join('')}
-      ${analiz.analizNotlari.gucluYonler.length === 0 ? '<li style="color:#9CA3AF">Henüz güçlü yön belirlenemedi</li>' : ''}
-    </ul>
-    
-    <h4 style="color:#1E2A44;margin:20px 0 10px">⚠️ Geliştirilmesi Gereken Alanlar</h4>
-    <ul style="padding-left:20px;margin-bottom:15px">
-      ${analiz.analizNotlari.zayifYonler.map(z => `<li style="margin-bottom:3px;color:#D97706"><i class="fas fa-exclamation-triangle"></i> ${z}</li>`).join('')}
-      ${analiz.analizNotlari.zayifYonler.length === 0 ? '<li style="color:#9CA3AF">Zayıf yön bulunamadı</li>' : ''}
-    </ul>
-    
-    <h4 style="color:#1E2A44;margin:20px 0 10px">🔔 Risk Analizi ve Öneriler</h4>
-    <div style="background:#FFFBEB;border-left:4px solid #D97706;padding:15px;border-radius:8px">
-      <p style="margin-bottom:8px"><strong>Riskler:</strong></p>
-      <ul style="padding-left:20px;margin-bottom:12px">
-        ${analiz.analizNotlari.riskler.map(r => `<li style="color:#92400E">${r}</li>`).join('')}
-        ${analiz.analizNotlari.riskler.length === 0 ? '<li style="color:#9CA3AF">Belirgin risk yok</li>' : ''}
-      </ul>
-      <p style="margin-bottom:8px"><strong>ADS Önerileri:</strong></p>
-      <ul style="padding-left:20px">
-        ${analiz.analizNotlari.oneriler.map(o => `<li style="color:#16A34A"><i class="fas fa-lightbulb"></i> ${o}</li>`).join('')}
-        ${analiz.analizNotlari.oneriler.length === 0 ? '<li style="color:#9CA3AF">Öneri yok</li>' : ''}
-      </ul>
-    </div>
-    
-    <div style="display:flex;gap:10px;margin-top:20px">
-      <button class="btn-gold" style="flex:1" onclick="kosgebRaporKaydet()">
-        <i class="fas fa-download"></i> Raporu İndir (HTML)
-      </button>
-      <button class="btn-navy" style="flex:1" onclick="kosgebMailGonder()">
-        <i class="fas fa-envelope"></i> E-posta ile Gönder
-      </button>
-    </div>
-  `;
-  
-  alan.innerHTML = html;
 }
 
 function kosgebRaporKaydet() {
@@ -2262,16 +2536,11 @@ function kosgebRaporKaydet() {
     <style>
       body{font-family:Arial;margin:20px;color:#333}
       .header{background:#1E2A44;color:white;padding:15px;border-radius:8px}
-      .program-box{border-left:4px solid #16A34A;padding:10px;margin:10px 0;background:#F9FAFB}
-      .cagri-acik{background:#F0FDF4;border:1px solid #86EFAC;padding:10px;border-radius:8px}
-      .score-bar{height:10px;background:#E5E7EB;border-radius:10px;margin:5px 0}
-      .score-fill{height:10px;background:#16A34A;border-radius:10px}
     </style>
     </head>
     <body>
       <div class="header"><h1>KOSGEB Ön Değerlendirme Raporu</h1></div>
       ${alan.innerHTML}
-      <p style="margin-top:20px;font-size:11px;color:#999">Rapor Tarihi: ${new Date().toLocaleString('tr-TR')}</p>
     </body>
     </html>
   `;
@@ -2283,15 +2552,8 @@ function kosgebRaporKaydet() {
   a.click();
 }
 
-function kosgebMailGonder() {
-  const subject = 'KOSGEB Ön Değerlendirme Raporum';
-  const body = 'Merhaba,\n\nKOSGEB ön değerlendirme raporumu ekte incelenmesi için gönderiyorum.\n\nSaygılarımla.';
-  window.location.href = `mailto:kosgeb@adsdanismanlik.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  alert('E-posta uygulamanız açılacaktır. Raporu HTML olarak kaydedip ekleyebilirsiniz.');
-}
-
 // ================================================================
-// 8. DİĞER SAYFA RENDER FONKSİYONLARI (Kısa)
+// 13. DİĞER SAYFA RENDER FONKSİYONLARI
 // ================================================================
 function renderTeam() {
   const team = LS.get('ads_team') || [];
@@ -2352,7 +2614,7 @@ function renderDokumanlar() {
 }
 
 // ================================================================
-// 9. ADMİN FONKSİYONLARI (Kısa)
+// 14. ADMİN FONKSİYONLARI (Kısa)
 // ================================================================
 function openAdmin() {
   el('adminWrap').style.display = 'block';
@@ -2370,7 +2632,6 @@ function doLogin() {
     el('adminLoginScreen').style.display = 'none';
     el('adminLayout').style.display = 'flex';
     renderDashboard();
-    loadAyarlar();
   } else {
     el('loginErr').style.display = 'block';
   }
@@ -2391,32 +2652,22 @@ function setAdmSec(sec) {
 
 function renderDashboard() {
   const subs = LS.get('ads_subs') || [];
-  const blogs = LS.get('ads_blogs') || [];
-  const team = LS.get('ads_team') || [];
-  const v = LS.get('ads_visitors') || { today: 0 };
   el('dashStats').innerHTML = `
-    <div class="s-box"><div class="s-num">${blogs.length}</div><div class="s-lbl">Blog</div></div>
-    <div class="s-box"><div class="s-num">${team.length}</div><div class="s-lbl">Ekip</div></div>
     <div class="s-box"><div class="s-num">${subs.length}</div><div class="s-lbl">Başvuru</div></div>
-    <div class="s-box"><div class="s-num">${v.today||0}</div><div class="s-lbl">Bugün</div></div>`;
+    <div class="s-box"><div class="s-num">0</div><div class="s-lbl">Bugün</div></div>`;
 }
 
 function renderCRM() {
   const subs = LS.get('ads_subs') || [];
-  el('crmTbody').innerHTML = subs.map(r => `<tr><td>${r.ad_soyad}</td><td>${r.firma_adi}</td><td>${r.hizmet}</td></tr>`).join('');
+  el('crmTbody').innerHTML = subs.map(r => `<tr><td>${r.tarih}</td><td>${r.ad_soyad}</td><td>${r.firma_adi}</td><td>${r.hizmet}</td><td>${r.durum}</td></tr>`).join('');
 }
 
 function topluRapor(fmt) {
   alert('Rapor oluşturma işlemi başlatıldı.');
 }
 
-function loadAyarlar() {
-  const cfg = LS.get('ads_config') || {};
-  if (el('cfg_firma')) el('cfg_firma').value = cfg.firma_adi || '';
-}
-
 // ================================================================
-// 10. E-POSTA MODAL FONKSİYONLARI
+// 15. E-POSTA MODAL FONKSİYONLARI
 // ================================================================
 function toggleMailMethod() {
   el('emailjsInfo').style.display = el('mailMethod').value === 'emailjs' ? 'block' : 'none';
@@ -2432,7 +2683,7 @@ function doSendMail() {
 }
 
 // ================================================================
-// 11. SAYFA YÜKLENİNCE
+// 16. SAYFA YÜKLENİNCE
 // ================================================================
 document.addEventListener('DOMContentLoaded', () => {
   renderAnaSayfa();
