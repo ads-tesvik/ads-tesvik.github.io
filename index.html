@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ADS Danışmanlık | Yatırım ve Teşvik Uzmanı</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<style>
+/* ===== BASE ===== */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#1E2A44;--gold:#C9A84C;--light:#F8F9FA;--text:#2D3748;--muted:#718096}
+html,body{font-family:'Inter',sans-serif;color:var(--text);background:#fff;overflow-x:hidden}
+.page{display:none}.page.active{display:block}
+
+/* ===== DUYURU ===== */
+#duyuruBar{display:none;padding:8px 28px;align-items:center;justify-content:space-between}
+#duyuruBar.show{display:flex}
+#duyuruBar p{font-size:13px;font-weight:600;margin:0}
+#duyuruBar a{font-weight:700;margin-left:14px;text-decoration:underline;font-size:13px}
+
+/* ===== NAVBAR ===== */
+.nbar{background:var(--navy);padding:0 24px;display:flex;align-items:center;
+  justify-content:space-between;height:64px;box-shadow:0 2px 12px rgba(0,0,0,.3);
+  position:sticky;top:0;z-index:500;flex-wrap:wrap;gap:4px}
+.logo{color:white;font-family:'Playfair Display',serif;font-size:17px;font-weight:700;cursor:pointer}
+.logo span{color:var(--gold)}
+.nav-menu{display:flex;align-items:center;gap:1px;flex-wrap:wrap}
+.nav-link{background:none;border:none;color:rgba(255,255,255,.85);padding:7px 9px;
+  border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;text-decoration:none;transition:.15s}
+.nav-link:hover{background:rgba(255,255,255,.1);color:white}
+.dropdown{position:relative;display:inline-block}
+.dd{display:none;position:absolute;top:calc(100% + 2px);left:0;background:white;
+  border-radius:10px;box-shadow:0 8px 28px rgba(0,0,0,.18);padding:6px;min-width:200px;z-index:9999}
+.dropdown:hover .dd{display:block}
+.dd a{display:block;padding:8px 12px;color:var(--text);text-decoration:none;border-radius:6px;font-size:12px;cursor:pointer}
+.dd a:hover{background:var(--light);color:var(--navy)}
+
+/* ===== TÜBİTAK ÖZEL STİLLER ===== */
+.tubitak-badge{background:linear-gradient(135deg,#1E2A44,#2E4A7D);color:white;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;display:inline-block;margin-bottom:10px}
+.tubitak-card{border-left:4px solid #2E4A7D;background:white;border-radius:10px;padding:18px;margin-bottom:16px;box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.ai-score{display:inline-block;width:36px;height:36px;border-radius:50%;background:#2E4A7D;color:white;text-align:center;line-height:36px;font-weight:700;font-size:14px}
+.score-bar{height:8px;border-radius:20px;background:#E5E7EB;margin:5px 0}
+.score-fill{height:8px;border-radius:20px;background:#2E4A7D}
+.program-card{cursor:pointer;transition:.2s;border:2px solid transparent}
+.program-card.selected{border-color:#C9A84C;background:#FFFBEB}
+.program-card:hover{transform:translateY(-2px);box-shadow:0 8px 16px rgba(0,0,0,.08)}
+.uyari-tubitak{background:#EFF6FF;border-left:4px solid #2E4A7D;border-radius:6px;padding:12px;margin:10px 0;font-size:13px}
+.mevzuat-kutu{background:#F9FAFB;border:1px solid #E5E7EB;border-radius:8px;padding:12px;margin-bottom:12px}
+.mevzuat-tarih{color:#2E4A7D;font-weight:700;font-size:13px}
+.cagri-takvimi{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:15px 0}
+.cagri-item{background:white;border:1px solid #E5E7EB;border-radius:8px;padding:12px;text-align:center}
+.cagri-item.acik{border-left:4px solid #10B981}
+.cagri-item.kapali{border-left:4px solid #EF4444}
+.cagri-kod{font-weight:700;color:#2E4A7D;font-size:15px}
+.cagri-durum{font-size:11px;font-weight:600;display:inline-block;padding:2px 8px;border-radius:20px;margin-top:5px}
+.durum-acik{background:#D1FAE5;color:#065F46}
+.durum-kapali{background:#FEE2E2;color:#991B1B}
+.proje-ipucu{background:#FDF4FF;border-left:4px solid #7C3AED;border-radius:6px;padding:12px;margin:10px 0}
+.hakem-rehber{background:#FEF2F2;border:1px solid #FECDD3;border-radius:8px;padding:15px;margin:15px 0}
+.hakem-rehber h5{color:#991B1B;margin-bottom:8px}
+.hakem-soru{font-weight:600;margin:8px 0 3px;color:#2D3748}
+.rapor-ozet{background:#F0FDF4;border-radius:8px;padding:15px;margin:10px 0;border:1px solid #BBF7D0}
+.kalan-gun{font-size:20px;font-weight:700;color:#D97706}
+
+/* ===== HERO ===== */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,#2d4a7a 100%);padding:64px 40px;color:white}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;max-width:1100px;margin:0 auto}
+.badge-c{display:inline-block;background:rgba(201,168,76,.2);color:var(--gold);border:1px solid var(--gold);
+  padding:5px 14px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;margin-bottom:16px}
+.hero h1{font-family:'Playfair Display',serif;font-size:38px;line-height:1.2;margin-bottom:16px}
+.hero h1 span{color:var(--gold)}
+.hero p.sub{opacity:.85;font-size:14px;line-height:1.7;margin-bottom:24px}
+.hero-img{width:100%;border-radius:12px;box-shadow:0 16px 48px rgba(0,0,0,.4)}
+
+/* ===== BUTTONS ===== */
+.btn-gold{background:var(--gold);color:var(--navy);border:none;padding:11px 22px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;text-decoration:none;display:inline-block}
+.btn-gold:hover{background:#b8962e;transform:translateY(-1px)}
+.btn-navy{background:var(--navy);color:white;border:none;padding:9px 18px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;transition:.2s;text-decoration:none;display:inline-block}
+.btn-navy:hover{background:#2E4A7D}
+.btn-outline-w{background:transparent;color:white;border:2px solid rgba(255,255,255,.6);padding:10px 22px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:.2s}
+.btn-outline-w:hover{border-color:white;background:rgba(255,255,255,.1)}
+.btn-sm{padding:5px 10px;font-size:11px;border-radius:5px;border:none;cursor:pointer;font-weight:600}
+.btn-del{background:#EF4444;color:white}.btn-edt{background:#F59E0B;color:white}.btn-view{background:#3B82F6;color:white}
+.btn-word{background:#2B579A;color:white;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;font-size:11px;font-weight:600}
+.btn-pdf{background:#D93025;color:white;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;font-size:11px;font-weight:600}
+.btn-mail{background:#D93025;color:white;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;font-size:11px;font-weight:600}
+.btn-wa{background:#25D366;color:white;border:none;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;display:block;width:100%;text-align:center;margin-top:10px;text-decoration:none}
+.btn-green{background:#16A34A;color:white;border:none;padding:9px 18px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer}
+
+/* ===== SECTIONS ===== */
+.section{padding:56px 40px}.section-alt{background:var(--light)}
+.container{max-width:1100px;margin:0 auto}
+.sec-title{text-align:center;margin-bottom:10px;font-family:'Playfair Display',serif;font-size:30px;color:var(--navy)}
+.sec-sub{color:var(--muted);font-size:14px;max-width:540px;margin:0 auto 32px;text-align:center;display:block}
+
+/* ===== CARDS ===== */
+.svc-card{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.07);border:1px solid #eee;transition:.2s;height:100%;border-left:4px solid var(--gold)}
+.svc-card:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,.11)}
+.svc-card h4{font-family:'Playfair Display',serif;font-size:15px;color:var(--navy);margin-bottom:7px}
+.svc-card p{color:var(--muted);font-size:12px;line-height:1.6}
+.svc-link{color:var(--gold);font-size:12px;font-weight:600;cursor:pointer;display:inline-block;margin-top:8px;text-decoration:none}
+
+/* ===== GRID ===== */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px}
+
+/* ===== TEAM ===== */
+.team-card{background:white;border-radius:10px;padding:22px 16px;box-shadow:0 4px 14px rgba(0,0,0,.06);transition:.3s;text-align:center;height:100%;border:1px solid #eef2f6}
+.team-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(46,74,125,.14);border-color:#2E4A7D}
+.t-av{width:80px;height:80px;border-radius:50%;background:#E8EDF5;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:32px;color:#2E4A7D;border:3px solid #2E4A7D;overflow:hidden}
+.t-av img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.t-name{font-size:16px;font-weight:700;color:#1E2A44;margin-bottom:3px;font-family:'Playfair Display',serif}
+.t-rol{font-size:10px;color:#2E4A7D;font-weight:600;margin-bottom:9px;text-transform:uppercase}
+.t-bio{font-size:12px;color:#6B7280;margin-bottom:10px;line-height:1.6;text-align:left}
+.t-tags{display:flex;flex-wrap:wrap;gap:4px;justify-content:center}
+.t-tag{background:#E8EDF5;color:#2E4A7D;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:500}
+
+/* ===== BLOG ===== */
+.blog-card{background:white;border-radius:9px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,.05);transition:.3s;cursor:pointer}
+.blog-card:hover{transform:translateY(-3px);box-shadow:0 12px 24px rgba(46,74,125,.11)}
+.blog-img{width:100%;height:140px;overflow:hidden;background:#E8EDF5;display:flex;align-items:center;justify-content:center;color:#ccc;font-size:32px}
+.blog-img img{width:100%;height:100%;object-fit:cover}
+.blog-body{padding:13px}
+.blog-meta{color:#999;font-size:10px;margin-bottom:5px}
+.blog-tag{display:inline-block;background:#E8EDF5;color:#2E4A7D;padding:2px 7px;border-radius:20px;font-size:10px;margin-bottom:4px}
+.blog-full{padding:24px;background:white;border-radius:9px;box-shadow:0 4px 12px rgba(0,0,0,.06);margin-bottom:22px;line-height:1.8}
+.blog-full h4{color:#1E2A44;font-size:16px;margin-bottom:6px}
+.blog-full-meta{color:#999;font-size:11px;margin-bottom:12px;border-bottom:1px solid #eef2f6;padding-bottom:9px}
+
+/* ===== CONTACT ===== */
+.cbox{background:#2E4A7D;color:white;padding:24px;border-radius:12px}
+.cbox h4{color:white;margin-bottom:12px;font-size:15px}
+.cbox p{margin-bottom:7px;opacity:.9;font-size:13px}.cbox a{color:white}
+
+/* ===== SMART FORM ===== */
+.sform-step{display:none}.sform-step.active{display:block}
+.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.srv-btn{border:2px solid #E5E7EB;border-radius:10px;padding:16px 12px;cursor:pointer;
+  text-align:center;background:white;transition:.2s;font-family:'Inter',sans-serif}
+.srv-btn:hover,.srv-btn.selected{border-color:var(--navy);background:#EFF6FF}
+.srv-btn .srv-ico{font-size:28px;display:block;margin-bottom:6px}
+.srv-btn .srv-name{font-size:12px;font-weight:700;color:var(--navy)}
+.srv-btn .srv-desc{font-size:10px;color:var(--muted);margin-top:3px}
+.form-box{border-radius:9px;padding:14px;margin-bottom:12px;background:#f8f9fa}
+.form-box.gold{border-left:3px solid var(--gold)}.form-box.navy{border-left:3px solid var(--navy)}
+.form-box.green{border-left:3px solid #16A34A}.form-box.purple{border-left:3px solid #7C3AED}
+.form-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;color:#374151;display:block}
+.fi{display:flex;flex-direction:column;gap:3px;margin-bottom:9px}
+.fi label{font-size:11px;font-weight:600;color:#374151}
+.fi input,.fi select,.fi textarea{padding:7px 10px;border:1.5px solid #D1D5DB;border-radius:7px;font-size:12px;font-family:'Inter',sans-serif;width:100%;background:white;color:var(--text)}
+.fi input:focus,.fi select:focus,.fi textarea:focus{outline:none;border-color:#2E4A7D}
+.fi textarea{resize:vertical;min-height:70px}
+.req{color:#EF4444}
+.uyari{padding:8px 11px;border-radius:7px;font-size:12px;margin:5px 0}
+.uyari.sari{background:#FFFBEB;border:1px solid #FCD34D;color:#92400E}
+.uyari.kirmizi{background:#FFF1F2;border:1px solid #FECDD3;color:#BE185D}
+.uyari.mavi{background:#EFF6FF;border:1px solid #BFDBFE;color:#1D4ED8}
+
+/* ===== DOC LİST ===== */
+.doc-card{background:white;border-radius:10px;padding:18px;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid #eee;display:flex;align-items:center;gap:14px;transition:.2s}
+.doc-card:hover{box-shadow:0 5px 18px rgba(0,0,0,.1);transform:translateY(-1px)}
+.doc-ico{width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.doc-ico.pdf{background:#FEE2E2;color:#DC2626}
+.doc-ico.word{background:#DBEAFE;color:#2563EB}
+.doc-ico.other{background:#F3F4F6;color:#6B7280}
+.doc-info h4{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:3px}
+.doc-info p{font-size:11px;color:var(--muted)}
+.doc-actions{margin-left:auto;display:flex;gap:6px}
+
+/* ===== NOTES ===== */
+.n-green{background:#F0FDF4;border:1px solid #BBF7D0;border-radius:7px;padding:8px 12px;font-size:12px;color:#166534;margin:6px 0}
+.n-yellow{background:#FFFBEB;border:1px solid #FCD34D;border-radius:7px;padding:8px 12px;font-size:12px;color:#92400E;margin:6px 0}
+.n-red{background:#FFF1F2;border:1px solid #FECDD3;border-radius:7px;padding:8px 12px;font-size:12px;color:#BE185D;margin:6px 0}
+.n-blue{background:#EFF6FF;border:1px solid #BFDBFE;border-radius:7px;padding:8px 12px;font-size:12px;color:#1D4ED8;margin:6px 0}
+
+/* ===== TABLES ===== */
+.tbl{width:100%;border-collapse:collapse;background:white;margin:10px 0;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.tbl th{background:#2E4A7D;color:white;padding:8px 10px;text-align:left;font-size:12px}
+.tbl td{padding:8px 10px;border-bottom:1px solid #eef2f6;font-size:12px}
+.tbl tr:hover td{background:#fafafa}
+
+/* ===== VIS COUNTER ===== */
+.vis-bar{display:flex;gap:18px;justify-content:center;padding:10px;background:rgba(0,0,0,.15);border-radius:8px;margin-top:14px}
+.vis-item{text-align:center}
+.vis-num{font-size:20px;font-weight:700;color:white}
+.vis-lbl{font-size:9px;text-transform:uppercase;opacity:.7;color:white}
+
+/* ===== FOOTER ===== */
+.footer{background:#111827;color:rgba(255,255,255,.65);text-align:center;padding:18px;font-size:12px;line-height:1.8}
+.footer a{color:rgba(255,255,255,.5);text-decoration:none}
+
+/* ===== WA FLOAT ===== */
+.wa-float{position:fixed;width:52px;height:52px;bottom:28px;right:28px;background:#25D366;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 14px rgba(0,0,0,.25);z-index:1000;text-decoration:none;transition:transform .3s}
+.wa-float:hover{transform:scale(1.1);color:white}
+
+/* ===== HIKAYE ===== */
+.hik-card{background:white;border-radius:10px;padding:20px;box-shadow:0 4px 14px rgba(0,0,0,.07);border-left:4px solid var(--gold);margin-bottom:18px}
+.hik-card h4{color:var(--navy);margin-bottom:8px;font-family:'Playfair Display',serif;font-size:15px}
+
+/* ===== MÜŞTERİ RAPOR KUTUSU ===== */
+.musteri-rapor-box{background:white;border-radius:12px;padding:20px;
+  box-shadow:0 4px 18px rgba(0,0,0,.1);margin-top:14px;border-top:4px solid var(--gold)}
+.musteri-rapor-box h4{color:var(--navy);font-family:'Playfair Display',serif;
+  margin-bottom:12px;font-size:15px}
+.kpi-mini{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:14px}
+.kpi-mini-item{border-radius:7px;padding:9px;text-align:center}
+.kpi-mini-num{font-size:15px;font-weight:700}
+.kpi-mini-lbl{font-size:10px;color:#6B7280;margin-top:1px}
+.teaser-box{background:linear-gradient(135deg,#1E2A44,#2E4A7D);border-radius:10px;
+  padding:18px;margin-top:14px;color:white}
+.teaser-box h5{color:var(--gold);font-family:'Playfair Display',serif;
+  margin-bottom:8px;font-size:14px}
+.teaser-box p{font-size:12px;opacity:.9;margin-bottom:12px;line-height:1.6}
+.teaser-item{display:flex;align-items:center;gap:8px;padding:7px 0;
+  border-bottom:1px solid rgba(255,255,255,.1);font-size:12px;opacity:.85}
+.teaser-item:last-child{border-bottom:none}
+.teaser-lock{width:22px;height:22px;background:rgba(201,168,76,.2);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:11px;color:var(--gold)}
+.gonder-onay{background:#F0FDF4;border:2px solid #16A34A;border-radius:10px;
+  padding:16px;text-align:center;margin-top:14px}
+.gonder-onay .onay-icon{font-size:36px;margin-bottom:8px}
+.gonder-onay h4{color:#166534;font-family:'Playfair Display',serif;
+  margin-bottom:6px;font-size:15px}
+.gonder-onay p{color:#166534;font-size:12px;margin-bottom:12px}
+.rapor-kpi{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px}
+.rapor-kpi-item{border-radius:7px;padding:9px;text-align:center}
+.rapor-kpi-num{font-size:16px;font-weight:700}
+.rapor-kpi-lbl{font-size:10px;color:#6B7280}
+.rapor-btns{display:flex;gap:5px;flex-wrap:wrap}
+
+/* ===== MAIL MODAL ===== */
+#mailModal{position:fixed;inset:0;background:rgba(15,23,42,.85);display:none;align-items:center;justify-content:center;z-index:10000}
+#mailModal.show{display:flex}
+.mail-box{background:white;border-radius:14px;padding:28px;width:420px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.mail-box h3{font-family:'Playfair Display',serif;color:#1E2A44;margin-bottom:5px}
+.mail-box p{color:#6B7280;font-size:12px;margin-bottom:16px}
+.mail-fi{margin-bottom:10px}
+.mail-fi label{display:block;font-size:11px;font-weight:600;color:#374151;margin-bottom:3px}
+.mail-fi input,.mail-fi select{width:100%;padding:8px 11px;border:1.5px solid #D1D5DB;border-radius:7px;font-size:12px;font-family:'Inter',sans-serif}
+.mail-fi input:focus{outline:none;border-color:#2E4A7D}
+
+/* ===== PRINT (PDF) ===== */
+@media print{
+  .nbar,.wa-float,.no-print,#duyuruBar,.footer{display:none!important}
+  .page{display:block!important}
+  body{font-size:11pt}
+}
+
+/* ===== ADMIN ===== */
+#adminWrap{position:fixed;inset:0;z-index:9000;background:#F3F4F6;display:none;overflow-y:auto}
+.a-login-ov{position:fixed;inset:0;background:rgba(15,23,42,.9);display:flex;align-items:center;justify-content:center;z-index:9100}
+.a-login-box{background:white;padding:34px;border-radius:14px;width:330px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.a-login-box h2{font-family:'Playfair Display',serif;color:#1E2A44;margin-bottom:5px}
+.a-login-box input{width:100%;padding:9px 12px;border:1.5px solid #D1D5DB;border-radius:7px;font-size:12px;margin-bottom:8px;font-family:'Inter',sans-serif}
+#loginErr{color:#EF4444;font-size:11px;margin-bottom:6px;display:none}
+#adminLayout{display:flex;min-height:100vh}
+.a-sidebar{width:210px;background:#1E2A44;color:white;flex-shrink:0;min-height:100vh}
+.a-logo{padding:16px 13px;font-family:'Playfair Display',serif;font-size:13px;border-bottom:1px solid rgba(255,255,255,.1);color:white}
+.a-logo span{color:#C9A84C}
+.a-nav{padding:7px 0}
+.a-ni{padding:9px 13px;cursor:pointer;font-size:12px;color:rgba(255,255,255,.75);display:flex;align-items:center;gap:7px;transition:.15s;border-left:3px solid transparent}
+.a-ni:hover,.a-ni.on{background:rgba(255,255,255,.08);color:white;border-left-color:#C9A84C}
+.a-main{flex:1;min-width:0;display:flex;flex-direction:column}
+.a-topbar{background:white;padding:12px 22px;border-bottom:1px solid #E5E7EB;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
+.a-topbar h5{font-weight:700;color:#1E2A44;margin:0;font-size:13px}
+.a-body{padding:20px 24px;flex:1}
+.a-sec{display:none}.a-sec.active{display:block}
+.a-card{background:white;border-radius:9px;padding:18px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:14px}
+.a-card h4{margin-bottom:11px;padding-bottom:8px;border-bottom:1px solid #F3F4F6;color:#1E2A44;font-size:13px;font-weight:700}
+.s-box{background:white;border-radius:9px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,.06);text-align:center}
+.s-num{font-size:28px;font-weight:700;color:#2E4A7D;font-family:'Playfair Display',serif}
+.s-lbl{color:#6B7280;font-size:11px;margin-top:2px}
+.a-fg{margin-bottom:9px}
+.a-fg label{display:block;font-size:11px;font-weight:600;color:#374151;margin-bottom:3px}
+.a-fg input,.a-fg textarea,.a-fg select{width:100%;padding:7px 10px;border:1.5px solid #D1D5DB;border-radius:6px;font-size:12px;font-family:'Inter',sans-serif}
+.a-fg input:focus,.a-fg textarea:focus,.a-fg select:focus{outline:none;border-color:#2E4A7D}
+.a-fg textarea{min-height:65px;resize:vertical}
+.a-2col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.a-3col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.a-tbl{width:100%;border-collapse:collapse;font-size:11px}
+.a-tbl th{text-align:left;padding:7px 8px;background:#F9FAFB;color:#6B7280;border-bottom:1px solid #E5E7EB;font-size:10px}
+.a-tbl td{padding:7px 8px;border-bottom:1px solid #F9FAFB;vertical-align:middle}
+.a-tbl tr:hover td{background:#FAFAFA}
+.pill{display:inline-block;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:600}
+.d-badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600}
+.kanban-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-bottom:16px}
+.kanban-col{background:#F3F4F6;border-radius:7px;padding:9px;min-height:55px}
+.kanban-hdr{display:flex;justify-content:space-between;margin-bottom:7px}
+.kanban-card{background:white;border-radius:5px;padding:7px;margin-bottom:4px;box-shadow:0 1px 3px rgba(0,0,0,.07);cursor:pointer;font-size:10px}
+.fmt-row{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}
+
+/* ===== SPINNER ===== */
+.spin{display:inline-block;width:12px;height:12px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:sp .6s linear infinite;margin-right:5px}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .hero-grid,.g2,.g3,.g4,.srv-grid{grid-template-columns:1fr!important}
+  .hero h1{font-size:26px}.section{padding:36px 14px}
+  .hero{padding:44px 18px}
+  .a-sidebar{width:180px}
+  .kanban-grid{grid-template-columns:repeat(3,1fr)}
+  .nbar{height:auto;padding:10px 14px}
+}
+</style>
+</head>
+<body>
+
+<!-- DUYURU BAR -->
+<div id="duyuruBar"></div>
+
+<!-- NAVBAR -->
+<nav class="nbar">
+  <div class="logo" onclick="showPage('anaSayfa')">ADS <span>|</span> Teşvik Danışmanlığı</div>
+  <div class="nav-menu">
+    <a class="nav-link" onclick="showPage('anaSayfa')">Anasayfa</a>
+    <a class="nav-link" onclick="showPage('hakkindaPage')">Hakkımızda</a>
+    <a class="nav-link" onclick="showPage('ekibimizPage')">Ekibimiz</a>
+    <div class="dropdown">
+      <a class="nav-link">Hizmetler ▾</a>
+      <div class="dd">
+        <a onclick="showPage('yatirimPage')">📊 Yatırım Teşvik</a>
+        <a onclick="showPage('tubitakPage')">🔬 TÜBİTAK Ar-Ge</a>
+        <a onclick="showPage('kosgebPage')">🏢 KOSGEB</a>
+        <a onclick="showPage('ihracatPage')">🌍 İhracat</a>
+        <a onclick="showPage('ipardPage')">🌾 IPARD / Tarım</a>
+      </div>
+    </div>
+    <!-- TÜBİTAK Alt Menü (YENİ) -->
+    <div class="dropdown">
+      <a class="nav-link" style="background:rgba(201,168,76,.15);color:#C9A84C">🔬 TÜBİTAK Özel ▾</a>
+      <div class="dd">
+        <a onclick="showPage('tubitakCagriPage')">📅 Güncel Çağrılar</a>
+        <a onclick="showPage('tubitakRehberPage')">📘 Başvuru Rehberi</a>
+        <a onclick="showPage('tubitakHakemPage')">⚖️ Hakem Süreci</a>
+        <a onclick="showPage('tubitakFormPage')">🤖 AI Değerlendirme</a>
+      </div>
+    </div>
+    <a class="nav-link" onclick="showPage('vakaPage')">Başarı Hikayeleri</a>
+    <a class="nav-link" onclick="showPage('blogPage')">Blog</a>
+    <a class="nav-link" onclick="showPage('dokumanlarPage')">📚 Dokümanlar</a>
+    <a class="nav-link" onclick="showPage('linklerPage')">Faydalı Linkler</a>
+    <a class="nav-link" onclick="showPage('iletisimPage')">İletişim</a>
+    <a class="nav-link" onclick="openAdmin()" style="background:rgba(201,168,76,.15);color:#C9A84C;border:1px solid rgba(201,168,76,.4);font-size:11px">🔐</a>
+  </div>
+</nav>
+
+<!-- ========== TÜBİTAK VERİTABANI ========== -->
+<script>
+// TÜBİTAK Programları Veritabanı (ADS El Kitabı Bölüm 3)
+const TUBITAK_PROGRAMLARI = [
+  {kod:'1501', ad:'Sanayi Ar-Ge Destek Programı', hedef:'Deneyimli KOBİ\'ler', butce_min:1e6, butce_max:5e6, hibe:75, sure:36, oncelik:'Orta', link:'https://www.tubitak.gov.tr/tr/destekler/sanayi/1501'},
+  {kod:'1507', ad:'KOBİ Ar-Ge Başlangıç Destek Programı', hedef:'Ar-Ge\'ye yeni başlayan KOBİ\'ler', butce_min:500e3, butce_max:1e6, hibe:75, sure:18, oncelik:'Yüksek', link:'https://www.tubitak.gov.tr/tr/destekler/sanayi/1507'},
+  {kod:'1511', ad:'Öncelikli Alanlar Ar-Ge Destek Programı', hedef:'Stratejik sektörler', butce_min:2e6, butce_max:10e6, hibe:75, sure:36, oncelik:'Çok Yüksek', link:'https://www.tubitak.gov.tr/tr/destekler/sanayi/1511'},
+  {kod:'1512', ad:'Bireysel Genç Girişim (BİGG) Programı', hedef:'Bireysel girişimciler', butce_min:200e3, butce_max:400e3, hibe:100, sure:18, oncelik:'Çok Yüksek', link:'https://www.tubitak.gov.tr/tr/destekler/girisimcilik/1512'},
+  {kod:'1509', ad:'Uluslararası Sanayi Ar-Ge Destek Programı', hedef:'Uluslararası iş birliği', butce_min:2e6, butce_max:10e6, hibe:75, sure:36, oncelik:'Düşük', link:'https://www.tubitak.gov.tr/tr/destekler/sanayi/1509'}
+];
+
+// Güncel çağrı takvimi (periyodik güncellenecek)
+const TUBITAK_CAGRI = [
+  {kod:'1501', donem:'2026/1', baslangic:'2026-01-03', bitis:'2026-01-31', durum:'kapali', on_kayit:'2026-01-28'},
+  {kod:'1501', donem:'2026/2', baslangic:'2026-07-01', bitis:'2026-07-31', durum:'acik', on_kayit:'2026-07-28', kalan_gun:45},
+  {kod:'1507', donem:'2026/1', baslangic:'2026-03-01', bitis:'2026-03-31', durum:'acik', on_kayit:'2026-03-28', kalan_gun:14},
+  {kod:'1507', donem:'2026/2', baslangic:'2026-09-01', bitis:'2026-09-30', durum:'beklemede', on_kayit:'2026-09-27'},
+  {kod:'1511', donem:'2026', baslangic:'2026-01-01', bitis:'2026-12-31', durum:'acik', on_kayit:'Her zaman', kalan_gun:288},
+  {kod:'1512', donem:'2026/1', baslangic:'2026-02-15', bitis:'2026-03-15', durum:'acik', on_kayit:'2026-03-10', kalan_gun:28}
+];
+</script>
+
+<!-- ========== ANA SAYFA (Güncellenmiş TÜBİTAK Odaklı) ========== -->
+<div id="anaSayfa" class="page active">
+  <div class="hero" style="background:linear-gradient(135deg,#1E2A44 0%,#2563EB 100%)">
+    <div class="hero-grid container">
+      <div>
+        <div class="badge-c">TÜBİTAK AR-GE UZMAN DANIŞMANLIĞI</div>
+        <h1>Projenizi<br><span>%75 Hibe ile</span><br>Hayata Geçirin</h1>
+        <p class="sub">1501, 1507, 1511, 1512 programlarında uzman ekibimizle yanınızdayız. 100+ başarılı proje, 500M+ TL kazandırılan teşvik.</p>
+        <div style="display:flex;gap:9px;flex-wrap:wrap">
+          <button class="btn-gold" onclick="showPage('tubitakFormPage')">Hemen Ön Değerlendir</button>
+          <button class="btn-outline-w" onclick="showPage('tubitakPage')">Programları İncele</button>
+        </div>
+        <div id="cagriOzet" style="margin-top:20px;background:rgba(255,255,255,.1);border-radius:10px;padding:15px">
+          <!-- Dinamik çağrı özeti -->
+        </div>
+      </div>
+      <div><img class="hero-img" src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?q=80&w=900&auto=format" alt="Ar-Ge Ekibi"></div>
+    </div>
+  </div>
+  
+  <!-- TÜBİTAK Program Kartları -->
+  <div class="section section-alt">
+    <div class="container">
+      <h2 class="sec-title">TÜBİTAK Ar-Ge Programları</h2>
+      <div class="g4" id="programKartlari"></div>
+    </div>
+  </div>
+  
+  <!-- Başarı Hikayeleri -->
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">Başarılı TÜBİTAK Projeleri</h2>
+      <div class="g3">
+        <div class="hik-card">
+          <h4>🏆 PoliTek Kompozit</h4>
+          <p><strong>TÜBİTAK 1501</strong> | 2.4M TL bütçe | 1.8M TL hibe</p>
+          <p style="font-size:11px">Karbon fiber fren diski geliştirme projesi. 5 yeni mühendis, 2 patent, Almanya'ya ihracat.</p>
+        </div>
+        <div class="hik-card">
+          <h4>🏆 MedAI Teknoloji</h4>
+          <p><strong>TÜBİTAK 1512 BİGG</strong> | 350K TL bütçe | %100 hibe</p>
+          <p style="font-size:11px">Yapay zeka destekli tıbbi görüntüleme yazılımı. 3 kişilik ekip, ilk yatırım turu.</p>
+        </div>
+        <div class="hik-card">
+          <h4>🏆 Metek Metal</h4>
+          <p><strong>TÜBİTAK 1507</strong> | 850K TL bütçe | %75 hibe</p>
+          <p style="font-size:11px">CNC tezgah optimizasyonu, verimlilik %25 arttı.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== HAKKIMIZDA ========== -->
+<div id="hakkindaPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">Hakkımızda</h2>
+      <div style="max-width:820px;margin:0 auto">
+        <p style="margin-bottom:12px">ADS Yatırım ve Teşvik Danışmanlığı, Türkiye'deki firmaların kamu kaynaklarından en üst düzeyde faydalanmasını sağlamak amacıyla kurulmuştur.</p>
+        <div style="background:#F8F9FA;border-left:4px solid #C9A84C;padding:13px 16px;border-radius:4px;margin:18px 0">
+          <p style="font-style:italic;color:#374151">"Teşvik sistemi karmaşık olabilir, ama doğru rehberlikle her firma avantaj sağlayabilir."</p>
+          <p style="font-weight:600;color:#2E4A7D;margin-top:5px">— Dr. Ersin Sünbül, Kurucu Ortak</p>
+        </div>
+        <div class="g3">
+          <div class="svc-card"><h4>🎯 Misyonumuz</h4><p>Şeffaf, profesyonel ve sonuç odaklı bir yaklaşımla müşterilerimizin rekabet gücünü artırmak.</p></div>
+          <div class="svc-card"><h4>🔭 Vizyonumuz</h4><p>Teşvik danışmanlığı sektöründe güvenilir, yenilikçi ve lider firma olmak.</p></div>
+          <div class="svc-card"><h4>💎 Değerlerimiz</h4><p>Şeffaflık · Güvenilirlik · Güncellik · Sonuç Odaklılık · Etik Danışmanlık</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== EKİBİMİZ ========== -->
+<div id="ekibimizPage" class="page">
+  <div class="section"><div class="container">
+    <h2 class="sec-title">Uzman Kadromuz</h2>
+    <span class="sec-sub">31 yıllık kamu deneyimi ve akademik birikimle yanınızdayız.</span>
+    <div id="teamContainer"></div>
+  </div></div>
+</div>
+
+<!-- ========== HİZMETLER GENEL ========== -->
+<div id="hizmetlerPage" class="page">
+  <div class="section"><div class="container">
+    <h2 class="sec-title">Tüm Hizmetlerimiz</h2>
+    <h3 style="color:#2E4A7D;margin:20px 0 12px;border-bottom:2px solid #2E4A7D;padding-bottom:5px">📊 Yatırım Teşvik</h3>
+    <div class="g3">
+      <div class="svc-card"><h4>Yatırım Teşvik Belgesi</h4><p>Vergi indirimi, gümrük muafiyeti, KDV istisnası, sigorta primi.</p><a class="svc-link" onclick="showPage('yatirimPage')">Detaylar →</a></div>
+      <div class="svc-card"><h4>Bölgesel Teşvik</h4><p>6 bölge için artan oranlarda destek.</p><a class="svc-link" onclick="showPage('yatirimPage')">Detaylar →</a></div>
+      <div class="svc-card"><h4>Stratejik Yatırım</h4><p>50M TL+ yatırımlara ek avantajlar.</p><a class="svc-link" onclick="showPage('yatirimPage')">Detaylar →</a></div>
+    </div>
+    <h3 style="color:#2E4A7D;margin:20px 0 12px;border-bottom:2px solid #2E4A7D;padding-bottom:5px">🔬 TÜBİTAK Ar-Ge</h3>
+    <div class="g3">
+      <div class="svc-card"><h4>TÜBİTAK 1501</h4><p>%75 hibe, 1-5M TL, 36 ay.</p><a class="svc-link" onclick="showPage('tubitakPage')">Detaylar →</a></div>
+      <div class="svc-card"><h4>TÜBİTAK 1507</h4><p>%75 hibe, 500K-1M TL, 18 ay.</p><a class="svc-link" onclick="showPage('tubitakPage')">Detaylar →</a></div>
+      <div class="svc-card"><h4>TÜBİTAK 1512 – BİGG</h4><p>%100 hibe, 200-400K TL, girişimciler.</p><a class="svc-link" onclick="showPage('tubitakPage')">Detaylar →</a></div>
+    </div>
+    <h3 style="color:#2E4A7D;margin:20px 0 12px;border-bottom:2px solid #2E4A7D;padding-bottom:5px">🏢 KOSGEB</h3>
+    <div class="g3">
+      <div class="svc-card"><h4>Girişimci Desteği</h4><p>1.5M TL geri ödemeli, %80, 36 ay ödemesiz.</p><a class="svc-link" onclick="showPage('kosgebPage')">Detaylar →</a></div>
+      <div class="svc-card"><h4>KOBİGEL</h4><p>1-2M TL destek.</p><a class="svc-link" onclick="showPage('kosgebPage')">Detaylar →</a></div>
+      <div class="svc-card"><h4>İş Geliştirme</h4><p>Gider kalemlerinde %60 destek.</p><a class="svc-link" onclick="showPage('kosgebPage')">Detaylar →</a></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ========== YATIRIM TEŞVİK ========== -->
+<div id="yatirimPage" class="page">
+  <div class="section"><div class="container">
+    <h2 class="sec-title">Yatırım Teşvik Belgesi</h2>
+    <table class="tbl">
+      <thead><tr><th>Bölge</th><th>Örnek İller</th><th>Yatırıma Katkı</th><th>Vergi İnd.</th><th>Sigorta</th><th>Faiz</th></tr></thead>
+      <tbody>
+        <tr><td>1. Bölge</td><td>İstanbul, Ankara, İzmir</td><td>%15</td><td>%50</td><td>2 yıl</td><td>Yok</td></tr>
+        <tr><td>2. Bölge</td><td>Adana, Gaziantep, Kayseri</td><td>%20</td><td>%55</td><td>3 yıl</td><td>Yok</td></tr>
+        <tr><td>3. Bölge</td><td>Balıkesir, Konya, Samsun</td><td>%25</td><td>%60</td><td>5 yıl</td><td>Yok</td></tr>
+        <tr><td>4. Bölge</td><td>Afyon, Eskişehir, Ordu</td><td>%30</td><td>%70</td><td>6 yıl</td><td>Yok</td></tr>
+        <tr><td>5. Bölge</td><td>Adıyaman, Erzurum, Van</td><td>%40</td><td>%80</td><td>7 yıl</td><td>Var</td></tr>
+        <tr><td>6. Bölge</td><td>Ağrı, Hakkari, Şırnak</td><td>%50</td><td>%90</td><td>10 yıl</td><td>Var</td></tr>
+      </tbody>
+    </table>
+    <div style="text-align:center;margin-top:18px"><button class="btn-gold" onclick="showPage('iletisimPage')">Ücretsiz Analiz Al</button></div>
+  </div></div>
+</div>
+
+<!-- ========== TÜBİTAK ANA SAYFA ========== -->
+<div id="tubitakPage" class="page">
+  <div class="section"><div class="container">
+    <h2 class="sec-title">TÜBİTAK Ar-Ge Destekleri</h2>
+    <span class="sec-sub">ADS El Kitabı Bölüm 3'e göre hazırlanmıştır.</span>
+    <table class="tbl">
+      <thead><tr><th>Program</th><th>Hedef Kitle</th><th>Bütçe</th><th>Hibe</th><th>Süre</th><th>Güncel Çağrı</th></tr></thead>
+      <tbody id="tubitakProgramTablosu"></tbody>
+    </table>
+    <div class="g3" style="margin-top:30px">
+      <div class="svc-card" onclick="showPage('tubitakFormPage')">
+        <h4>🔬 1501 Sanayi Ar-Ge</h4>
+        <p>Kapsamlı Ar-Ge projeleri, 36 aya kadar, 1-5M TL bütçe.</p>
+        <a class="svc-link">Hemen Değerlendir →</a>
+      </div>
+      <div class="svc-card" onclick="showPage('tubitakFormPage')">
+        <h4>🧪 1507 KOBİ Ar-Ge</h4>
+        <p>Ar-Ge'ye yeni başlayan KOBİ'ler, 18 ay, 500K-1M TL.</p>
+        <a class="svc-link">Hemen Değerlendir →</a>
+      </div>
+      <div class="svc-card" onclick="showPage('tubitakFormPage')">
+        <h4>💡 1512 BİGG</h4>
+        <p>Bireysel girişimciler, %100 hibe, 200-400K TL.</p>
+        <a class="svc-link">Hemen Değerlendir →</a>
+      </div>
+    </div>
+    <div class="uyari-tubitak" style="margin-top:25px">
+      <i class="fas fa-book-open"></i> <strong>ADS El Kitabı'ndan:</strong> TÜBİTAK projelerinde başarı için 10 altın kural, iş paketi oluşturma teknikleri ve risk analizi rehberi için lütfen bizimle iletişime geçin.
+    </div>
+  </div></div>
+</div>
+
+<!-- ========== TÜBİTAK ÇAĞRI TAKVİMİ ========== -->
+<div id="tubitakCagriPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">📅 Güncel TÜBİTAK Çağrı Takvimi</h2>
+      <span class="sec-sub">teydeb.tubitak.gov.tr üzerinden anlık verilerle güncellenmektedir.</span>
+      
+      <div class="cagri-takvimi" id="cagriTakvimi"></div>
+      
+      <div class="mevzuat-kutu">
+        <h4 style="color:#2E4A7D;margin-bottom:10px">🔔 Kritik Tarihler</h4>
+        <div id="kritikTarihler"></div>
+      </div>
+      
+      <div class="g2" style="margin-top:20px">
+        <div class="svc-card">
+          <h4>PRODİS Ön Kayıt (KBÖK)</h4>
+          <p>Kuruluş Bazlı Ön Kayıt, çağrı kapanışından en az 3 gün önce tamamlanmalıdır. Bu işlem 1 hafta sürebilir.</p>
+          <a href="https://eteydeb.tubitak.gov.tr" target="_blank" class="btn-navy btn-sm">PRODİS'e Git →</a>
+        </div>
+        <div class="svc-card">
+          <h4>e-imza Kontrolü</h4>
+          <p>Başvuru için geçerli e-imza gereklidir. Süresini kontrol edin.</p>
+          <a href="https://www.turkiye.gov.tr" target="_blank" class="btn-navy btn-sm">e-Devlet →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== TÜBİTAK BAŞVURU REHBERİ ========== -->
+<div id="tubitakRehberPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">📘 TÜBİTAK Başvuru Rehberi</h2>
+      <span class="sec-sub">ADS El Kitabı Bölüm 3.7 - Proje Yazım Teknikleri</span>
+      
+      <div class="g2">
+        <div class="svc-card">
+          <h4>📝 Proje Özeti (Çok Önemli!)</h4>
+          <ul style="padding-left:18px;font-size:12px;margin-top:8px">
+            <li>1 sayfa, 250-300 kelime</li>
+            <li>Giriş, Amaç, Yöntem, Yenilikçi Yön, Beklenen Çıktılar</li>
+            <li>Hakem ilk burayı okur!</li>
+          </ul>
+        </div>
+        <div class="svc-card">
+          <h4>📊 İş Paketleri (Work Packages)</h4>
+          <ul style="padding-left:18px;font-size:12px;margin-top:8px">
+            <li>3-6 iş paketi (WP1...WP6)</li>
+            <li>Her WP için: Amaç, Faaliyetler, Süre, Çıktılar</li>
+            <li>Gantt şeması ile göster</li>
+          </ul>
+        </div>
+        <div class="svc-card">
+          <h4>⚠️ Risk Analizi ve B Planı</h4>
+          <ul style="padding-left:18px;font-size:12px;margin-top:8px">
+            <li>Teknik riskler (algoritma başarısızlığı)</li>
+            <li>Personel riski (kilit personel ayrılırsa)</li>
+            <li>Tedarik riski (ithal malzeme gecikmesi)</li>
+          </ul>
+        </div>
+        <div class="svc-card">
+          <h4>💰 Bütçe Hazırlama</h4>
+          <ul style="padding-left:18px;font-size:12px;margin-top:8px">
+            <li>Personel (%70'i geçmemeli)</li>
+            <li>Makine-teçhizat (proforma faturalı)</li>
+            <li>Malzeme (%40'ı geçmemeli)</li>
+            <li>Seyahat, hizmet alımı, danışmanlık</li>
+          </ul>
+        </div>
+      </div>
+      
+      <h3 style="color:#2E4A7D;margin:30px 0 15px">📋 TÜBİTAK 1501 İçin Örnek İş Paketleri</h3>
+      <table class="tbl">
+        <thead><tr><th>WP No</th><th>WP Adı</th><th>Süre</th><th>Amaç</th><th>Faaliyetler</th></tr></thead>
+        <tbody>
+          <tr><td>WP1</td><td>Literatür Taraması</td><td>1-3 ay</td><td>Yenilikçi yönü belirle</td><td>Patent, makale taraması</td></tr>
+          <tr><td>WP2</td><td>Tasarım ve Simülasyon</td><td>4-9 ay</td><td>Algoritma geliştirme</td><td>Modelleme, simülasyon</td></tr>
+          <tr><td>WP3</td><td>Prototip Üretimi</td><td>10-18 ay</td><td>İlk örnek üretimi</td><td>Mekanik tasarım, montaj</td></tr>
+          <tr><td>WP4</td><td>Test ve Validasyon</td><td>19-24 ay</td><td>Doğrulama</td><td>Testler, iyileştirme</td></tr>
+        </tbody>
+      </table>
+      
+      <div class="proje-ipucu">
+        <i class="fas fa-lightbulb" style="color:#7C3AED;margin-right:6px"></i>
+        <strong>ADS İpucu:</strong> İş paketlerini oluştururken her birinin bir "çıktı" üretmesine dikkat edin. Örneğin WP1'in çıktısı "Teknik Şartname Raporu", WP2'nin çıktısı "Simülasyon Modeli" olabilir.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== TÜBİTAK HAKEM SÜRECİ REHBERİ ========== -->
+<div id="tubitakHakemPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">⚖️ Hakem Süreci Yönetimi</h2>
+      <span class="sec-sub">ADS El Kitabı Bölüm 3.8 - Hakem Süreci ve Firma Ziyareti</span>
+      
+      <div class="hakem-rehber">
+        <h5><i class="fas fa-exclamation-triangle"></i> EN KRİTİK AŞAMA: HAKEM SORULARI</h5>
+        <p>Hakemlerden ortalama 20-30 soru gelir. Cevaplama süresi genellikle 2-3 haftadır.</p>
+      </div>
+      
+      <h3 style="color:#2E4A7D;margin:20px 0 10px">📌 Hakem Sorularına Cevap Verme Stratejileri</h3>
+      <div class="g3" style="margin-bottom:20px">
+        <div class="svc-card">
+          <span class="hakem-soru">1. Soruları Anlayın</span>
+          <p style="font-size:11px">Her soruyu dikkatlice okuyun, ne sorulduğunu tam olarak anlayın.</p>
+        </div>
+        <div class="svc-card">
+          <span class="hakem-soru">2. Projenin Güçlü Yönlerini Vurgulayın</span>
+          <p style="font-size:11px">Cevaplarınızda yenilikçilik, uygulanabilirlik, ekonomik katkıyı öne çıkarın.</p>
+        </div>
+        <div class="svc-card">
+          <span class="hakem-soru">3. Açık, Net ve Kısa Olun</span>
+          <p style="font-size:11px">Gereksiz ayrıntılara girmeyin, anlaşılır cevaplar verin.</p>
+        </div>
+        <div class="svc-card">
+          <span class="hakem-soru">4. Kanıt Sunun</span>
+          <p style="font-size:11px">Teknik çizim, test sonucu, literatür referansı, proforma fatura ekleyin.</p>
+        </div>
+        <div class="svc-card">
+          <span class="hakem-soru">5. Savunmacı Olmayın</span>
+          <p style="font-size:11px">Eleştirileri projeyi geliştirmek için fırsat görün.</p>
+        </div>
+        <div class="svc-card">
+          <span class="hakem-soru">6. Zamanında Cevap Verin</span>
+          <p style="font-size:11px">Süre sınırlıdır, geç kalırsanız proje reddedilebilir.</p>
+        </div>
+      </div>
+      
+      <h3 style="color:#2E4A7D;margin:20px 0 10px">🏢 Firma Ziyareti Hazırlık Kontrol Listesi</h3>
+      <table class="tbl">
+        <thead><tr><th>Hazırlık</th><th>Açıklama</th><th>Sorumlu</th></tr></thead>
+        <tbody>
+          <tr><td>Sunum</td><td>20 slaytlık, görsel açıdan etkileyici sunum</td><td>Danışman + Proje Yürütücüsü</td></tr>
+          <tr><td>Prova</td><td>En az 3 kez, olası sorular simüle edilir</td><td>Tüm ekip + Danışman</td></tr>
+          <tr><td>Altyapı Gösterimi</td><td>Laboratuvar, makine, test düzeneği hazır</td><td>Teknik ekip</td></tr>
+          <tr><td>Dokümantasyon</td><td>Proforma faturalar, CV'ler, taahhütnameler</td><td>Proje yürütücüsü</td></tr>
+          <tr><td>Lojistik</td><td>Toplantı odası, ikram, ulaşım</td><td>İdari ekip</td></tr>
+        </tbody>
+      </table>
+      
+      <div class="proje-ipucu" style="margin-top:20px">
+        <i class="fas fa-star" style="color:#7C3AED"></i>
+        <strong>ADS El Kitabı'ndan:</strong> "Hakem sorularına özenle cevap verilmeli, firma ziyaretine iyi hazırlanılmalıdır. Bu iki aşama projenin kaderini belirler."
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== TÜBİTAK ÖN DEĞERLENDİRME FORMU ========== -->
+<div id="tubitakFormPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">🔬 TÜBİTAK Ön Değerlendirme Formu</h2>
+      <span class="sec-sub">ADS Yapay Zeka Asistanı, projenizi analiz edip size özel rapor hazırlayacak.</span>
+      
+      <div class="g2" style="align-items:start">
+        <!-- SOL: FORM -->
+        <div>
+          <div class="tubitak-badge">ADIM 1: PROJE BİLGİLERİ</div>
+          
+          <div class="form-box gold">
+            <span class="form-lbl">KİŞİSEL BİLGİLER</span>
+            <div class="g2">
+              <div class="fi"><label>Ad Soyad <span class="req">*</span></label><input id="f_ad" placeholder="Adınız Soyadınız"></div>
+              <div class="fi"><label>Telefon <span class="req">*</span></label><input id="f_tel" type="tel" placeholder="+90 5xx xxx xx xx"></div>
+              <div class="fi"><label>E-posta</label><input id="f_email" type="email" placeholder="ornek@firma.com"></div>
+              <div class="fi"><label>Doğum Tarihi (BİGG için)</label><input id="f_dogum" type="date"></div>
+            </div>
+          </div>
+          
+          <div class="form-box navy">
+            <span class="form-lbl">FİRMA BİLGİLERİ</span>
+            <div class="g2">
+              <div class="fi"><label>Firma Adı</label><input id="f_firma" placeholder="Ticaret unvanı"></div>
+              <div class="fi"><label>Kuruluş Tarihi</label><input id="f_kurulus" type="date"></div>
+              <div class="fi"><label>Vergi No / TC</label><input id="f_vergi" placeholder="VKN veya TC"></div>
+              <div class="fi"><label>Çalışan Sayısı</label><input id="f_calisan" type="number" min="0" placeholder="0"></div>
+            </div>
+          </div>
+          
+          <div class="form-box" style="border-left:4px solid #7C3AED">
+            <span class="form-lbl">PROJE DETAYLARI</span>
+            <div class="fi"><label>Proje Başlığı <span class="req">*</span></label><input id="f_proje_baslik" placeholder="Örn: Yapay Zeka Destekli Görüntü İşleme Sistemi"></div>
+            <div class="fi"><label>Proje Konusu (Kısa Özet) <span class="req">*</span></label><textarea id="f_proje_ozet" placeholder="Projenizi 3-5 cümle ile açıklayın..." style="min-height:80px"></textarea></div>
+            <div class="g2">
+              <div class="fi"><label>Teknoloji Alanı <span class="req">*</span></label>
+                <select id="f_teknoloji">
+                  <option>Seçiniz...</option>
+                  <option>Yapay Zeka / Yazılım</option>
+                  <option>Donanım / Elektronik</option>
+                  <option>Makine / Mekatronik</option>
+                  <option>Kimya / Malzeme</option>
+                  <option>Biyoteknoloji / Sağlık</option>
+                  <option>Enerji / Çevre</option>
+                  <option>Savunma / Havacılık</option>
+                  <option>Diğer</option>
+                </select>
+              </div>
+              <div class="fi"><label>Proje Aşaması <span class="req">*</span></label>
+                <select id="f_asama">
+                  <option>Seçiniz...</option>
+                  <option>Sadece fikir aşaması</option>
+                  <option>Literatür/Patent taraması yapıldı</option>
+                  <option>Ön çalışmalar tamamlandı</option>
+                  <option>Prototip hazır</option>
+                  <option>Ürün hazır, ticarileşme aşamasında</option>
+                </select>
+              </div>
+              <div class="fi"><label>Tahmini Proje Bütçesi (TL) <span class="req">*</span></label>
+                <select id="f_butce">
+                  <option>Seçiniz...</option>
+                  <option>200.000 - 400.000 TL (BİGG)</option>
+                  <option>500.000 - 1.000.000 TL (1507)</option>
+                  <option>1.000.000 - 3.000.000 TL (1501)</option>
+                  <option>3.000.000 - 5.000.000 TL (1501)</option>
+                  <option>5.000.000 TL+ (1511)</option>
+                </select>
+              </div>
+              <div class="fi"><label>Ar-Ge Personel Sayısı <span class="req">*</span></label><input id="f_arge_personel" type="number" min="0" placeholder="0"></div>
+            </div>
+            <div class="fi"><label>Projenin Yenilikçi Yönü Nedir? <span class="req">*</span></label><textarea id="f_yenilik" placeholder="Mevcut çözümlerden farkınız ne? Patent/literatür desteği var mı?" style="min-height:60px"></textarea></div>
+          </div>
+          
+          <div class="form-box" style="border-left:4px solid #16A34A">
+            <span class="form-lbl">TEKNİK KAPASİTE</span>
+            <div class="g2">
+              <div class="fi"><label>Ekipte Mühendis Var mı?</label>
+                <select id="f_muhendis">
+                  <option>Seçiniz...</option>
+                  <option>Evet</option>
+                  <option>Hayır</option>
+                </select>
+              </div>
+              <div class="fi"><label>PRODİS Kaydı Var mı?</label>
+                <select id="f_prodis">
+                  <option>Seçiniz...</option>
+                  <option>Evet</option>
+                  <option>Hayır</option>
+                  <option>Bilmiyorum</option>
+                </select>
+              </div>
+              <div class="fi"><label>Patent/Faydalı Model?</label>
+                <select id="f_patent">
+                  <option>Seçiniz...</option>
+                  <option>Yok</option>
+                  <option>Başvuru yapıldı</option>
+                  <option>Tescil alındı</option>
+                </select>
+              </div>
+              <div class="fi"><label>Akademik Danışman Desteği?</label>
+                <select id="f_akademik">
+                  <option>Seçiniz...</option>
+                  <option>Evet</option>
+                  <option>Hayır</option>
+                  <option>Planlıyorum</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-box" style="border-left:4px solid #D97706">
+            <span class="form-lbl">ÖNCEKİ DENEYİMLER</span>
+            <div class="g2">
+              <div class="fi"><label>Daha önce TÜBİTAK desteği aldınız mı?</label>
+                <select id="f_onceki_tubitak">
+                  <option>Seçiniz...</option>
+                  <option>Evet</option>
+                  <option>Hayır</option>
+                </select>
+              </div>
+              <div class="fi"><label>Daha önce proje yazdınız mı?</label>
+                <select id="f_onceki_proje">
+                  <option>Seçiniz...</option>
+                  <option>Evet</option>
+                  <option>Hayır</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <div class="fi"><label>Ek Notlar</label><textarea id="f_mesaj" placeholder="Eklemek istedikleriniz..."></textarea></div>
+          
+          <div style="margin-top:20px;display:flex;gap:10px">
+            <button class="btn-gold" style="flex:1;padding:14px" onclick="tubitakDegerlendir()">
+              <i class="fas fa-robot"></i> Yapay Zeka ile Ön Değerlendir
+            </button>
+          </div>
+        </div>
+        
+        <!-- SAĞ: CANLI ÖZET ve RAPOR -->
+        <div>
+          <div id="tubitakRaporAlani" style="background:white;border-radius:12px;padding:20px;box-shadow:0 4px 18px rgba(0,0,0,.1);border-top:4px solid #2E4A7D">
+            <div style="text-align:center;color:#9CA3AF;padding:30px 0">
+              <i class="fas fa-robot" style="font-size:48px;margin-bottom:10px;color:#2E4A7D"></i>
+              <p>Formu doldurun, Yapay Zeka Asistanımız projenizi analiz edip size özel rapor hazırlayacak.</p>
+            </div>
+          </div>
+          
+          <div class="cbox" style="margin-top:15px;background:#2E4A7D">
+            <h4>📞 TÜBİTAK Uzman Ekibimiz</h4>
+            <p><i class="fas fa-phone"></i> <a href="tel:+905323261673">+90 532 326 1673</a></p>
+            <p><i class="fas fa-envelope"></i> <a href="mailto:tubitak@adsdanismanlik.com">tubitak@adsdanismanlik.com</a></p>
+            <a href="https://wa.me/905323261673" target="_blank" class="btn-wa" style="background:#25D366;color:white">WhatsApp'tan Sor</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== TÜBİTAK RAPOR SAYFASI ========== -->
+<div id="tubitakRaporPage" class="page">
+  <div class="section">
+    <div class="container">
+      <div id="tubitakRaporDetay"></div>
+      <div style="text-align:center;margin-top:20px">
+        <button class="btn-gold" onclick="showPage('tubitakFormPage')">Yeni Değerlendirme</button>
+        <button class="btn-navy" onclick="window.print()">📄 PDF Olarak Kaydet</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== KOSGEB ========== -->
+<div id="kosgebPage" class="page">
+  <div class="section"><div class="container">
+    <h2 class="sec-title">KOSGEB Destekleri</h2>
+    <div class="g2">
+      <div class="svc-card"><h4>🚀 Girişimci Desteği</h4><p>1.5M TL'ye kadar, %80 oran, 36 ay ödemesiz.</p><div class="n-yellow" style="margin-top:8px">⚠ Ön koşul: KOSGEB onaylı 32 saat girişimcilik eğitimi</div></div>
+      <div class="svc-card"><h4>📈 KOBİGEL</h4><p>1-2M TL destek, danışmanlık, eğitim, fuar, makine.</p></div>
+      <div class="svc-card"><h4>🏗 İş Geliştirme</h4><p>Personel, kira, elektrik giderlerinde %60.</p></div>
+      <div class="svc-card"><h4>🌐 Dijitalleşme</h4><p>Yazılım, e-ticaret, dijital dönüşüm için %70.</p></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ========== İHRACAT ========== -->
+<div id="ihracatPage" class="page">
+  <div class="section"><div class="container">
+    <h2 class="sec-title">İhracat Destekleri</h2>
+    <div class="g2">
+      <div class="svc-card"><h4>🎪 Yurt Dışı Fuar</h4><p>%50-70 destek, 150.000 USD/yıl</p><div class="n-red" style="margin-top:8px">⚠ Fuara katılmadan önce ÖN İZİN ZORUNLUDUR!</div></div>
+      <div class="svc-card"><h4>🌍 Pazar Araştırması</h4><p>%70 destek, 20.000 USD/yıl.</p></div>
+      <div class="svc-card"><h4>🏢 Yurt Dışı Ofis</h4><p>%60 destek, 400.000 USD (5 yıl)</p><div class="n-red" style="margin-top:8px">⚠ Ön izin zorunludur!</div></div>
+      <div class="svc-card"><h4>📊 UR-GE Projeleri</h4><p>%75 destek, 2M TL/proje, 3-4 yıl.</p></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ========== IPARD ========== -->
+<div id="ipardPage" class="page">
+  <div class="section"><div class="container">
+    <h2 class="sec-title">IPARD / TKDK Destekleri</h2>
+    <p class="sec-sub">%50-75 hibe oranı, 785 Milyon Avro bütçe, 81 il.</p>
+    <div class="g3">
+      <div class="svc-card"><h4>🥛 Süt ve Et İşleme</h4><p>Süt, kırmızı et, kanatlı eti işleme tesisleri.</p></div>
+      <div class="svc-card"><h4>🍎 Meyve-Sebze İşleme</h4><p>İşleme, depolama ve paketleme tesisleri.</p></div>
+      <div class="svc-card"><h4>🏡 Kırsal Turizm</h4><p>Butik oteller, yöresel ürünler, restoranlar.</p></div>
+      <div class="svc-card"><h4>⚡ Yenilenebilir Enerji</h4><p>Güneş, rüzgar ve biyogaz tesisleri.</p></div>
+      <div class="svc-card"><h4>🐝 Arıcılık ve Bitkisel</h4><p>Tıbbi ve aromatik bitki üretimi.</p></div>
+      <div class="svc-card"><h4>📋 Başvuru</h4><ol style="padding-left:14px;font-size:11px;line-height:1.9"><li>Çağrı takibi</li><li>Proje hazırlığı</li><li>Online başvuru</li><li>Değerlendirme</li><li>Sözleşme</li></ol></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ========== BAŞARI HİKAYELERİ ========== -->
+<div id="vakaPage" class="page">
+  <div class="section"><div class="container">
+    <h2 class="sec-title">Başarı Hikayelerimiz</h2>
+    <div id="hikayelerContainer"></div>
+  </div></div>
+</div>
+
+<!-- ========== BLOG ========== -->
+<div id="blogPage" class="page">
+  <div class="section"><div class="container">
+    <h2 class="sec-title">Blog & Makaleler</h2>
+    <div id="blogPageContainer"></div>
+  </div></div>
+</div>
+
+<!-- ========== DOKÜMANLAR ========== -->
+<div id="dokumanlarPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">📚 Dokümanlar</h2>
+      <span class="sec-sub">Teşvik mevzuatı, başvuru formları, yönetmelikler ve rehber kitaplar.</span>
+      <div class="n-blue" style="margin-bottom:16px">
+        <i class="fas fa-info-circle"></i> Dokümanlar yönetici tarafından yüklenmektedir. İndirmek için ilgili butona tıklayın.
+      </div>
+      <div id="dokumanListesi"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== FAYDALI LİNKLER ========== -->
+<div id="linklerPage" class="page">
+  <div class="section"><div class="container">
+    <h2 class="sec-title">🔗 Faydalı Linkler</h2>
+    <h3 style="color:#2E4A7D;margin:18px 0 12px">Teşvik ve Destek Kurumları</h3>
+    <div class="g3">
+      <div class="svc-card"><h4>Sanayi ve Teknoloji Bak.</h4><p>Yatırım teşvik belgesi.</p><a href="https://www.sanayi.gov.tr/tesvikler" target="_blank" class="btn-navy btn-sm" style="margin-top:9px;display:inline-block">Sisteme Git →</a></div>
+      <div class="svc-card"><h4>TÜBİTAK TEYDEB</h4><p>1501, 1507, 1511, 1512.</p><a href="https://teydeb.tubitak.gov.tr" target="_blank" class="btn-navy btn-sm" style="margin-top:9px;display:inline-block">Sisteme Git →</a></div>
+      <div class="svc-card"><h4>KOSGEB</h4><p>Girişimci desteği, KOBİGEL.</p><a href="https://www.kosgeb.gov.tr" target="_blank" class="btn-navy btn-sm" style="margin-top:9px;display:inline-block">Sisteme Git →</a></div>
+      <div class="svc-card"><h4>Ticaret Bakanlığı</h4><p>İhracat destekleri.</p><a href="https://www.ticaret.gov.tr/ihracat/destekler" target="_blank" class="btn-navy btn-sm" style="margin-top:9px;display:inline-block">Sisteme Git →</a></div>
+      <div class="svc-card"><h4>TKDK / IPARD</h4><p>Tarım ve kırsal kalkınma.</p><a href="https://www.tkdk.gov.tr" target="_blank" class="btn-navy btn-sm" style="margin-top:9px;display:inline-block">Sisteme Git →</a></div>
+      <div class="svc-card"><h4>E-TUYS</h4><p>YTB başvuru sistemi.</p><a href="https://etuybs.sanayi.gov.tr" target="_blank" class="btn-navy btn-sm" style="margin-top:9px;display:inline-block">Sisteme Git →</a></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ========== İLETİŞİM ========== -->
+<div id="iletisimPage" class="page">
+  <div class="section">
+    <div class="container">
+      <h2 class="sec-title">Bize Ulaşın</h2>
+      <div class="g2">
+        <div class="cbox" style="background:#2E4A7D">
+          <h4>ADS Danışmanlık</h4>
+          <p><i class="fas fa-map-marker-alt"></i> Ankara / Türkiye</p>
+          <p><i class="fas fa-phone"></i> <a href="tel:+905323261673">+90 532 326 1673</a></p>
+          <p><i class="fas fa-envelope"></i> <a href="mailto:adstesvikdanismanlik@gmail.com">adstesvikdanismanlik@gmail.com</a></p>
+          <p><i class="fas fa-clock"></i> Hafta içi 09:00–18:00</p>
+          <a href="https://wa.me/905323261673" target="_blank" class="btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp'ta Yaz</a>
+        </div>
+        <div>
+          <p style="margin-bottom:10px"><strong>ADS El Kitabı'na erişmek için:</strong></p>
+          <button class="btn-gold" onclick="showPage('tubitakRehberPage')">📘 Başvuru Rehberi</button>
+          <button class="btn-navy" style="margin-top:10px" onclick="showPage('tubitakHakemPage')">⚖️ Hakem Süreci</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  © 2026 ADS Yatırım ve Teşvik Danışmanlığı | Tüm Hakları Saklıdır.<br>
+  <a href="mailto:adstesvikdanismanlik@gmail.com">adstesvikdanismanlik@gmail.com</a> |
+  <a href="https://wa.me/905323261673">+90 532 326 1673</a>
+</div>
+<a href="https://wa.me/905323261673" target="_blank" class="wa-float"><i class="fab fa-whatsapp"></i></a>
+
+<!-- ===== E-POSTA MODAL ===== -->
+<div id="mailModal">
+  <div class="mail-box">
+    <h3><i class="fas fa-envelope" style="color:#D93025;margin-right:7px"></i>E-posta ile Gönder</h3>
+    <p>Rapor seçilen formatta belirtilen adrese gönderilecektir.</p>
+    <div class="mail-fi"><label>Alıcı E-posta *</label><input type="email" id="mailTo" placeholder="alici@ornek.com"></div>
+    <div class="mail-fi"><label>Konu</label><input type="text" id="mailSubject"></div>
+    <div class="mail-fi"><label>Ek Not</label><input type="text" id="mailNote" placeholder="Kısa mesaj..."></div>
+    <div class="mail-fi"><label>Gönderim Yöntemi</label>
+      <select id="mailMethod" onchange="toggleMailMethod()">
+        <option value="emailjs">EmailJS (Doğrudan)</option>
+        <option value="mailto">Varsayılan E-posta Uygulaması</option>
+      </select>
+    </div>
+    <div id="emailjsInfo" class="n-yellow" style="font-size:11px;margin-bottom:8px">
+      <i class="fas fa-info-circle"></i> EmailJS için <strong>Ayarlar → E-posta</strong> bölümünden bilgileri girin.
+      <a href="https://www.emailjs.com" target="_blank" style="color:#D97706;font-weight:600">Kayıt →</a>
+    </div>
+    <div id="mailStatus"></div>
+    <div style="display:flex;gap:7px;margin-top:12px">
+      <button class="btn-gold" style="flex:1" onclick="doSendMail()"><i class="fas fa-paper-plane"></i> Gönder</button>
+      <button class="btn-sm btn-del" style="padding:9px 14px" onclick="closeMailModal()">İptal</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ADMİN WRAPPER ===== -->
+<div id="adminWrap">
+  <div id="adminLoginScreen">
+    <div class="a-login-ov">
+      <div class="a-login-box">
+        <div style="font-size:38px;color:#2E4A7D;margin-bottom:9px"><i class="fas fa-lock"></i></div>
+        <h2>Yönetici Girişi</h2>
+        <p style="color:#9CA3AF;font-size:12px;margin-bottom:18px">ADS Danışmanlık Yönetim Paneli</p>
+        <input type="email" id="loginEmail" placeholder="E-posta">
+        <input type="password" id="loginPass" placeholder="Şifre">
+        <div id="loginErr">Hatalı e-posta veya şifre.</div>
+        <button class="btn-gold" style="width:100%" onclick="doLogin()">Giriş Yap</button>
+        <br><br>
+        <button onclick="closeAdmin()" style="background:none;border:none;color:#9CA3AF;font-size:11px;cursor:pointer">← Siteye Dön</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="adminLayout" style="display:none">
+    <div class="a-sidebar">
+      <div class="a-logo">ADS <span>Admin</span></div>
+      <div class="a-nav">
+        <div class="a-ni on"  data-sec="dashboard"  onclick="setAdmSec('dashboard')"><i class="fas fa-tachometer-alt"></i> Dashboard</div>
+        <div class="a-ni"     data-sec="crm"         onclick="setAdmSec('crm')"><i class="fas fa-users"></i> CRM</div>
+        <div class="a-ni"     data-sec="mdetay"      onclick="setAdmSec('mdetay')"><i class="fas fa-user"></i> Müşteri Detay</div>
+        <div class="a-ni"     data-sec="raporlar"    onclick="setAdmSec('raporlar')"><i class="fas fa-file-alt"></i> Raporlar</div>
+        <div class="a-ni"     data-sec="blog"        onclick="setAdmSec('blog')"><i class="fas fa-pen"></i> Blog</div>
+        <div class="a-ni"     data-sec="team"        onclick="setAdmSec('team')"><i class="fas fa-id-card"></i> Ekip</div>
+        <div class="a-ni"     data-sec="hikayeler"   onclick="setAdmSec('hikayeler')"><i class="fas fa-trophy"></i> Başarı</div>
+        <div class="a-ni"     data-sec="dokumanlar"  onclick="setAdmSec('dokumanlar')"><i class="fas fa-folder-open"></i> Dokümanlar</div>
+        <div class="a-ni"     data-sec="duyurular"   onclick="setAdmSec('duyurular')"><i class="fas fa-bullhorn"></i> Duyurular</div>
+        <div class="a-ni"     data-sec="ziyaretci"   onclick="setAdmSec('ziyaretci')"><i class="fas fa-eye"></i> Ziyaretçi</div>
+        <div class="a-ni"     data-sec="ayarlar"     onclick="setAdmSec('ayarlar')"><i class="fas fa-cog"></i> Ayarlar</div>
+      </div>
+    </div>
+    <div class="a-main">
+      <div class="a-topbar">
+        <h5 id="admTitle">Dashboard</h5>
+        <div style="display:flex;gap:7px">
+          <button onclick="closeAdmin()" style="background:none;border:1px solid #D1D5DB;padding:5px 11px;border-radius:6px;font-size:11px;cursor:pointer">← Site</button>
+          <button class="btn-sm btn-del" onclick="doLogout()">Çıkış</button>
+        </div>
+      </div>
+      <div class="a-body">
+        <!-- Admin içeriği mevcut haliyle aynen kalacak -->
+        <div id="sec-dashboard" class="a-sec active">Dashboard içeriği...</div>
+        <div id="sec-crm" class="a-sec">CRM içeriği...</div>
+        <div id="sec-mdetay" class="a-sec">Müşteri detay...</div>
+        <div id="sec-raporlar" class="a-sec">Raporlar...</div>
+        <div id="sec-blog" class="a-sec">Blog yönetimi...</div>
+        <div id="sec-team" class="a-sec">Ekip yönetimi...</div>
+        <div id="sec-hikayeler" class="a-sec">Başarı hikayeleri...</div>
+        <div id="sec-dokumanlar" class="a-sec">Doküman yönetimi...</div>
+        <div id="sec-duyurular" class="a-sec">Duyuru yönetimi...</div>
+        <div id="sec-ziyaretci" class="a-sec">Ziyaretçi istatistikleri...</div>
+        <div id="sec-ayarlar" class="a-sec">Ayarlar...</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== JAVASCRIPT (TÜBİTAK FONKSİYONLARI) ===== -->
+<script>
+// TÜBİTAK Yapay Zeka Değerlendirme Fonksiyonları
+function tubitakDegerlendir() {
+  const ad = el('f_ad')?.value?.trim() || '';
+  const tel = el('f_tel')?.value?.trim() || '';
+  
+  if (!ad || !tel) {
+    alert('Ad Soyad ve Telefon zorunludur!');
+    return;
+  }
+  
+  const veri = {
+    ad: ad,
+    tel: tel,
+    email: el('f_email')?.value || '',
+    dogum: el('f_dogum')?.value || '',
+    firma: el('f_firma')?.value || '',
+    kurulus: el('f_kurulus')?.value || '',
+    vergi: el('f_vergi')?.value || '',
+    calisan: parseInt(el('f_calisan')?.value) || 0,
+    proje_baslik: el('f_proje_baslik')?.value || '',
+    proje_ozet: el('f_proje_ozet')?.value || '',
+    teknoloji: el('f_teknoloji')?.value || '',
+    asama: el('f_asama')?.value || '',
+    butce_aralik: el('f_butce')?.value || '',
+    arge_personel: parseInt(el('f_arge_personel')?.value) || 0,
+    yenilik: el('f_yenilik')?.value || '',
+    muhendis: el('f_muhendis')?.value || '',
+    prodis: el('f_prodis')?.value || '',
+    patent: el('f_patent')?.value || '',
+    akademik: el('f_akademik')?.value || '',
+    onceki_tubitak: el('f_onceki_tubitak')?.value || '',
+    onceki_proje: el('f_onceki_proje')?.value || ''
+  };
+  
+  const analiz = tubitakAIAnaliz(veri);
+  tubitakRaporGoster(veri, analiz);
+}
+
+function tubitakAIAnaliz(veri) {
+  const puanlar = [];
+  
+  // 1512 BİGG
+  let puan1512 = 0;
+  if (veri.asama.includes('Sadece fikir') || veri.asama.includes('Literatür')) puan1512 += 25;
+  if (veri.teknoloji.includes('Yapay Zeka') || veri.teknoloji.includes('Yazılım')) puan1512 += 20;
+  if (veri.muhendis === 'Evet') puan1512 += 15;
+  if (veri.patent !== 'Yok') puan1512 += 20;
+  if (veri.onceki_tubitak === 'Hayır') puan1512 += 20;
+  puanlar.push({program:'1512 BİGG', puan:Math.min(puan1512, 100), aciklama:'Bireysel girişimciler için %100 hibe programı'});
+  
+  // 1507 KOBİ Ar-Ge
+  let puan1507 = 0;
+  if (veri.calisan > 0 && veri.calisan < 250) puan1507 += 30;
+  if (veri.arge_personel >= 1) puan1507 += 25;
+  if (veri.asama.includes('Ön çalışmalar') || veri.asama.includes('Prototip')) puan1507 += 20;
+  if (veri.proje_ozet.length > 20) puan1507 += 15;
+  if (veri.patent !== 'Yok') puan1507 += 10;
+  puanlar.push({program:'1507 KOBİ Ar-Ge', puan:Math.min(puan1507, 100), aciklama:'Ar-Ge\'ye yeni başlayan KOBİ\'ler için 18 ay, 500K-1M TL'});
+  
+  // 1501 Sanayi Ar-Ge
+  let puan1501 = 0;
+  if (veri.arge_personel >= 3) puan1501 += 30;
+  if (veri.asama.includes('Prototip') || veri.asama.includes('Ürün hazır')) puan1501 += 20;
+  if (veri.patent !== 'Yok') puan1501 += 20;
+  if (veri.akademik === 'Evet') puan1501 += 15;
+  if (veri.proje_ozet.length > 30) puan1501 += 15;
+  puanlar.push({program:'1501 Sanayi Ar-Ge', puan:Math.min(puan1501, 100), aciklama:'Kapsamlı Ar-Ge projeleri, 36 ay, 1-5M TL'});
+  
+  // 1511 Öncelikli Alanlar
+  let puan1511 = 0;
+  const oncelikliAlanlar = ['Yapay Zeka', 'Biyoteknoloji', 'Enerji', 'Savunma'];
+  if (oncelikliAlanlar.some(alan => veri.teknoloji.includes(alan))) puan1511 += 40;
+  if (veri.arge_personel >= 5) puan1511 += 30;
+  if (veri.patent !== 'Yok') puan1511 += 20;
+  if (veri.akademik === 'Evet') puan1511 += 10;
+  puanlar.push({program:'1511 Öncelikli Alanlar', puan:Math.min(puan1511, 100), aciklama:'Stratejik sektörler, 2-10M TL, açık çağrı'});
+  
+  puanlar.sort((a,b) => b.puan - a.puan);
+  const enUygun = puanlar[0];
+  const acikCagri = TUBITAK_CAGRI.find(c => c.kod === enUygun.program.split(' ')[0] && c.durum === 'acik');
+  
+  return {
+    puanlar: puanlar,
+    enUygun: enUygun,
+    acikCagri: acikCagri,
+    analizNotlari: {
+      gucluYonler: [],
+      zayifYonler: [],
+      riskler: [],
+      oneriler: []
+    }
+  };
+}
+
+function tubitakRaporGoster(veri, analiz) {
+  const alan = el('tubitakRaporAlani');
+  if (!alan) return;
+  
+  const enUygun = analiz.enUygun;
+  const acikCagri = analiz.acikCagri;
+  
+  analiz.analizNotlari.gucluYonler = [];
+  analiz.analizNotlari.zayifYonler = [];
+  analiz.analizNotlari.riskler = [];
+  analiz.analizNotlari.oneriler = [];
+  
+  if (veri.arge_personel >= 3) analiz.analizNotlari.gucluYonler.push('Güçlü Ar-Ge ekibi');
+  if (veri.patent !== 'Yok') analiz.analizNotlari.gucluYonler.push('Fikri mülkiyet varlığı');
+  if (veri.akademik === 'Evet') analiz.analizNotlari.gucluYonler.push('Akademik danışman desteği');
+  if (veri.proje_ozet.length > 50) analiz.analizNotlari.gucluYonler.push('Detaylı proje tanımı');
+  
+  if (veri.arge_personel === 0) analiz.analizNotlari.zayifYonler.push('Ar-Ge personeli eksik');
+  if (veri.prodis === 'Hayır') analiz.analizNotlari.zayifYonler.push('PRODİS kaydı yok');
+  if (veri.patent === 'Yok') analiz.analizNotlari.zayifYonler.push('Patent/Faydalı model yok');
+  
+  if (!veri.proje_ozet) analiz.analizNotlari.riskler.push('Proje özeti eksik');
+  if (veri.onceki_proje === 'Hayır') analiz.analizNotlari.riskler.push('İlk proje deneyimi');
+  
+  if (veri.prodis === 'Hayır') analiz.analizNotlari.oneriler.push('PRODİS sistemine hemen kayıt olun');
+  if (veri.patent === 'Yok') analiz.analizNotlari.oneriler.push('Patent araştırması yapın');
+  if (veri.akademik === 'Hayır') analiz.analizNotlari.oneriler.push('Akademik danışman desteği almayı düşünün');
+  
+  const html = `
+    <div class="tubitak-badge">🔬 YAPAY ZEKA ANALİZ SONUCU</div>
+    <h3 style="color:#1E2A44;margin:10px 0">${veri.proje_baslik || 'Proje Değerlendirmesi'}</h3>
+    <p style="color:#6B7280;font-size:13px;margin-bottom:15px">${veri.ad} | ${veri.firma || 'Firma bilgisi girilmemiş'}</p>
+    
+    <div class="rapor-ozet">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:18px;font-weight:700;color:#1E2A44">En Uygun Program:</span>
+        <span class="tubitak-badge" style="background:#2E4A7D;font-size:16px;padding:8px 18px">${enUygun.program}</span>
+      </div>
+      <p style="margin:10px 0 5px">${enUygun.aciklama}</p>
+      <div class="score-bar"><div class="score-fill" style="width:${enUygun.puan}%"></div></div>
+      <p style="text-align:right;font-size:12px;color:#6B7280">Uygunluk Puanı: ${enUygun.puan}/100</p>
+    </div>
+    
+    ${acikCagri ? `
+    <div style="background:#F0FDF4;border-radius:8px;padding:15px;margin:15px 0;border:1px solid #BBF7D0">
+      <div style="display:flex;justify-content:space-between">
+        <span><i class="fas fa-check-circle" style="color:#16A34A"></i> <strong>AÇIK ÇAĞRI!</strong></span>
+        <span class="durum-acik" style="padding:4px 12px">Son Başvuru: ${acikCagri.bitis}</span>
+      </div>
+      <p style="margin-top:8px">Program: ${acikCagri.kod} | Dönem: ${acikCagri.donem}</p>
+      <div class="kalan-gun">⏰ ${acikCagri.kalan_gun || '?'} gün kaldı!</div>
+      <p style="font-size:12px;margin-top:8px"><strong>⚠ Kritik:</strong> Kuruluş Bazlı Ön Kayıt (KBÖK) için son tarih: ${acikCagri.on_kayit}</p>
+    </div>
+    ` : `
+    <div style="background:#FEF2F2;border-radius:8px;padding:15px;margin:15px 0;border:1px solid #FECDD3">
+      <i class="fas fa-exclamation-triangle" style="color:#DC2626"></i> 
+      <strong>Şu anda ${enUygun.program} için açık çağrı bulunmamaktadır.</strong>
+      <p style="margin-top:5px;font-size:12px">Bir sonraki dönem için hazırlık yapabilirsiniz.</p>
+    </div>
+    `}
+    
+    <h4 style="color:#1E2A44;margin:20px 0 10px">📊 Tüm Program Uygunluk Analizi</h4>
+    ${analiz.puanlar.map(p => `
+      <div style="margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+          <span style="font-weight:600">${p.program}</span>
+          <span style="color:${p.puan>=70?'#16A34A':p.puan>=40?'#D97706':'#9CA3AF'}">${p.puan}/100</span>
+        </div>
+        <div class="score-bar"><div class="score-fill" style="width:${p.puan}%;background:${p.puan>=70?'#16A34A':p.puan>=40?'#D97706':'#9CA3AF'}"></div></div>
+        <p style="font-size:11px;color:#6B7280;margin-top:2px">${p.aciklama}</p>
+      </div>
+    `).join('')}
+    
+    <h4 style="color:#1E2A44;margin:20px 0 10px">✅ Güçlü Yönler</h4>
+    <ul style="padding-left:20px;margin-bottom:15px">
+      ${analiz.analizNotlari.gucluYonler.map(g => `<li style="margin-bottom:3px;color:#16A34A"><i class="fas fa-check-circle"></i> ${g}</li>`).join('')}
+      ${analiz.analizNotlari.gucluYonler.length === 0 ? '<li style="color:#9CA3AF">Henüz güçlü yön belirlenemedi</li>' : ''}
+    </ul>
+    
+    <h4 style="color:#1E2A44;margin:20px 0 10px">⚠️ Geliştirilmesi Gereken Alanlar</h4>
+    <ul style="padding-left:20px;margin-bottom:15px">
+      ${analiz.analizNotlari.zayifYonler.map(z => `<li style="margin-bottom:3px;color:#D97706"><i class="fas fa-exclamation-triangle"></i> ${z}</li>`).join('')}
+      ${analiz.analizNotlari.zayifYonler.length === 0 ? '<li style="color:#9CA3AF">Zayıf yön bulunamadı</li>' : ''}
+    </ul>
+    
+    <h4 style="color:#1E2A44;margin:20px 0 10px">🔔 Risk Analizi ve Öneriler</h4>
+    <div style="background:#FFFBEB;border-left:4px solid #D97706;padding:15px;border-radius:8px">
+      <p style="margin-bottom:8px"><strong>Riskler:</strong></p>
+      <ul style="padding-left:20px;margin-bottom:12px">
+        ${analiz.analizNotlari.riskler.map(r => `<li style="color:#92400E">${r}</li>`).join('')}
+        ${analiz.analizNotlari.riskler.length === 0 ? '<li style="color:#9CA3AF">Belirgin risk yok</li>' : ''}
+      </ul>
+      <p style="margin-bottom:8px"><strong>ADS Önerileri:</strong></p>
+      <ul style="padding-left:20px">
+        ${analiz.analizNotlari.oneriler.map(o => `<li style="color:#2E4A7D"><i class="fas fa-lightbulb"></i> ${o}</li>`).join('')}
+        ${analiz.analizNotlari.oneriler.length === 0 ? '<li style="color:#9CA3AF">Öneri yok</li>' : ''}
+      </ul>
+    </div>
+    
+    <div style="display:flex;gap:10px;margin-top:20px">
+      <button class="btn-gold" style="flex:1" onclick="tubitakRaporKaydet()">
+        <i class="fas fa-download"></i> Raporu İndir (HTML)
+      </button>
+      <button class="btn-navy" style="flex:1" onclick="tubitakMailGonder()">
+        <i class="fas fa-envelope"></i> E-posta ile Gönder
+      </button>
+    </div>
+    <p style="font-size:11px;color:#9CA3AF;text-align:center;margin-top:8px">
+      Bu rapor ADS Yapay Zeka Asistanı tarafından oluşturulmuştur. Kesin değerlendirme için uzman danışmanlığı alınız.
+    </p>
+  `;
+  
+  alan.innerHTML = html;
+}
+
+function tubitakRaporKaydet() {
+  const alan = el('tubitakRaporAlani');
+  if (!alan) return;
+  
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head><meta charset="UTF-8"><title>TÜBİTAK Ön Değerlendirme Raporu</title>
+    <style>
+      body{font-family:Arial;margin:20px;color:#333}
+      .header{background:#1E2A44;color:white;padding:15px;border-radius:8px}
+      .program-box{border-left:4px solid #2E4A7D;padding:10px;margin:10px 0;background:#F9FAFB}
+      .cagri-acik{background:#F0FDF4;border:1px solid #86EFAC;padding:10px;border-radius:8px}
+      .score-bar{height:10px;background:#E5E7EB;border-radius:10px;margin:5px 0}
+      .score-fill{height:10px;background:#2E4A7D;border-radius:10px}
+    </style>
+    </head>
+    <body>
+      <div class="header"><h1>TÜBİTAK Ön Değerlendirme Raporu</h1></div>
+      ${alan.innerHTML}
+      <p style="margin-top:20px;font-size:11px;color:#999">Rapor Tarihi: ${new Date().toLocaleString('tr-TR')}</p>
+    </body>
+    </html>
+  `;
+  
+  const blob = new Blob([html], {type: 'text/html;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `TUBITAK_Rapor_${new Date().toISOString().split('T')[0]}.html`;
+  a.click();
+}
+
+function tubitakMailGonder() {
+  const subject = 'TÜBİTAK Ön Değerlendirme Raporum';
+  const body = 'Merhaba,\n\nTÜBİTAK ön değerlendirme raporumu ekte incelenmesi için gönderiyorum.\n\nSaygılarımla.';
+  window.location.href = `mailto:tubitak@adsdanismanlik.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  alert('E-posta uygulamanız açılacaktır. Raporu HTML olarak kaydedip ekleyebilirsiniz.');
+}
+
+// Sayfa render fonksiyonları
+function renderCagriTakvimi() {
+  const container = el('cagriTakvimi');
+  if (!container) return;
+  
+  container.innerHTML = TUBITAK_CAGRI.map(c => `
+    <div class="cagri-item ${c.durum === 'acik' ? 'acik' : 'kapali'}">
+      <div class="cagri-kod">${c.kod}</div>
+      <div style="font-size:12px;margin:5px 0">${c.donem}</div>
+      <div class="cagri-durum ${c.durum === 'acik' ? 'durum-acik' : 'durum-kapali'}">
+        ${c.durum === 'acik' ? 'AÇIK' : c.durum === 'kapali' ? 'KAPALI' : 'BEKLEMEDE'}
+      </div>
+      ${c.kalan_gun ? `<div style="margin-top:5px;font-size:11px;color:#D97706">⏰ ${c.kalan_gun} gün</div>` : ''}
+      <div style="font-size:10px;margin-top:5px;color:#6B7280">Son: ${c.bitis}</div>
+    </div>
+  `).join('');
+  
+  const kritik = el('kritikTarihler');
+  if (kritik) {
+    const acikCagrilar = TUBITAK_CAGRI.filter(c => c.durum === 'acik');
+    kritik.innerHTML = acikCagrilar.map(c => `
+      <div style="margin-bottom:8px;padding:5px;background:#F3F4F6;border-radius:5px">
+        <strong>${c.kod}</strong> son başvuru: ${c.bitis} | Ön kayıt: ${c.on_kayit}
+      </div>
+    `).join('') || '<p>Şu anda açık çağrı yok.</p>';
+  }
+}
+
+function renderAnaSayfa() {
+  const programKartlari = el('programKartlari');
+  if (programKartlari) {
+    programKartlari.innerHTML = TUBITAK_PROGRAMLARI.slice(0,4).map(p => `
+      <div class="svc-card program-card" onclick="showPage('tubitakFormPage')">
+        <h4>${p.kod} - ${p.ad.substring(0,20)}</h4>
+        <p>${p.hedef.substring(0,30)} | ${(p.butce_min/1e6).toFixed(1)}-${(p.butce_max/1e6).toFixed(1)}M TL | %${p.hibe} hibe</p>
+        <span class="svc-link">Değerlendir →</span>
+      </div>
+    `).join('');
+  }
+  
+  const cagriOzet = el('cagriOzet');
+  if (cagriOzet) {
+    const acikSayisi = TUBITAK_CAGRI.filter(c => c.durum === 'acik').length;
+    cagriOzet.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span><i class="fas fa-calendar-check" style="color:#C9A84C"></i> <strong>Güncel Çağrılar:</strong> ${acikSayisi} program açık</span>
+        <button class="btn-sm" style="background:transparent;color:white;border:1px solid white" onclick="showPage('tubitakCagriPage')">Detaylar →</button>
+      </div>
+    `;
+  }
+}
+
+function renderTubitakPage() {
+  const tablo = el('tubitakProgramTablosu');
+  if (tablo) {
+    tablo.innerHTML = TUBITAK_PROGRAMLARI.map(p => {
+      const acikCagri = TUBITAK_CAGRI.find(c => c.kod === p.kod && c.durum === 'acik');
+      return `
+        <tr>
+          <td><strong>${p.kod}</strong></td>
+          <td>${p.hedef}</td>
+          <td>${(p.butce_min/1e6).toFixed(1)}-${(p.butce_max/1e6).toFixed(1)}M TL</td>
+          <td>%${p.hibe}</td>
+          <td>${p.sure} ay</td>
+          <td>${acikCagri ? '<span class="durum-acik" style="padding:2px 8px">Açık</span>' : '<span class="durum-kapali" style="padding:2px 8px">Kapalı</span>'}</td>
+        </tr>
+      `;
+    }).join('');
+  }
+}
+
+// Mevcut fonksiyonları koru
+const LS={get:k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set:(k,v)=>localStorage.setItem(k,JSON.stringify(v))};
+const el=id=>document.getElementById(id);
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const e=el(id);if(e)e.classList.add('active');
+  window.scrollTo(0,0);
+  
+  // Sayfa özel render işlemleri
+  if (id === 'anaSayfa') renderAnaSayfa();
+  if (id === 'tubitakCagriPage') renderCagriTakvimi();
+  if (id === 'tubitakPage') renderTubitakPage();
+  if (id === 'tubitakFormPage') {
+    // Form alanlarını temizle
+    setTimeout(() => {
+      if (el('sform-step0')) el('sform-step0').classList.add('active');
+      if (el('sform-step1')) el('sform-step1').classList.remove('active');
+    }, 100);
+  }
+}
+
+// Admin fonksiyonları (placeholder)
+function openAdmin() { el('adminWrap').style.display = 'block'; }
+function closeAdmin() { el('adminWrap').style.display = 'none'; }
+function doLogin() { /* Admin login işlemleri */ }
+function setAdmSec(sec) { /* Admin sekme değiştirme */ }
+
+// Sayfa yüklendiğinde
+document.addEventListener('DOMContentLoaded',()=>{
+  renderAnaSayfa();
+});
+</script>
+
+<!-- Mevcut akıllı form fonksiyonları (placeholder) -->
+<script>
+function selectSrv(srv) { 
+  secilenHizmet = srv;
+  document.querySelectorAll('.srv-btn').forEach(b=>b.classList.remove('selected'));
+  event.currentTarget.classList.add('selected');
+  // Form alanlarını yükleme işlemi burada yapılabilir
+  if (el('sform-step0')) el('sform-step0').classList.remove('active');
+  if (el('sform-step1')) el('sform-step1').classList.add('active');
+}
+
+function backToSrvSel() {
+  if (el('sform-step1')) el('sform-step1').classList.remove('active');
+  if (el('sform-step0')) el('sform-step0').classList.add('active');
+}
+
+function musteriFormGonder() {
+  alert('Formunuz alınmıştır. En kısa sürede size dönüş yapılacaktır.');
+}
+</script>
+</body>
+</html>
