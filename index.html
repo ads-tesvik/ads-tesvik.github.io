@@ -3,25 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADS Danışmanlık | Yatırım ve Teşvik Uzmanı</title>
+    <title>ADS Danışmanlık | AI Destekli Analiz Formları</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
     <style>
-        /* ===== RESET & VARIABLES ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --navy: #1E2A44; --gold: #C9A84C; --light: #F8F9FA; --text: #2D3748; --muted: #718096; }
         body { font-family: 'Inter', sans-serif; color: var(--text); background: #fff; overflow-x: hidden; }
         .page { display: none; }
         .page.active { display: block; }
-
-        /* ===== DUYURU BAR ===== */
-        #duyuruBar { display: none; padding: 8px 28px; align-items: center; justify-content: space-between; background: #2E4A7D; color: white; }
-        #duyuruBar.show { display: flex; }
-        #duyuruBar p { font-size: 13px; font-weight: 600; margin: 0; }
-        #duyuruBar a { color: var(--gold); font-weight: 700; margin-left: 14px; text-decoration: underline; font-size: 13px; }
 
         /* ===== NAVBAR ===== */
         .nbar { background: var(--navy); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 64px; box-shadow: 0 2px 12px rgba(0,0,0,.3); position: sticky; top: 0; z-index: 500; flex-wrap: wrap; }
@@ -35,13 +28,6 @@
         .dropdown:hover .dd { display: block; }
         .dd a { display: block; padding: 8px 12px; color: var(--text); text-decoration: none; border-radius: 6px; font-size: 12px; cursor: pointer; }
         .dd a:hover { background: var(--light); color: var(--navy); }
-        .dd .menu-group { border-bottom: 1px solid #eee; }
-        .dd .group-title { font-weight: 700; color: var(--navy); padding: 8px 12px; font-size: 12px; background: #f5f5f5; border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
-        .dd .group-title i { transition: transform .2s; }
-        .dd .group-title.open i { transform: rotate(90deg); }
-        .dd .sub-items { padding-left: 12px; display: none; }
-        .dd .sub-items a { padding: 6px 12px; font-size: 11px; }
-        .dd .sub-items a i { margin-right: 6px; width: 16px; }
 
         /* ===== HERO SLIDER ===== */
         .hero-slider { position: relative; height: 500px; overflow: hidden; }
@@ -72,13 +58,9 @@
         .btn-gold { background: var(--gold); color: var(--navy); border: none; padding: 11px 22px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; }
         .btn-gold:hover { background: #b8962e; }
         .btn-navy { background: var(--navy); color: white; padding: 9px 18px; border-radius: 7px; font-size: 12px; font-weight: 600; cursor: pointer; }
-        .btn-outline-w { background: transparent; color: white; border: 2px solid rgba(255,255,255,.6); padding: 10px 22px; border-radius: 8px; font-size: 13px; cursor: pointer; }
-        .btn-outline-w:hover { border-color: white; background: rgba(255,255,255,.1); }
         .btn-sm { padding: 5px 10px; font-size: 11px; border-radius: 5px; cursor: pointer; font-weight: 600; }
         .btn-del { background: #EF4444; color: white; }
-        .btn-edt { background: #F59E0B; color: white; }
         .btn-view { background: #3B82F6; color: white; }
-        .btn-green { background: #16A34A; color: white; }
 
         /* ===== SEKMELER ===== */
         .section { padding: 56px 40px; }
@@ -87,82 +69,33 @@
         .sec-title { text-align: center; margin-bottom: 10px; font-family: 'Playfair Display', serif; font-size: 30px; color: var(--navy); }
         .sec-sub { color: var(--muted); font-size: 14px; max-width: 540px; margin: 0 auto 32px; text-align: center; }
 
-        /* ===== KARTLAR ===== */
-        .svc-card { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,.07); border: 1px solid #eee; border-left: 4px solid var(--gold); height: 100%; }
-        .svc-card h4 { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--navy); margin-bottom: 7px; }
-        .svc-card p { color: var(--muted); font-size: 12px; }
-        .svc-card a { text-decoration: none; color: inherit; }
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
+        .form-container { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .report-container { background: #f8f9fa; border-radius: 16px; padding: 24px; border-left: 5px solid #0a5b8c; box-shadow: 0 4px 12px rgba(0,0,0,0.1); position: sticky; top: 90px; }
+        .form-section { margin-bottom: 30px; border-bottom: 1px solid #e2e8f0; padding-bottom: 20px; }
+        .form-section h3 { color: #0a5b8c; margin-bottom: 20px; font-size: 1.3rem; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        .form-group { margin-bottom: 15px; }
+        label { font-weight: 600; display: block; margin-bottom: 6px; font-size: 13px; color: #2d3748; }
+        input, select, textarea { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; font-family: inherit; }
+        textarea { resize: vertical; min-height: 80px; }
+        .checkbox-group { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 5px; }
+        .checkbox-group label { font-weight: normal; background: #f1f5f9; padding: 5px 12px; border-radius: 20px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+        .report-box { background: white; border-radius: 12px; padding: 20px; margin-top: 20px; border-left: 4px solid #ffc107; }
+        .report-box h4 { color: #0a5b8c; margin-bottom: 15px; }
 
-        /* ===== GRID ===== */
-        .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-        .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-        .g4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 14px; }
-        .g5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
-
-        /* ===== TEAM ===== */
-        .team-card { background: white; border-radius: 10px; padding: 22px 16px; box-shadow: 0 4px 14px rgba(0,0,0,.06); text-align: center; height: 100%; }
-        .t-av { width: 80px; height: 80px; border-radius: 50%; background: #E8EDF5; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 32px; color: #2E4A7D; border: 3px solid #2E4A7D; overflow: hidden; }
-        .t-av img { width: 100%; height: 100%; object-fit: cover; }
-        .t-name { font-size: 16px; font-weight: 700; color: #1E2A44; }
-        .t-rol { font-size: 10px; color: #2E4A7D; font-weight: 600; margin-bottom: 9px; text-transform: uppercase; }
-        .t-bio { font-size: 12px; color: #6B7280; }
-
-        /* ===== BLOG ===== */
-        .blog-card { background: white; border-radius: 9px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,.05); cursor: pointer; }
-        .blog-img { width: 100%; height: 140px; background: #E8EDF5; display: flex; align-items: center; justify-content: center; color: #ccc; font-size: 32px; overflow: hidden; }
-        .blog-img img { width: 100%; height: 100%; object-fit: cover; }
-        .blog-body { padding: 13px; }
-        .blog-meta { color: #999; font-size: 10px; margin-bottom: 5px; }
-        .blog-tag { display: inline-block; background: #E8EDF5; color: #2E4A7D; padding: 2px 7px; border-radius: 20px; font-size: 10px; }
-
-        /* ===== DOKÜMAN KARTLARI ===== */
-        .doc-card { background: white; border-radius: 8px; padding: 14px; box-shadow: 0 2px 8px rgba(0,0,0,.05); border-left: 4px solid var(--gold); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-        .doc-info h5 { font-size: 13px; color: var(--navy); }
-        .doc-info p { font-size: 11px; color: var(--muted); }
-        .doc-actions { display: flex; gap: 8px; }
-        .doc-link { color: var(--gold); cursor: pointer; font-size: 16px; text-decoration: none; }
-
-        /* ===== DUYURU ===== */
-        .duyuru-card { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,.05); border-left: 4px solid #2E4A7D; margin-bottom: 12px; }
-        .duyuru-card h5 { font-size: 14px; color: var(--navy); display: flex; align-items: center; gap: 8px; }
-        .duyuru-card .onem { font-size: 10px; padding: 2px 6px; border-radius: 4px; background: #EF4444; color: white; }
-        .duyuru-card .tarih { font-size: 10px; color: var(--muted); display: block; margin-top: 8px; }
-
-        /* ===== HİKAYE ===== */
-        .hik-card { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 4px 14px rgba(0,0,0,.07); border-left: 4px solid var(--gold); margin-bottom: 18px; }
-        .hik-card h4 { color: var(--navy); font-size: 15px; display: flex; align-items: center; gap: 8px; }
-        .hik-card h4 img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
-
-        /* ===== İLETİŞİM ===== */
-        .cbox { background: #2E4A7D; color: white; padding: 24px; border-radius: 12px; }
-        .cbox a { color: white; }
-
-        /* ===== FORM ===== */
-        .form-box { border-radius: 9px; padding: 14px; margin-bottom: 12px; background: #f8f9fa; }
-        .form-box.navy { border-left: 3px solid var(--navy); }
-        .form-box.gold { border-left: 3px solid var(--gold); }
-        .fi { display: flex; flex-direction: column; gap: 3px; margin-bottom: 9px; }
-        .fi label { font-size: 11px; font-weight: 600; color: #374151; }
-        .fi input, .fi select, .fi textarea { padding: 7px 10px; border: 1.5px solid #D1D5DB; border-radius: 7px; font-size: 12px; width: 100%; }
-        .fi input:focus, .fi select:focus, .fi textarea:focus { outline: none; border-color: #2E4A7D; }
-        .fi textarea { resize: vertical; min-height: 70px; }
-        .req { color: #EF4444; }
-
-        /* ===== TABLO ===== */
+        /* ===== TABLO, MODAL, ADMIN ===== */
         .tbl { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; }
         .tbl th { background: #2E4A7D; color: white; padding: 8px; text-align: left; font-size: 12px; }
         .tbl td { padding: 8px; border-bottom: 1px solid #eef2f6; font-size: 12px; }
-
-        /* ===== FOOTER & WHATSAPP ===== */
         .footer { background: #111827; color: rgba(255,255,255,.65); text-align: center; padding: 18px; font-size: 12px; }
         .wa-float { position: fixed; width: 52px; height: 52px; bottom: 28px; right: 28px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; z-index: 1000; text-decoration: none; }
-
-        /* ===== MODAL ===== */
         .modal { position: fixed; inset: 0; background: rgba(0,0,0,.7); display: none; align-items: center; justify-content: center; z-index: 10000; }
         .modal.show { display: flex; }
-        .modal-content { background: white; border-radius: 10px; padding: 30px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; }
-
-        /* ===== ADMIN PANEL ===== */
+        .modal-content { background: white; border-radius: 10px; padding: 30px; max-width: 800px; width: 90%; max-height: 80vh; overflow-y: auto; }
+        .detail-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .detail-table th, .detail-table td { border: 1px solid #ddd; padding: 8px; text-align: left; vertical-align: top; }
+        .detail-table th { background: #f2f2f2; width: 30%; }
         #adminWrap { position: fixed; inset: 0; z-index: 9000; background: #F3F4F6; display: none; overflow-y: auto; }
         .a-login-ov { position: fixed; inset: 0; background: rgba(15,23,42,.9); display: flex; align-items: center; justify-content: center; }
         .a-login-box { background: white; padding: 34px; border-radius: 14px; width: 330px; text-align: center; }
@@ -182,44 +115,19 @@
         .a-card { background: white; border-radius: 9px; padding: 18px; box-shadow: 0 2px 10px rgba(0,0,0,.06); margin-bottom: 14px; }
         .s-box { background: white; border-radius: 9px; padding: 14px; text-align: center; }
         .s-num { font-size: 28px; font-weight: 700; color: #2E4A7D; }
-        .a-fg { margin-bottom: 9px; }
-        .a-fg label { display: block; font-size: 11px; font-weight: 600; color: #374151; margin-bottom: 3px; }
-        .a-fg input, .a-fg textarea, .a-fg select { width: 100%; padding: 7px 10px; border: 1.5px solid #D1D5DB; border-radius: 6px; font-size: 12px; }
         .a-tbl { width: 100%; border-collapse: collapse; font-size: 11px; }
         .a-tbl th { text-align: left; padding: 7px; background: #F9FAFB; color: #6B7280; border-bottom: 1px solid #E5E7EB; }
         .a-tbl td { padding: 7px; border-bottom: 1px solid #F9FAFB; }
-        .pill { display: inline-block; padding: 2px 7px; border-radius: 20px; font-size: 10px; font-weight: 600; }
-        .admin-form { background: #f9fafb; border-radius: 8px; padding: 15px; margin-bottom: 15px; }
-        .admin-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
-        .admin-form .form-col { display: flex; flex-direction: column; }
-        .admin-form label { font-size: 11px; font-weight: 600; color: #374151; margin-bottom: 3px; }
-        .admin-form input, .admin-form textarea, .admin-form select { padding: 6px 8px; border: 1px solid #d1d5db; border-radius: 5px; font-size: 12px; }
-        .admin-form textarea { min-height: 80px; }
-        .update-btn { background: #2E4A7D; color: white; border: none; padding: 8px 12px; border-radius: 6px; font-size: 11px; cursor: pointer; }
-
-        /* ===== SÜRÜKLE BIRAK ALANI ===== */
-        .dropzone { border: 2px dashed #ccc; border-radius: 8px; padding: 20px; text-align: center; background: #fafafa; cursor: pointer; margin-bottom: 10px; transition: .2s; }
-        .dropzone.dragover { border-color: var(--gold); background: #f0f0f0; }
-        .dropzone i { font-size: 24px; color: var(--muted); margin-bottom: 5px; }
-        .dropzone p { font-size: 11px; color: var(--muted); }
-        .file-info { font-size: 11px; margin-top: 5px; color: green; }
-
-        /* ===== MAIL MODAL ===== */
-        .mail-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); align-items: center; justify-content: center; z-index: 11000; }
-        .mail-box { background: white; border-radius: 14px; padding: 28px; width: 420px; max-width: 90%; }
-
-        /* ===== LİNKLER SAYFASI ===== */
         .link-grubu { margin-bottom: 25px; }
         .link-grubu h3 { font-size: 18px; color: var(--navy); border-bottom: 2px solid var(--gold); padding-bottom: 5px; margin-bottom: 15px; }
         .link-item { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: white; border-radius: 8px; margin-bottom: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
         .link-item i { width: 20px; color: var(--gold); }
         .link-item a { text-decoration: none; color: var(--navy); font-weight: 500; flex: 1; }
         .link-item a:hover { color: var(--gold); }
+        @media (max-width: 900px) { .two-column { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-
-<div id="duyuruBar"></div>
 
 <nav class="nbar">
     <div class="logo" onclick="showPage('anaSayfa')">ADS <span>|</span> Teşvik Danışmanlığı</div>
@@ -227,10 +135,7 @@
         <a class="nav-link" onclick="showPage('anaSayfa')">Anasayfa</a>
         <a class="nav-link" onclick="showPage('hakkindaPage')">Hakkımızda</a>
         <a class="nav-link" onclick="showPage('ekibimizPage')">Ekibimiz</a>
-        <div class="dropdown">
-            <a class="nav-link">Hizmetler ▾</a>
-            <div class="dd" id="hizmetDropdown"></div>
-        </div>
+        <div class="dropdown"><a class="nav-link">Hizmetler ▾</a><div class="dd" id="hizmetDropdown"></div></div>
         <a class="nav-link" onclick="showPage('vakaPage')">Başarı Hikayeleri</a>
         <a class="nav-link" onclick="showPage('blogPage')">Blog</a>
         <a class="nav-link" onclick="showPage('dokumanlarPage')">📚 Dokümanlar</a>
@@ -240,33 +145,10 @@
     </div>
 </nav>
 
-<!-- HERO SLIDER (5 slayt) -->
-<div class="hero-slider">
-    <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=900&auto=format')">
-        <div class="slide-overlay"><div class="slide-content"><div class="badge-c">PROFESYONEL TEŞVİK DANIŞMANLIĞI</div><h1>İşletmenizi<br><span>Devlet Destekleriyle</span><br>Büyütün</h1><p class="sub">Yatırım Teşvik, TÜBİTAK, KOSGEB, İhracat ve IPARD'dan maksimum fayda sağlayın.</p><div><button class="btn-gold" onclick="showPage('iletisimPage')">Hemen Danış</button><button class="btn-outline-w" onclick="showPage('hizmetlerPage')">Hizmetleri İnceleyin</button></div></div></div>
-    </div>
-    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?q=80&w=900&auto=format')">
-        <div class="slide-overlay"><div class="slide-content"><div class="badge-c">TÜBİTAK AR-GE</div><h1>Ar-Ge Projelerinize<br><span>%75 Hibe Desteği</span></h1><p class="sub">1501,1507,1511,1512 programlarıyla yenilikçi fikirlerinizi hayata geçirin.</p><div><button class="btn-outline-w" onclick="showPage('tubitakPage')">Detaylı Bilgi</button></div></div></div>
-    </div>
-    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=900&auto=format')">
-        <div class="slide-overlay"><div class="slide-content"><div class="badge-c">KOSGEB GİRİŞİMCİLİK</div><h1>Kendi İşinizi Kurun<br><span>1.5 Milyon TL'ye</span><br>Kadar Destek</h1><p class="sub">Girişimci, KOBİGEL, İş Geliştirme destekleri.</p><div><button class="btn-outline-w" onclick="showPage('kosgebPage')">Detaylı Bilgi</button></div></div></div>
-    </div>
-    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1566576912302-a6cd8c0e29a4?q=80&w=900&auto=format')">
-        <div class="slide-overlay"><div class="slide-content"><div class="badge-c">YATIRIM TEŞVİK</div><h1>Vergi, Sigorta, Gümrük<br><span>Avantajlarıyla</span><br>Yatırım Yapın</h1><p class="sub">Bölgesel, stratejik ve öncelikli yatırım imkanları.</p><div><button class="btn-outline-w" onclick="showPage('yatirimPage')">Detaylı Bilgi</button></div></div></div>
-    </div>
-    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1563986768711-b3a069f9657e?q=80&w=900&auto=format')">
-        <div class="slide-overlay"><div class="slide-content"><div class="badge-c">İHRACAT DESTEKLERİ</div><h1>Dünyaya Açılın<br><span>%70 Destekle</span><br>Fuar ve Pazarlama</h1><p class="sub">Yurt dışı fuar, pazar araştırması, UR-GE.</p><div><button class="btn-outline-w" onclick="showPage('ihracatPage')">Detaylı Bilgi</button></div></div></div>
-    </div>
-    <div class="slide-dots">
-        <span class="dot active" onclick="currentSlide(0)"></span>
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
-        <span class="dot" onclick="currentSlide(4)"></span>
-    </div>
-</div>
+<!-- HERO SLIDER (kısa) -->
+<div class="hero-slider"><div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=900&auto=format')"><div class="slide-overlay"><div class="slide-content"><div class="badge-c">AI DESTEKLİ ANALİZ</div><h1>Yapay Zeka Destekli<br><span>Ön Analiz</span><br>Formları</h1><p class="sub">Yatırım Teşvik, TÜBİTAK, KOSGEB, SEGEM, İhracat ve IPARD için detaylı değerlendirme.</p></div></div></div><div class="slide-dots"><span class="dot active" onclick="currentSlide(0)"></span></div></div>
 
-<!-- AI SEKMELER (Görseldeki gibi) -->
+<!-- AI SEKMELER -->
 <div class="ai-sekmeler">
     <span class="ai-sekme yatirim" onclick="showPage('yatirimFormPage')">📊 Yatırım AI ✨</span>
     <span class="ai-sekme tubitak" onclick="showPage('tubitakFormPage')">🔬 TÜBİTAK AI ✨</span>
@@ -278,141 +160,48 @@
 
 <!-- ========== ANA SAYFA ========== -->
 <div id="anaSayfa" class="page active">
-    <div class="section section-alt">
-        <div class="container">
-            <h2 class="sec-title">Hizmetlerimiz</h2>
-            <div class="g5">
-                <div class="svc-card" onclick="showPage('yatirimPage')"><h4>📊 Yatırım Teşvik</h4><p>Vergi indirimi, gümrük muafiyeti, KDV istisnası, sigorta primi desteği.</p></div>
-                <div class="svc-card" onclick="showPage('tubitakPage')"><h4>🔬 TÜBİTAK Ar-Ge</h4><p>%75 hibe, 1501,1507,1512 programları, proje yazımı ve yönetimi.</p></div>
-                <div class="svc-card" onclick="showPage('kosgebPage')"><h4>🏢 KOSGEB</h4><p>Girişimci, KOBİGEL, İş Geliştirme, 1.5M TL'ye kadar destek.</p></div>
-                <div class="svc-card" onclick="showPage('segemFormPage')"><h4>🏢 SEGEM</h4><p>KOSGEB SEGEM kapsamında AI destekli yazılım başvuruları.</p></div>
-                <div class="svc-card" onclick="showPage('ihracatPage')"><h4>🌍 İhracat</h4><p>Fuar, pazar araştırması, ofis-mağaza, UR-GE, %70 destek.</p></div>
-                <div class="svc-card" onclick="showPage('ipardPage')"><h4>🌾 IPARD / Tarım</h4><p>Süt, et, meyve-sebze işleme, kırsal turizm, %65 hibe.</p></div>
-            </div>
-        </div>
-    </div>
-    <div class="section">
-        <div class="container">
-            <h2 class="sec-title">Neden ADS?</h2>
-            <div class="g4" style="text-align:center">
-                <div><div style="font-size:36px;color:var(--gold)">100+</div><div>Başarılı Proje</div></div>
-                <div><div style="font-size:36px;color:var(--gold)">500M+</div><div>TL Teşvik</div></div>
-                <div><div style="font-size:36px;color:var(--gold)">5</div><div>Uzmanlık Alanı</div></div>
-                <div><div style="font-size:36px;color:var(--gold)">5+</div><div>Yıl Deneyim</div></div>
-            </div>
-        </div>
-    </div>
-    <div class="section section-alt">
-        <div class="container">
-            <h2 class="sec-title">Başarı Hikayeleri</h2>
-            <div class="g3" id="basariliProjeler"></div>
-        </div>
-    </div>
-    <div class="section" style="background:var(--navy)">
-        <div class="container" style="text-align:center">
-            <h2 class="sec-title" style="color:white">Ücretsiz Ön Teşvik Analizi Alın</h2>
-            <p style="color:rgba(255,255,255,.8);margin-bottom:18px">48 saat içinde uzman değerlendirmesi.</p>
-            <button class="btn-gold" onclick="showPage('iletisimPage')">Analiz Talep Et</button>
-        </div>
-    </div>
+    <div class="section section-alt"><div class="container"><h2 class="sec-title">AI Destekli Ön Analizler</h2><div class="g5" style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;"><div class="svc-card" onclick="showPage('yatirimFormPage')"><h4>📊 Yatırım AI</h4><p>Teşvik analizi, bölgesel avantajlar, vergi indirimi hesaplamaları</p></div><div class="svc-card" onclick="showPage('tubitakFormPage')"><h4>🔬 TÜBİTAK AI</h4><p>Ar-Ge projesi uygunluğu, program seçimi, hakem süreci analizi</p></div><div class="svc-card" onclick="showPage('kosgebFormPage')"><h4>🏢 KOSGEB AI</h4><p>Girişimci destekleri, iş planı analizi, jüri sunumu hazırlığı</p></div><div class="svc-card" onclick="showPage('segemFormPage')"><h4>🏢 SEGEM AI</h4><p>KOSGEB SEGEM kapsamında yazılım başvuru analizi</p></div><div class="svc-card" onclick="showPage('ihracatFormPage')"><h4>🌍 İhracat AI</h4><p>Pazar araştırması, fuar destekleri, UR-GE proje analizi</p></div><div class="svc-card" onclick="showPage('ipardFormPage')"><h4>🌾 IPARD AI</h4><p>Tarım ve kırsal kalkınma yatırım analizi, hibe hesaplamaları</p></div></div></div></div>
+    <div class="section"><div class="container"><h2 class="sec-title">Neden ADS?</h2><div class="g4" style="text-align:center"><div><div style="font-size:36px;color:var(--gold)">100+</div><div>Başarılı Proje</div></div><div><div style="font-size:36px;color:var(--gold)">500M+</div><div>TL Teşvik</div></div><div><div style="font-size:36px;color:var(--gold)">5</div><div>Uzmanlık Alanı</div></div><div><div style="font-size:36px;color:var(--gold)">5+</div><div>Yıl Deneyim</div></div></div></div></div>
+    <div class="section" style="background:var(--navy)"><div class="container" style="text-align:center"><h2 class="sec-title" style="color:white">Yapay Zeka Destekli Ücretsiz Analiz</h2><p style="color:rgba(255,255,255,.8);margin-bottom:18px">48 saat içinde uzman değerlendirmesi.</p><button class="btn-gold" onclick="showPage('yatirimFormPage')">Analiz Talep Et</button></div></div>
 </div>
 
-<!-- ========== HAKKIMIZDA ========== -->
+<!-- ========== DİĞER SAYFALAR (Hakkımızda, Ekibimiz, vb. kısa placeholder) ========== -->
 <div id="hakkindaPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">Hakkımızda</h2><p>ADS Yatırım ve Teşvik Danışmanlığı, 2018 yılında Ankara'da kurulmuş olup, kamu ve özel sektörde edinilen 31 yıllık deneyimi, 5+ yıllık danışmanlık tecrübesiyle birleştirerek firmalara devlet desteklerinden maksimum fayda sağlama konusunda hizmet vermektedir.</p></div></div></div>
-
-<!-- ========== EKİBİMİZ ========== -->
 <div id="ekibimizPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">Uzman Kadromuz</h2><div id="teamContainer" class="g3"></div></div></div></div>
-
-<!-- ========== YATIRIM TEŞVİK SAYFASI ========== -->
-<div id="yatirimPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">Yatırım Teşvik Destekleri</h2><table class="tbl"><thead><tr><th>Bölge</th><th>Yatırıma Katkı</th><th>Vergi İndirimi</th><th>SGK Primi</th><th>Faiz Desteği</th></tr></thead><tbody><tr><td>1. Bölge</td><td>%15</td><td>%50</td><td>2 yıl</td><td>Yok</td></tr><tr><td>2. Bölge</td><td>%20</td><td>%55</td><td>3 yıl</td><td>Yok</td></tr><tr><td>3. Bölge</td><td>%25</td><td>%60</td><td>5 yıl</td><td>Yok</td></tr><tr><td>4. Bölge</td><td>%30</td><td>%70</td><td>6 yıl</td><td>Yok</td></tr><tr><td>5. Bölge</td><td>%40</td><td>%80</td><td>7 yıl</td><td>Var</td></tr><tr><td>6. Bölge</td><td>%50</td><td>%90</td><td>10 yıl</td><td>Var</td></tr></tbody></table></div></div></div>
-
-<!-- ========== TÜBİTAK SAYFASI ========== -->
-<div id="tubitakPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">TÜBİTAK Destekleri</h2><table class="tbl"><thead><tr><th>Program</th><th>Hedef</th><th>Bütçe</th><th>Hibe</th></tr></thead><tbody><tr><td>1501</td><td>Sanayi Ar-Ge</td><td>1-5M TL</td><td>%75</td></tr><tr><td>1507</td><td>KOBİ Ar-Ge</td><td>500K-1M TL</td><td>%75</td></tr><tr><td>1512</td><td>BİGG</td><td>200-400K TL</td><td>%100</td></tr></tbody></table></div></div></div>
-
-<!-- ========== KOSGEB SAYFASI ========== -->
-<div id="kosgebPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">KOSGEB Destekleri</h2><table class="tbl"><thead><tr><th>Program</th><th>Oran</th><th>Limit</th></tr></thead><tbody><tr><td>Girişimci</td><td>%80</td><td>1.5M TL</td></tr><tr><td>KOBİGEL</td><td>%75</td><td>2M TL</td></tr><tr><td>İş Geliştirme</td><td>%60</td><td>300K TL</td></tr></tbody></table></div></div></div>
-
-<!-- ========== İHRACAT SAYFASI ========== -->
-<div id="ihracatPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">İhracat Destekleri</h2><table class="tbl"><thead><tr><th>Program</th><th>Oran</th><th>Limit</th></tr></thead><tbody><tr><td>Fuar</td><td>%70</td><td>150K USD/yıl</td></tr><tr><td>Pazar Araştırması</td><td>%70</td><td>20K USD/yıl</td></tr><tr><td>UR-GE</td><td>%75</td><td>2M TL/proje</td></tr></tbody></table></div></div></div>
-
-<!-- ========== IPARD SAYFASI ========== -->
-<div id="ipardPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">IPARD Destekleri</h2><table class="tbl"><thead><tr><th>Sektör</th><th>Hibe</th><th>Min Yatırım</th></tr></thead><tbody><tr><td>Süt İşleme</td><td>%65</td><td>500K TL</td></tr><tr><td>Et İşleme</td><td>%65</td><td>500K TL</td></tr><tr><td>Kırsal Turizm</td><td>%65</td><td>200K TL</td></tr></tbody></table></div></div></div>
-
-<!-- ========== FORM SAYFALARI (AI Analiz) ========== -->
-<div id="yatirimFormPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">📊 Yatırım Teşvik Ön Analiz</h2><div id="yatirimFormContainer">Form yükleniyor...</div></div></div></div>
-<div id="tubitakFormPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">🔬 TÜBİTAK Ön Analiz</h2><div id="tubitakFormContainer">Form yükleniyor...</div></div></div></div>
-<div id="kosgebFormPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">🏢 KOSGEB Ön Analiz</h2><div id="kosgebFormContainer">Form yükleniyor...</div></div></div></div>
-<div id="ihracatFormPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">🌍 İhracat Ön Analiz</h2><div id="ihracatFormContainer">Form yükleniyor...</div></div></div></div>
-<div id="ipardFormPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">🌾 IPARD Ön Analiz</h2><div id="ipardFormContainer">Form yükleniyor...</div></div></div></div>
-
-<!-- ========== SEGEM FORM SAYFASI (YENİ) ========== -->
-<div id="segemFormPage" class="page">
-    <div class="section">
-        <div class="container">
-            <h2 class="sec-title">🏢 SEGEM Başvuru Bilgi Toplama Formu</h2>
-            <p class="sec-sub">KOSGEB SEGEM kapsamında AI destekli yazılım başvurusu için gerekli bilgileri doldurun. Gönderdiğinizde yanıtlarınız Excel eki olarak e-posta ile iletilecek ve admin paneline kaydedilecektir.</p>
-            <div id="segemFormContainer"></div>
-        </div>
-    </div>
-</div>
-
-<!-- ========== DİĞER SAYFALAR ========== -->
 <div id="vakaPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">Başarı Hikayeleri</h2><div id="hikayelerContainer" class="g2"></div></div></div></div>
 <div id="blogPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">Blog</h2><div id="blogContainer" class="g2"></div></div></div></div>
 <div id="dokumanlarPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">📚 Dokümanlar</h2><div id="dokumanListesiKart" class="g2"></div></div></div></div>
-<div id="duyurularPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">📢 Duyurular</h2><div id="duyurularListesiKart" class="g2"></div></div></div></div>
 <div id="linklerPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">🔗 Faydalı Linkler</h2><div id="linklerContainer"></div></div></div></div>
 <div id="iletisimPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">İletişim</h2><div class="cbox"><p><i class="fas fa-phone"></i> +90 532 326 1673</p><p><i class="fas fa-envelope"></i> adstesvikdanismanlik@gmail.com</p><p><i class="fas fa-map-marker-alt"></i> Ankara / Türkiye</p></div></div></div></div>
 
-<!-- MODAL -->
-<div id="blogModal" class="modal"><div class="modal-content"><span class="modal-close" onclick="closeModal()">&times;</span><h3 id="modalBaslik"></h3><div id="modalIcerik"></div></div></div>
+<!-- ========== 6 AI FORM SAYFASI (Her biri iki sütunlu) ========== -->
+<!-- YATIRIM FORM -->
+<div id="yatirimFormPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">📊 Yatırım Teşvik AI Analiz</h2><div class="two-column"><div class="form-container"><form id="yatirimForm"><div class="form-section"><h3>1. Genel Bilgiler</h3><div class="form-row"><div class="form-group"><label>Ad Soyad *</label><input type="text" name="adSoyad" required></div><div class="form-group"><label>Telefon *</label><input type="tel" name="telefon" required></div></div><div class="form-row"><div class="form-group"><label>E-posta *</label><input type="email" name="email" required></div><div class="form-group"><label>Firma Ünvanı</label><input type="text" name="firmaUnvan"></div></div><div class="form-row"><div class="form-group"><label>Yatırım Konusu (detaylı)</label><textarea name="konu" rows="2"></textarea></div><div class="form-group"><label>NACE Kodu</label><input type="text" name="nace" placeholder="Örn: 25.62"></div></div></div><div class="form-section"><h3>2. Yatırım Yeri ve Bölge</h3><div class="form-row"><div class="form-group"><label>İl</label><input type="text" name="il" placeholder="Yatırım yapılacak il"></div><div class="form-group"><label>İlçe</label><input type="text" name="ilce"></div></div><div class="form-group"><label>Organize Sanayi Bölgesi (OSB) içinde mi?</label><select name="osb"><option>Evet</option><option>Hayır</option></select></div></div><div class="form-section"><h3>3. Yatırım Detayları</h3><div class="form-row"><div class="form-group"><label>Toplam Yatırım Tutarı (TL)</label><input type="number" name="toplamTutar"></div><div class="form-group"><label>Sabit Yatırım (TL)</label><input type="number" name="sabitTutar"></div></div><div class="form-row"><div class="form-group"><label>Makine-Teçhizat Tutarı (TL)</label><input type="number" name="makineTutar"></div><div class="form-group"><label>İnşaat Tutarı (TL)</label><input type="number" name="insaatTutar"></div></div><div class="form-row"><div class="form-group"><label>Yeni İstihdam (kişi)</label><input type="number" name="istihdam"></div><div class="form-group"><label>Proje Süresi (ay)</label><input type="number" name="sure"></div></div><div class="form-group"><label>İthal Makine Var mı?</label><select name="ithal"><option>Evet</option><option>Hayır</option></select></div><div class="form-group"><label>Kapasite Raporu Var mı?</label><select name="kapasiteRapor"><option>Evet</option><option>Hayır</option><option>Yatırım sonrası alınacak</option></select></div></div><div class="form-section"><h3>4. Finansman</h3><div class="form-row"><div class="form-group"><label>Öz Kaynak (TL)</label><input type="number" name="ozKaynak"></div><div class="form-group"><label>Kredi İhtiyacı (TL)</label><input type="number" name="kredi"></div></div></div><button type="button" onclick="submitAIAnaliz('yatirim')">📊 Analiz Gönder</button></form></div><div class="report-container"><h3>📊 Ön Analiz Raporu</h3><div id="yatirimReport" class="report-box"><p>Formu doldurup gönderdiğinizde bu alanda yatırım teşvik analizi oluşacaktır.</p></div></div></div></div></div></div>
 
-<!-- ADMIN PANELİ -->
+<!-- TÜBİTAK FORM -->
+<div id="tubitakFormPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">🔬 TÜBİTAK AI Analiz</h2><div class="two-column"><div class="form-container"><form id="tubitakForm"><div class="form-section"><h3>1. Genel Bilgiler</h3><div class="form-row"><div class="form-group"><label>Ad Soyad *</label><input type="text" name="adSoyad" required></div><div class="form-group"><label>Telefon *</label><input type="tel" name="telefon" required></div></div><div class="form-row"><div class="form-group"><label>E-posta *</label><input type="email" name="email" required></div><div class="form-group"><label>Firma Ünvanı</label><input type="text" name="firmaUnvan"></div></div><div class="form-group"><label>Proje Başlığı</label><input type="text" name="projeBaslik"></div><div class="form-group"><label>Proje Konusu (Teknik detay)</label><textarea name="projeKonu" rows="3"></textarea></div></div><div class="form-section"><h3>2. Teknik Detaylar</h3><div class="form-group"><label>Proje Aşaması</label><select name="asama"><option>Sadece fikir</option><option>Literatür/patent taraması yapıldı</option><option>Ön çalışmalar tamamlandı</option><option>Prototip hazır</option><option>Ürün hazır</option></select></div><div class="form-group"><label>Yenilikçi Yön (Mevcut teknolojiden farkı)</label><textarea name="yenilik" rows="2"></textarea></div><div class="form-group"><label>Patent/Faydalı Model Başvurusu Var mı?</label><select name="patent"><option>Yok</option><option>Başvuru yapıldı</option><option>Tescil alındı</option></select></div><div class="form-group"><label>Hedeflenen Program</label><select name="program"><option>1501 - Sanayi Ar-Ge</option><option>1507 - KOBİ Ar-Ge Başlangıç</option><option>1512 - BİGG</option><option>1511 - Öncelikli Alanlar</option><option>Kararsızım</option></select></div></div><div class="form-section"><h3>3. Bütçe ve Süre</h3><div class="form-row"><div class="form-group"><label>Proje Bütçesi (TL)</label><input type="number" name="butce"></div><div class="form-group"><label>Proje Süresi (ay)</label><input type="number" name="sure"></div></div><div class="form-group"><label>Ar-Ge Personel Sayısı</label><input type="number" name="personelSayisi"></div></div><div class="form-section"><h3>4. Ekip ve Kapasite</h3><div class="form-group"><label>Ekip Üyelerinin Uzmanlık Alanları</label><textarea name="uzmanlik" rows="2"></textarea></div><div class="form-group"><label>Daha önce TÜBİTAK projesi yürüttünüz mü?</label><select name="oncekiProje"><option>Evet</option><option>Hayır</option></select></div><div class="form-group"><label>PRODİS Kaydınız Var mı?</label><select name="prodisKayit"><option>Evet</option><option>Hayır</option></select></div></div><button type="button" onclick="submitAIAnaliz('tubitak')">🔬 Analiz Gönder</button></form></div><div class="report-container"><h3>📊 Ön Analiz Raporu</h3><div id="tubitakReport" class="report-box"><p>Formu doldurup gönderdiğinizde bu alanda TÜBİTAK proje analizi oluşacaktır.</p></div></div></div></div></div></div>
+
+<!-- KOSGEB FORM -->
+<div id="kosgebFormPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">🏢 KOSGEB AI Analiz</h2><div class="two-column"><div class="form-container"><form id="kosgebForm"><div class="form-section"><h3>1. Genel Bilgiler</h3><div class="form-row"><div class="form-group"><label>Ad Soyad *</label><input type="text" name="adSoyad" required></div><div class="form-group"><label>Telefon *</label><input type="tel" name="telefon" required></div></div><div class="form-row"><div class="form-group"><label>E-posta *</label><input type="email" name="email" required></div><div class="form-group"><label>Firma Ünvanı</label><input type="text" name="firmaUnvan"></div></div><div class="form-group"><label>İş Fikri Adı</label><input type="text" name="isFikriAdi"></div><div class="form-group"><label>İş Fikri Detayı</label><textarea name="isFikriDetay" rows="3"></textarea></div></div><div class="form-section"><h3>2. KOSGEB Özel Sorular</h3><div class="form-group"><label>Girişimcilik Eğitimi Aldınız mı?</label><select name="egitimDurum"><option>Evet, sertifikam var</option><option>Hayır, almadım</option><option>Almayı planlıyorum</option></select></div><div class="form-group"><label>KOSGEB Veri Tabanına Kayıtlı mısınız?</label><select name="kosgebKayit"><option>Evet</option><option>Hayır</option><option>Bilmiyorum</option></select></div><div class="form-group"><label>İşletmenizin Yaşı</label><select name="isletmeYas"><option>0-1 yıl</option><option>1-3 yıl</option><option>3+ yıl</option></select></div></div><div class="form-section"><h3>3. Yatırım Planı</h3><div class="form-row"><div class="form-group"><label>Toplam Yatırım Tutarı (TL)</label><input type="number" name="tutar"></div><div class="form-group"><label>Makine-Ekipman Tutarı (TL)</label><input type="number" name="makineTutar"></div></div><div class="form-row"><div class="form-group"><label>Yeni İstihdam (kişi)</label><input type="number" name="istihdam"></div><div class="form-group"><label>Yatırım Süresi (ay)</label><input type="number" name="sure"></div></div><div class="form-group"><label>Proforma Faturalar Var mı?</label><select name="proforma"><option>Evet</option><option>Hayır</option></select></div></div><div class="form-section"><h3>4. Pazar ve Rekabet</h3><div class="form-group"><label>Hedef Kitle / Müşteri Profili</label><textarea name="hedefKitle" rows="2"></textarea></div><div class="form-group"><label>Rakipleriniz Kimler?</label><textarea name="rakipler" rows="2"></textarea></div></div><button type="button" onclick="submitAIAnaliz('kosgeb')">🏢 Analiz Gönder</button></form></div><div class="report-container"><h3>📊 Ön Analiz Raporu</h3><div id="kosgebReport" class="report-box"><p>Formu doldurup gönderdiğinizde bu alanda KOSGEB analizi oluşacaktır.</p></div></div></div></div></div></div>
+
+<!-- SEGEM FORM -->
+<div id="segemFormPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">🏢 SEGEM AI Analiz</h2><div class="two-column"><div class="form-container"><form id="segemForm"><div class="form-section"><h3>1. Genel Bilgiler</h3><div class="form-row"><div class="form-group"><label>Ad Soyad *</label><input type="text" name="adSoyad" required></div><div class="form-group"><label>Telefon *</label><input type="tel" name="telefon" required></div></div><div class="form-row"><div class="form-group"><label>E-posta *</label><input type="email" name="email" required></div><div class="form-group"><label>Firma Ünvanı</label><input type="text" name="firmaUnvan"></div></div></div><div class="form-section"><h3>2. Yazılım ve Proje Detayları</h3><div class="form-group"><label>Yazılımın Temel İşlevi (AI destekli ne yapacak?)</label><textarea name="temelIslev" rows="3" required></textarea></div><div class="form-group"><label>Hedef Sektör(ler)</label><input type="text" name="hedefSektor" placeholder="Örn: tekstil, otomotiv, makine..."></div><div class="form-group"><label>Somut Faydalar (Verimlilik artışı %, maliyet azalımı vb.)</label><textarea name="faydalar" rows="2"></textarea></div><div class="form-group"><label>10 Yıllık Hedef (KOBİ sayısı, yaygınlaşma stratejisi)</label><textarea name="hedef10Yil" rows="2"></textarea></div></div><div class="form-section"><h3>3. Teknik Altyapı</h3><div class="form-group"><label>Geliştirme Aşamaları (MVP, pilot, yaygınlaştırma)</label><textarea name="asamalar" rows="2"></textarea></div><div class="form-group"><label>Kullanılacak Teknolojiler</label><textarea name="teknolojiler" rows="2"></textarea></div><div class="form-group"><label>Geliştirme Modeli</label><select name="gelistirmeModeli"><option>Kendi ekibimizle geliştireceğiz</option><option>Dışarıdan yazılım hizmeti alacağız</option><option>Hibrit</option></select></div></div><div class="form-section"><h3>4. Organizasyon ve Bölgeler</h3><div class="form-group"><label>30 Kişilik Ekip Nitelikleri (KOBİ Danışmanı sayısı, yazılım mühendisi vb.)</label><textarea name="ekipNitelik" rows="2"></textarea></div><div class="form-group"><label>Seçilen 5 İBBS Düzey-1 Bölgesi (En az 5 seçin)</label><div class="checkbox-group" id="segemBolgeler"><label><input type="checkbox" value="İstanbul"> İstanbul</label><label><input type="checkbox" value="Batı Marmara"> Batı Marmara</label><label><input type="checkbox" value="Ege"> Ege</label><label><input type="checkbox" value="Doğu Marmara"> Doğu Marmara</label><label><input type="checkbox" value="Batı Anadolu"> Batı Anadolu</label><label><input type="checkbox" value="Akdeniz"> Akdeniz</label><label><input type="checkbox" value="Orta Anadolu"> Orta Anadolu</label><label><input type="checkbox" value="Batı Karadeniz"> Batı Karadeniz</label><label><input type="checkbox" value="Doğu Karadeniz"> Doğu Karadeniz</label><label><input type="checkbox" value="Kuzeydoğu Anadolu"> Kuzeydoğu Anadolu</label><label><input type="checkbox" value="Ortadoğu Anadolu"> Ortadoğu Anadolu</label><label><input type="checkbox" value="Güneydoğu Anadolu"> Güneydoğu Anadolu</label></div></div><div class="form-group"><label>Fiziki Ofis Planı</label><textarea name="ofisPlan" rows="2"></textarea></div></div><div class="form-section"><h3>5. Bütçe ve Finans</h3><div class="form-group"><label>Yıllık Bütçe Tahmini (Personel, Yazılım, Eğitim, Danışmanlık)</label><textarea name="butce" rows="2"></textarea></div><div class="form-group"><label>Gelir Modeli</label><textarea name="gelirModeli" rows="2"></textarea></div></div><button type="button" onclick="submitAIAnaliz('segem')">🏢 Analiz Gönder</button></form></div><div class="report-container"><h3>📊 Ön Analiz Raporu</h3><div id="segemReport" class="report-box"><p>Formu doldurup gönderdiğinizde bu alanda SEGEM analizi oluşacaktır.</p></div></div></div></div></div></div>
+
+<!-- İHRACAT FORM -->
+<div id="ihracatFormPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">🌍 İhracat AI Analiz</h2><div class="two-column"><div class="form-container"><form id="ihracatForm"><div class="form-section"><h3>1. Genel Bilgiler</h3><div class="form-row"><div class="form-group"><label>Ad Soyad *</label><input type="text" name="adSoyad" required></div><div class="form-group"><label>Telefon *</label><input type="tel" name="telefon" required></div></div><div class="form-row"><div class="form-group"><label>E-posta *</label><input type="email" name="email" required></div><div class="form-group"><label>Firma Ünvanı</label><input type="text" name="firmaUnvan"></div></div></div><div class="form-section"><h3>2. İhracat Deneyimi</h3><div class="form-group"><label>Daha önce ihracat yaptınız mı?</label><select name="deneyim"><option>Evet</option><option>Hayır</option></select></div><div class="form-group"><label>İhracat Yaptığınız / Hedeflediğiniz Ülkeler</label><input type="text" name="ulkeler"></div><div class="form-group"><label>Son 3 Yıl İhracat Hacmi (USD)</label><input type="number" name="hacim"></div></div><div class="form-section"><h3>3. Destek Bilgileri</h3><div class="form-group"><label>Yurt Dışı Fuar Katılımı Planlıyor musunuz?</label><select name="fuar"><option>Evet</option><option>Hayır</option></select></div><div class="form-group"><label>Yurt Dışı Ofis/Mağaza Açmayı Düşünüyor musunuz?</label><select name="ofis"><option>Evet</option><option>Hayır</option></select></div><div class="form-group"><label>UR-GE Projesi Katılımınız Var mı?</label><select name="urge"><option>Evet</option><option>Hayır</option></select></div><div class="form-group"><label>E-İhracat (Amazon, Trendyol vb.) Yapıyor musunuz?</label><select name="eihracat"><option>Evet</option><option>Hayır</option></select></div></div><div class="form-section"><h3>4. Pazar Araştırması</h3><div class="form-group"><label>Hedef Pazar / Ülke</label><input type="text" name="hedefPazar"></div><div class="form-group"><label>Hedef Pazar Analizi (varsa notlar)</label><textarea name="pazarNot" rows="2"></textarea></div></div><button type="button" onclick="submitAIAnaliz('ihracat')">🌍 Analiz Gönder</button></form></div><div class="report-container"><h3>📊 Ön Analiz Raporu</h3><div id="ihracatReport" class="report-box"><p>Formu doldurup gönderdiğinizde bu alanda ihracat analizi oluşacaktır.</p></div></div></div></div></div></div>
+
+<!-- IPARD FORM -->
+<div id="ipardFormPage" class="page"><div class="section"><div class="container"><h2 class="sec-title">🌾 IPARD AI Analiz</h2><div class="two-column"><div class="form-container"><form id="ipardForm"><div class="form-section"><h3>1. Genel Bilgiler</h3><div class="form-row"><div class="form-group"><label>Ad Soyad *</label><input type="text" name="adSoyad" required></div><div class="form-group"><label>Telefon *</label><input type="tel" name="telefon" required></div></div><div class="form-row"><div class="form-group"><label>E-posta *</label><input type="email" name="email" required></div><div class="form-group"><label>Firma / Kooperatif Ünvanı</label><input type="text" name="firmaUnvan"></div></div></div><div class="form-section"><h3>2. Yatırım Detayları</h3><div class="form-group"><label>Yatırım Konusu</label><select name="konu"><option>Süt Üretimi ve İşlenmesi</option><option>Kırmızı Et Üretimi ve İşlenmesi</option><option>Kanatlı Eti ve Yumurta Üretimi</option><option>Meyve ve Sebze İşleme</option><option>Kırsal Turizm</option><option>Yenilenebilir Enerji (GES/RES/Biyokütle)</option></select></div><div class="form-row"><div class="form-group"><label>Yatırım Tutarı (TL)</label><input type="number" name="tutar"></div><div class="form-group"><label>Yeni İstihdam (kişi)</label><input type="number" name="istihdam"></div></div><div class="form-row"><div class="form-group"><label>Yatırım Yeri (İl/İlçe)</label><input type="text" name="yer"></div><div class="form-group"><label>Yatırım Süresi (ay)</label><input type="number" name="sure"></div></div></div><div class="form-section"><h3>3. Ulusal Sistem Kayıtları</h3><div class="form-group"><label>ÇKS (Çiftçi Kayıt Sistemi) Kaydınız Var mı?</label><select name="cks"><option>Evet</option><option>Hayır</option></select></div><div class="form-group"><label>TÜRKVET (Hayvan Kayıt) Kaydınız Var mı?</label><select name="turvket"><option>Evet</option><option>Hayır</option></select></div></div><div class="form-section"><h3>4. Teknik ve İzinler</h3><div class="form-group"><label>Kapasite Raporu Var mı?</label><select name="kapasite"><option>Evet</option><option>Hayır</option></select></div><div class="form-group"><label>İmar Durumu / Tapu Bilgileri</label><textarea name="tapubilgi" rows="2"></textarea></div></div><button type="button" onclick="submitAIAnaliz('ipard')">🌾 Analiz Gönder</button></form></div><div class="report-container"><h3>📊 Ön Analiz Raporu</h3><div id="ipardReport" class="report-box"><p>Formu doldurup gönderdiğinizde bu alanda IPARD analizi oluşacaktır.</p></div></div></div></div></div></div>
+
+<!-- MODAL, ADMIN, vb. -->
+<div id="blogModal" class="modal"><div class="modal-content"><span class="modal-close" onclick="closeModal()">&times;</span><h3 id="modalBaslik"></h3><div id="modalIcerik"></div></div></div>
+<div id="detailModal" class="modal"><div class="modal-content"><span class="modal-close" onclick="closeDetailModal()">&times;</span><h3 id="detailModalTitle">Başvuru Detayı</h3><div id="detailModalBody"></div><div style="margin-top:20px; display:flex; gap:10px;"><button id="exportDetailExcelBtn" class="btn-gold">📊 Excel İndir</button><button id="printDetailBtn" class="btn-navy">🖨️ Yazdır / PDF</button></div></div></div>
+
 <div id="adminWrap">
-    <div id="adminLoginScreen">
-        <div class="a-login-ov">
-            <div class="a-login-box">
-                <h2>Yönetici Girişi</h2>
-                <input type="email" id="loginEmail" placeholder="E-posta" value="admin@ads.com">
-                <input type="password" id="loginPass" placeholder="Şifre" value="ads2026">
-                <div id="loginErr">Hatalı giriş</div>
-                <button class="btn-gold" style="width:100%" onclick="doLogin()">Giriş Yap</button>
-                <br><br>
-                <button onclick="closeAdmin()" style="background:none;border:none;cursor:pointer">← Siteye Dön</button>
-            </div>
-        </div>
-    </div>
+    <div id="adminLoginScreen"><div class="a-login-ov"><div class="a-login-box"><h2>Yönetici Girişi</h2><input type="email" id="loginEmail" placeholder="E-posta" value="admin@ads.com"><input type="password" id="loginPass" placeholder="Şifre" value="ads2026"><div id="loginErr">Hatalı giriş</div><button class="btn-gold" style="width:100%" onclick="doLogin()">Giriş Yap</button><br><br><button onclick="closeAdmin()" style="background:none;border:none;cursor:pointer">← Siteye Dön</button></div></div></div>
     <div id="adminLayout" style="display:none">
-        <div class="a-sidebar">
-            <div class="a-logo">ADS Admin <span>|</span> Panel</div>
-            <div class="a-nav">
-                <div class="a-ni on" data-sec="dashboard" onclick="setAdmSec('dashboard')">📊 Dashboard</div>
-                <div class="a-ni" data-sec="crm" onclick="setAdmSec('crm')">👥 CRM</div>
-                <div class="a-ni" data-sec="musteri-detay" onclick="setAdmSec('musteri-detay')">🔍 Müşteri Detay</div>
-                <div class="a-ni" data-sec="blog" onclick="setAdmSec('blog')">📝 Blog</div>
-                <div class="a-ni" data-sec="ekip" onclick="setAdmSec('ekip')">👥 Ekip</div>
-                <div class="a-ni" data-sec="basari" onclick="setAdmSec('basari')">🏆 Başarı</div>
-                <div class="a-ni" data-sec="dokumanlar" onclick="setAdmSec('dokumanlar')">📚 Dokümanlar</div>
-                <div class="a-ni" data-sec="duyurular" onclick="setAdmSec('duyurular')">📢 Duyurular</div>
-                <div class="a-ni" data-sec="raporlar" onclick="setAdmSec('raporlar')">📁 Raporlar</div>
-                <div class="a-ni" data-sec="ayarlar" onclick="setAdmSec('ayarlar')">⚙️ Ayarlar</div>
-            </div>
-        </div>
-        <div class="a-main">
-            <div class="a-topbar"><h5 id="admTitle">Dashboard</h5><button class="btn-sm btn-del" onclick="doLogout()">Çıkış</button></div>
-            <div class="a-body">
-                <div id="sec-dashboard" class="a-sec active"><div class="g4" id="dashStats"></div><div class="a-card"><h4>Son Başvurular</h4><div id="dashLastSubs"></div></div></div>
-                <div id="sec-crm" class="a-sec"><div class="a-card"><h4>CRM</h4><input type="text" id="crmSearch" placeholder="Ara..." onkeyup="filterCRM()"><div id="crmListesi"></div></div></div>
-                <div id="sec-musteri-detay" class="a-sec"><div class="a-card"><h4>Müşteri Detay</h4><select id="musteriSelect" onchange="loadMusteriDetay()"></select><div id="musteriDetayKart" style="display:none"><div id="musteriDetayIcerik"></div><button class="btn-edt" onclick="duzenleMusteri()">Düzenle</button><button class="btn-del" onclick="silMusteri()">Sil</button></div></div></div>
-                <div id="sec-blog" class="a-sec"><div class="a-card"><h4>Blog Yönetimi</h4>...</div></div>
-                <div id="sec-ekip" class="a-sec"><div class="a-card"><h4>Ekip Yönetimi</h4>...</div></div>
-                <div id="sec-basari" class="a-sec"><div class="a-card"><h4>Başarı Hikayeleri</h4>...</div></div>
-                <div id="sec-dokumanlar" class="a-sec"><div class="a-card"><h4>Doküman Yönetimi</h4>...</div></div>
-                <div id="sec-duyurular" class="a-sec"><div class="a-card"><h4>Duyuru Yönetimi</h4>...</div></div>
-                <div id="sec-raporlar" class="a-sec"><div class="a-card"><h4>Raporlar</h4><button class="btn-navy" onclick="raporOlustur('excel')">Excel</button><button class="btn-navy" onclick="raporOlustur('pdf')">PDF</button></div></div>
-                <div id="sec-ayarlar" class="a-sec"><div class="a-card"><h4>Ayarlar</h4><div class="a-fg"><label>E-posta</label><input id="siteEmail" value="admin@ads.com"></div><div class="a-fg"><label>Mevcut Şifre</label><input type="password" id="currentPass"></div><div class="a-fg"><label>Yeni Şifre</label><input type="password" id="newPass"></div><button class="btn-gold" onclick="changePassword()">Şifre Değiştir</button></div></div>
-            </div>
-        </div>
+        <div class="a-sidebar"><div class="a-logo">ADS Admin <span>|</span> Panel</div><div class="a-nav"><div class="a-ni on" data-sec="dashboard" onclick="setAdmSec('dashboard')">📊 Dashboard</div><div class="a-ni" data-sec="crm" onclick="setAdmSec('crm')">👥 CRM</div><div class="a-ni" data-sec="musteri-detay" onclick="setAdmSec('musteri-detay')">🔍 Müşteri Detay</div><div class="a-ni" data-sec="blog" onclick="setAdmSec('blog')">📝 Blog</div><div class="a-ni" data-sec="ekip" onclick="setAdmSec('ekip')">👥 Ekip</div><div class="a-ni" data-sec="basari" onclick="setAdmSec('basari')">🏆 Başarı</div><div class="a-ni" data-sec="dokumanlar" onclick="setAdmSec('dokumanlar')">📚 Dokümanlar</div><div class="a-ni" data-sec="duyurular" onclick="setAdmSec('duyurular')">📢 Duyurular</div><div class="a-ni" data-sec="raporlar" onclick="setAdmSec('raporlar')">📁 Raporlar</div><div class="a-ni" data-sec="ayarlar" onclick="setAdmSec('ayarlar')">⚙️ Ayarlar</div></div></div>
+        <div class="a-main"><div class="a-topbar"><h5 id="admTitle">Dashboard</h5><button class="btn-sm btn-del" onclick="doLogout()">Çıkış</button></div><div class="a-body"><div id="sec-dashboard" class="a-sec active"><div class="g4" id="dashStats"></div><div class="a-card"><h4>Son Başvurular</h4><div id="dashLastSubs"></div></div></div><div id="sec-crm" class="a-sec"><div class="a-card"><h4>CRM</h4><input type="text" id="crmSearch" placeholder="Ara..." onkeyup="filterCRM()"><div id="crmListesi"></div></div></div><div id="sec-musteri-detay" class="a-sec"><div class="a-card"><h4>Müşteri Detay</h4><select id="musteriSelect" onchange="loadMusteriDetay()"></select><div id="musteriDetayKart" style="display:none"><div id="musteriDetayIcerik"></div><button class="btn-edt" onclick="duzenleMusteri()">Düzenle</button><button class="btn-del" onclick="silMusteri()">Sil</button></div></div></div><div id="sec-blog" class="a-sec"><div class="a-card"><h4>Blog Yönetimi</h4>...</div></div><div id="sec-ekip" class="a-sec"><div class="a-card"><h4>Ekip Yönetimi</h4>...</div></div><div id="sec-basari" class="a-sec"><div class="a-card"><h4>Başarı Hikayeleri</h4>...</div></div><div id="sec-dokumanlar" class="a-sec"><div class="a-card"><h4>Doküman Yönetimi</h4>...</div></div><div id="sec-duyurular" class="a-sec"><div class="a-card"><h4>Duyuru Yönetimi</h4>...</div></div><div id="sec-raporlar" class="a-sec"><div class="a-card"><h4>Raporlar</h4><button class="btn-navy" onclick="exportAllToExcel()">📊 Tüm Başvuruları Excel İndir</button><button class="btn-navy" onclick="exportAllToWord()">📄 Tüm Başvuruları Word İndir</button></div></div><div id="sec-ayarlar" class="a-sec"><div class="a-card"><h4>Ayarlar</h4><div class="a-fg"><label>E-posta</label><input id="siteEmail" value="admin@ads.com"></div><div class="a-fg"><label>Mevcut Şifre</label><input type="password" id="currentPass"></div><div class="a-fg"><label>Yeni Şifre</label><input type="password" id="newPass"></div><button class="btn-gold" onclick="changePassword()">Şifre Değiştir</button></div></div></div></div>
     </div>
 </div>
 
@@ -420,18 +209,16 @@
 <a href="https://wa.me/905323261673" class="wa-float"><i class="fab fa-whatsapp"></i></a>
 
 <script>
-    // ========== EMAILJS AYARLARI (KENDİ BİLGİLERİNİZLE DEĞİŞTİRİN) ==========
-    const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';     // Dashboard > Account > API Keys
-    const EMAILJS_SERVICE_ID = 'service_mb0wxgc';    // Mevcut servis ID'niz
-    const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // Yeni oluşturduğunuz template ID
-    // =========================================================================
+    // ========== EMAILJS AYARLARI ==========
+    const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+    const EMAILJS_SERVICE_ID = 'service_mb0wxgc';
+    const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
     emailjs.init(EMAILJS_PUBLIC_KEY);
 
     const LS = {
         get: (k) => { try { return JSON.parse(localStorage.getItem(k)) } catch { return null } },
         set: (k, v) => localStorage.setItem(k, JSON.stringify(v))
     };
-
     if (!LS.get('ads_subs')) LS.set('ads_subs', []);
     if (!LS.get('ads_blogs')) LS.set('ads_blogs', [{id:1, baslik:'Yatırım Teşvik Rehberi', yazar:'Admin', kategori:'Genel', ozet:'...', icerik:'2026 güncellemeleri...', kapak:'', tarih:'19.03.2026'}]);
     if (!LS.get('ads_team')) LS.set('ads_team', [{id:1, ad:'Dr. Ersin Sünbül', unvan:'Kurucu Ortak', email:'ersin@ads.com', linkedin:'', twitter:'', biyografi:'31 yıllık kamu deneyimi', foto:''}]);
@@ -440,41 +227,14 @@
     if (!LS.get('ads_duyurular')) LS.set('ads_duyurular', []);
     if (!LS.get('ads_config')) LS.set('ads_config', {email:'admin@ads.com',password:'ads2026'});
 
-    // MENU GRUPLARI (KOSGEB altına SEGEM AI eklendi)
+    // MENU (kısa)
     const menuGruplari = [
-        { baslik: '📊 Yatırım Teşvik', alt: [
-            { ad: '📅 Güncel Teşvikler', sayfa: 'yatirimCagriPage' },
-            { ad: '📘 Teşvik Rehberi', sayfa: 'yatirimRehberPage' },
-            { ad: '📊 Fizibilite Süreci', sayfa: 'yatirimFizibilitePage' },
-            { ad: '🤖 Yatırım AI Analiz', sayfa: 'yatirimFormPage' }
-        ]},
-        { baslik: '🔬 TÜBİTAK', alt: [
-            { ad: '📅 Güncel Çağrılar', sayfa: 'tubitakCagriPage' },
-            { ad: '📘 Başvuru Rehberi', sayfa: 'tubitakRehberPage' },
-            { ad: '⚖️ Hakem Süreci', sayfa: 'tubitakHakemPage' },
-            { ad: '🤖 TÜBİTAK AI', sayfa: 'tubitakFormPage' }
-        ]},
-        { baslik: '🏢 KOSGEB', alt: [
-            { ad: '📅 Güncel Çağrılar', sayfa: 'kosgebCagriPage' },
-            { ad: '📘 Başvuru Rehberi', sayfa: 'kosgebRehberPage' },
-            { ad: '⚖️ Jüri Süreci', sayfa: 'kosgebJuriPage' },
-            { ad: '🤖 KOSGEB AI', sayfa: 'kosgebFormPage' },
-            { ad: '🤖 SEGEM AI', sayfa: 'segemFormPage' }
-        ]},
-        { baslik: '🌍 İhracat', alt: [
-            { ad: '📅 Güncel Destekler', sayfa: 'ihracatCagriPage' },
-            { ad: '📘 Destek Rehberi', sayfa: 'ihracatRehberPage' },
-            { ad: '🎪 Fuar Süreci', sayfa: 'ihracatFuarPage' },
-            { ad: '🤖 İhracat AI', sayfa: 'ihracatFormPage' }
-        ]},
-        { baslik: '🌾 IPARD', alt: [
-            { ad: '📅 Güncel Çağrılar', sayfa: 'ipardCagriPage' },
-            { ad: '📘 Başvuru Rehberi', sayfa: 'ipardRehberPage' },
-            { ad: '📋 Proje Süreci', sayfa: 'ipardProjePage' },
-            { ad: '🤖 IPARD AI', sayfa: 'ipardFormPage' }
-        ]}
+        { baslik: '📊 Yatırım Teşvik', alt: [{ ad: '🤖 Yatırım AI', sayfa: 'yatirimFormPage' }] },
+        { baslik: '🔬 TÜBİTAK', alt: [{ ad: '🤖 TÜBİTAK AI', sayfa: 'tubitakFormPage' }] },
+        { baslik: '🏢 KOSGEB', alt: [{ ad: '🤖 KOSGEB AI', sayfa: 'kosgebFormPage' }, { ad: '🤖 SEGEM AI', sayfa: 'segemFormPage' }] },
+        { baslik: '🌍 İhracat', alt: [{ ad: '🤖 İhracat AI', sayfa: 'ihracatFormPage' }] },
+        { baslik: '🌾 IPARD', alt: [{ ad: '🤖 IPARD AI', sayfa: 'ipardFormPage' }] }
     ];
-
     function renderMenu() {
         let html = '';
         menuGruplari.forEach(g => {
@@ -486,131 +246,117 @@
     }
     window.toggleSubMenu = function(e) { e.classList.toggle('open'); e.nextElementSibling.style.display = e.nextElementSibling.style.display === 'block' ? 'none' : 'block'; };
 
-    // ========== SEGEM FORM RENDER VE GÖNDERİM ==========
-    function renderSEGEMForm() {
-        const container = document.getElementById('segemFormContainer');
-        if (!container) return;
-        const regionOptions = ['İstanbul','Batı Marmara','Ege','Doğu Marmara','Batı Anadolu','Akdeniz','Orta Anadolu','Batı Karadeniz','Doğu Karadeniz','Kuzeydoğu Anadolu','Ortadoğu Anadolu','Güneydoğu Anadolu'];
-        let html = `
-        <form id="segemFormElement">
-            <div class="form-box navy">
-                <div class="fi"><label>Ad Soyad *</label><input type="text" name="ad" required></div>
-                <div class="fi"><label>Telefon *</label><input type="tel" name="tel" required></div>
-                <div class="fi"><label>E-posta</label><input type="email" name="email"></div>
-                <div class="fi"><label>Firma Ünvanı</label><input type="text" name="firma"></div>
-            </div>
-            <div class="form-box gold">
-                <h4>1. PROJE KONSEPTİ</h4>
-                <div class="fi"><label>1.1. Yazılımın temel işlevi *</label><textarea name="q1_1" rows="3" required></textarea></div>
-                <div class="fi"><label>1.2. Hedef sektör(ler) *</label><textarea name="q1_2" rows="2" required></textarea></div>
-                <div class="fi"><label>1.3. Somut faydalar *</label><textarea name="q1_3" rows="3" required></textarea></div>
-                <div class="fi"><label>1.4. 10 yıllık vizyon ve hedefler *</label><textarea name="q1_4" rows="3" required></textarea></div>
-                <h4>2. TEKNİK ALTYAPI</h4>
-                <div class="fi"><label>2.1. Geliştirme aşamaları *</label><textarea name="q2_1" rows="2" required></textarea></div>
-                <div class="fi"><label>2.2. Kullanılacak teknolojiler *</label><textarea name="q2_2" rows="2" required></textarea></div>
-                <div class="fi"><label>2.3. Geliştirme modeli *</label><select name="q2_3" required><option value="">Seçiniz</option><option>Kendi ekibimizle geliştireceğiz</option><option>Dışarıdan yazılım hizmeti alacağız</option><option>Hibrit (kısmen kendi, kısmen dış kaynak)</option></select></div>
-                <div class="fi"><label>2.4. Mevcut altyapı / prototip</label><textarea name="q2_4" rows="2"></textarea></div>
-                <h4>3. ORGANİZASYON & İNSAN KAYNAKLARI PLANI</h4>
-                <div class="fi"><label>3.1. Ortaklık yapısı *</label><textarea name="q3_1" rows="2" required></textarea></div>
-                <div class="fi"><label>3.2. 30 kişilik ekip nitelikleri *</label><textarea name="q3_2" rows="3" required></textarea></div>
-                <div class="fi"><label>3.3. İşe alım planı *</label><textarea name="q3_3" rows="2" required></textarea></div>
-                <div class="fi"><label>3.4. Yönetim kadrosu *</label><textarea name="q3_4" rows="2" required></textarea></div>
-                <h4>4. FAALİYET BÖLGELERİ</h4>
-                <div class="fi"><label>4.1. Seçilen 5 İBBS Düzey-1 bölgesi (En az 5 seçin) *</label>
-                    <div class="checkbox-group" style="display:flex; flex-wrap:wrap; gap:10px;">${regionOptions.map(b => `<label><input type="checkbox" name="region" value="${b}"> ${b}</label>`).join('')}</div>
-                </div>
-                <div class="fi"><label>4.2. Fiziki ofis planı *</label><textarea name="q4_2" rows="2" required></textarea></div>
-                <div class="fi"><label>4.3. Bölgesel sektör odakları *</label><textarea name="q4_3" rows="2" required></textarea></div>
-                <h4>5. İŞ PLANI & FİNANS</h4>
-                <div class="fi"><label>5.1. Yıllık bütçe tahmini *</label><textarea name="q5_1" rows="3" required></textarea></div>
-                <div class="fi"><label>5.2. Gelir modeli *</label><textarea name="q5_2" rows="2" required></textarea></div>
-                <div class="fi"><label>5.3. Yıllık hedef KOBİ sayısı *</label><textarea name="q5_3" rows="2" required></textarea></div>
-                <div class="fi"><label>5.4. Sürdürülebilirlik planı *</label><textarea name="q5_4" rows="2" required></textarea></div>
-                <h4>6. KURUMSAL DENEYİM</h4>
-                <div class="fi"><label>6.1. Daha önce KOBİ projesi yürütüldü mü? *</label><select name="q6_1" required><option value="">Seçiniz</option><option>Evet, eğitim/danışmanlık projesi yürüttük</option><option>Hayır</option></select></div>
-                <div class="fi"><label>6.2. İşbirliği imkanları *</label><textarea name="q6_2" rows="2" required></textarea></div>
-                <div class="fi"><label>6.3. Daha önce alınan destekler</label><textarea name="q6_3" rows="2"></textarea></div>
-                <h4>7. EK MATERYALLER (İsteğe Bağlı)</h4>
-                <div class="fi"><label>7.1. Yazılım mock-up / ekran görüntüsü (açıklama veya link)</label><textarea name="q7_1" rows="2"></textarea></div>
-                <div class="fi"><label>7.2. Proje akış şeması (açıklama veya link)</label><textarea name="q7_2" rows="2"></textarea></div>
-                <div class="fi"><label>7.3. Referans projeler (açıklama veya link)</label><textarea name="q7_3" rows="2"></textarea></div>
-            </div>
-            <button type="button" class="btn-gold" style="width:100%;" onclick="submitSEGEM()">📩 Gönder (Excel + Admin Kaydı)</button>
-            <div id="segemResult" class="success" style="display:none;"></div>
-            <div id="segemError" class="error" style="display:none;"></div>
-        </form>`;
-        container.innerHTML = html;
-    }
-
-    async function submitSEGEM() {
-        const form = document.getElementById('segemFormElement');
-        const resultDiv = document.getElementById('segemResult');
-        const errorDiv = document.getElementById('segemError');
-        resultDiv.style.display = 'none';
-        errorDiv.style.display = 'none';
-
-        const selectedRegions = Array.from(form.querySelectorAll('input[name="region"]:checked')).map(cb => cb.value);
-        if (selectedRegions.length < 5) {
-            errorDiv.innerText = '❌ Lütfen en az 5 bölge seçiniz.';
-            errorDiv.style.display = 'block';
+    // ========== ORTAK GÖNDERİM FONKSİYONU ==========
+    async function submitAIAnaliz(type) {
+        const form = document.getElementById(`${type}Form`);
+        if (!form) return;
+        const formData = new FormData(form);
+        if (!formData.get('adSoyad') || !formData.get('email') || !formData.get('telefon')) {
+            alert('Lütfen ad soyad, e-posta ve telefon alanlarını doldurun.');
             return;
         }
-
-        const formData = new FormData(form);
-        formData.append('4.1. Seçilen bölgeler', selectedRegions.join(', '));
-        const ad = formData.get('ad') || '';
-        const tel = formData.get('tel') || '';
-        const email = formData.get('email') || '';
-        const firma = formData.get('firma') || '';
-
+        // SEGEM için bölge kontrolü
+        if (type === 'segem') {
+            const selectedRegions = Array.from(document.querySelectorAll('#segemBolgeler input:checked')).map(cb => cb.value);
+            if (selectedRegions.length < 5) {
+                alert('SEGEM için lütfen en az 5 bölge seçiniz.');
+                return;
+            }
+            formData.append('secilenBolgeler', selectedRegions.join(', '));
+        }
         // Excel oluştur
         const excelData = [];
-        for (let [key, value] of formData.entries()) excelData.push([key, value]);
+        for (let [key, value] of formData.entries()) {
+            excelData.push([key, value]);
+        }
         const ws = XLSX.utils.aoa_to_sheet(excelData);
         const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, 'SEGEM_Basvuru');
+        XLSX.utils.book_append_sheet(wb, ws, `${type.toUpperCase()}_Analiz`);
         const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-        const file = new File([excelBuffer], `SEGEM_Basvuru_${new Date().toISOString()}.xlsx`, { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-
-        let emailBody = 'Yeni başvuru alındı. Detaylar ekteki Excel dosyasındadır.\n\n';
-        excelData.forEach(([q, a]) => { emailBody += `${q}: ${a}\n`; });
-
+        const file = new File([excelBuffer], `${type}_Analiz_${new Date().toISOString()}.xlsx`, { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        let emailBody = `Yeni ${type.toUpperCase()} AI analiz başvurusu alındı.\n\n`;
+        for (let [key, value] of formData.entries()) {
+            emailBody += `${key}: ${value}\n`;
+        }
+        // EmailJS
         try {
             await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
                 to_email: 'ersinsunbul@gmail.com',
-                subject: 'SEGEM Başvuru Formu - Yeni Cevap (Excel Eki)',
+                subject: `${type.toUpperCase()} AI Analiz - Yeni Başvuru`,
                 message: emailBody,
                 attachment: file,
             });
-        } catch (err) { console.error(err); }
-
+        } catch(err) { console.error('EmailJS hatası:', err); }
         // LocalStorage'a kaydet
         const cevaplar = {};
         for (let [key, value] of formData.entries()) cevaplar[key] = value;
         const subs = LS.get('ads_subs');
         subs.push({
             id: Date.now(),
-            hizmet: 'SEGEM',
+            hizmet: `${type.toUpperCase()} AI Analiz`,
             tarih: new Date().toLocaleString(),
-            ad, tel, email, firma,
-            durum: 'Yeni',
-            ekBilgiler: cevaplar,
+            adSoyad: formData.get('adSoyad'),
+            email: formData.get('email'),
+            telefon: formData.get('telefon'),
+            firma: formData.get('firmaUnvan') || '',
+            tumCevaplar: cevaplar
         });
         LS.set('ads_subs', subs);
-
-        resultDiv.innerText = '✅ Form başarıyla gönderildi. Yanıtlarınız e-posta ile iletildi ve admin paneline kaydedildi.';
-        resultDiv.style.display = 'block';
+        // Rapor oluştur
+        const reportDiv = document.getElementById(`${type}Report`);
+        if (reportDiv) {
+            reportDiv.innerHTML = generateReport(type, formData);
+        }
         form.reset();
-        form.querySelectorAll('input[name="region"]').forEach(cb => cb.checked = false);
+        if (type === 'segem') document.querySelectorAll('#segemBolgeler input').forEach(cb => cb.checked = false);
+        alert('Form başarıyla gönderildi. Ön analiz raporu sağ tarafta oluşturuldu.');
     }
 
-    // ========== MEVCUT FONKSİYONLAR (KISALTILMIŞ) ==========
+    function generateReport(type, formData) {
+        const ad = formData.get('adSoyad') || 'Değerli katılımcı';
+        let report = `<h4>📋 ${ad} için ${type.toUpperCase()} Ön Analiz Raporu</h4>`;
+        if (type === 'yatirim') {
+            const tutar = parseFloat(formData.get('toplamTutar')) || 0;
+            const il = formData.get('il') || '';
+            let bolge = 3;
+            if (['İstanbul','Ankara','İzmir','Bursa','Kocaeli'].some(city => il.includes(city))) bolge = 2;
+            const katki = [15,20,25,30,40,50][bolge-1];
+            report += `<p>Yatırımınız ${bolge}. bölge kapsamında değerlendirilmiştir. Yatırıma katkı oranı: %${katki}.</p>`;
+            if (tutar > 0) report += `<p>Tahmini yatırıma katkı tutarı: ${(tutar * katki / 100).toLocaleString()} TL.</p>`;
+            report += `<p>Öneri: Yatırım Teşvik Belgesi için E-TUYS başvurusu hazırlanmalıdır.</p>`;
+        } else if (type === 'tubitak') {
+            const butce = parseFloat(formData.get('butce')) || 0;
+            let program = '1501';
+            if (butce < 500000) program = '1507';
+            if (butce < 200000) program = '1512';
+            report += `<p>Proje bütçeniz: ${butce.toLocaleString()} TL. Önerilen program: ${program}.</p>`;
+            report += `<p>Hibe oranı: %75 (BİGG'de %100). Proje yazımı ve PRODİS başvurusu için destek alabilirsiniz.</p>`;
+        } else if (type === 'kosgeb') {
+            const tutar = parseFloat(formData.get('tutar')) || 0;
+            report += `<p>Girişimci Destek Programı için uygun görünüyorsunuz. Destek limiti: 1.5 Milyon TL.</p>`;
+            if (tutar > 0) report += `<p>İş planı ve jüri sunumu hazırlığı kritik önem taşır.</p>`;
+        } else if (type === 'segem') {
+            const bolgeler = formData.get('secilenBolgeler') || '';
+            report += `<p>KOSGEB SEGEM kapsamında AI yazılım başvurunuz değerlendirilmiştir.</p>`;
+            report += `<p>${bolgeler} bölgelerinde faaliyet planlandığından, 10 yıl süreyle %100 geri ödemesiz destek potansiyeli bulunmaktadır.</p>`;
+        } else if (type === 'ihracat') {
+            report += `<p>İhracat deneyiminiz ve hedef pazarlarınız dikkate alındığında, Ticaret Bakanlığı fuar ve pazar araştırması desteklerinden yararlanabilirsiniz.</p>`;
+        } else if (type === 'ipard') {
+            const konu = formData.get('konu') || '';
+            const tutar = parseFloat(formData.get('tutar')) || 0;
+            report += `<p>${konu} yatırımınız IPARD kapsamında %65 hibeye uygun görünüyor.</p>`;
+            if (tutar > 0) report += `<p>Tahmini hibe: ${(tutar * 0.65).toLocaleString()} TL.</p>`;
+        }
+        report += `<p><strong>Not:</strong> Bu rapor ön analizdir, kesin sonuç için uzman danışmanlık alınız.</p>`;
+        return report;
+    }
+
+    // ========== MEVCUT SİTE FONKSİYONLARI ==========
     function showPage(id) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         const page = document.getElementById(id);
         if (page) page.classList.add('active');
         window.scrollTo(0,0);
-        if (id === 'segemFormPage') renderSEGEMForm();
         if (id === 'anaSayfa') renderAnaSayfa();
         if (id === 'ekibimizPage') renderTeam();
         if (id === 'vakaPage') renderHikayeler();
@@ -619,7 +365,6 @@
         if (id === 'duyurularPage') renderDuyuruKartlari();
         if (id === 'linklerPage') renderLinkler();
     }
-
     function renderAnaSayfa() {
         let h = LS.get('ads_hikayeler') || [];
         const container = document.getElementById('basariliProjeler');
@@ -655,13 +400,10 @@
     function renderLinkler() {
         const container = document.getElementById('linklerContainer');
         if (!container) return;
-        container.innerHTML = `
-            <div class="link-grubu"><h3>🏛️ Bakanlıklar</h3><div class="link-item"><i class="fas fa-building"></i><a href="https://www.sanayi.gov.tr" target="_blank">Sanayi ve Teknoloji Bakanlığı</a></div><div class="link-item"><i class="fas fa-building"></i><a href="https://www.ticaret.gov.tr" target="_blank">Ticaret Bakanlığı</a></div></div>
-            <div class="link-grubu"><h3>🔬 TÜBİTAK</h3><div class="link-item"><i class="fas fa-flask"></i><a href="https://www.tubitak.gov.tr" target="_blank">TÜBİTAK Ana Sayfa</a></div></div>
-            <div class="link-grubu"><h3>🏢 KOSGEB</h3><div class="link-item"><i class="fas fa-store"></i><a href="https://www.kosgeb.gov.tr" target="_blank">KOSGEB Ana Sayfa</a></div></div>
-        `;
+        container.innerHTML = `<div class="link-grubu"><h3>🏛️ Bakanlıklar</h3><div class="link-item"><i class="fas fa-building"></i><a href="https://www.sanayi.gov.tr" target="_blank">Sanayi ve Teknoloji Bakanlığı</a></div><div class="link-item"><i class="fas fa-building"></i><a href="https://www.ticaret.gov.tr" target="_blank">Ticaret Bakanlığı</a></div></div><div class="link-grubu"><h3>🔬 TÜBİTAK</h3><div class="link-item"><i class="fas fa-flask"></i><a href="https://www.tubitak.gov.tr" target="_blank">TÜBİTAK Ana Sayfa</a></div></div><div class="link-grubu"><h3>🏢 KOSGEB</h3><div class="link-item"><i class="fas fa-store"></i><a href="https://www.kosgeb.gov.tr" target="_blank">KOSGEB Ana Sayfa</a></div></div>`;
     }
 
+    // SLIDER
     let slideIndex = 0;
     const slides = document.querySelectorAll('.hero-slide');
     const dots = document.querySelectorAll('.dot');
@@ -669,22 +411,115 @@
     window.currentSlide = function(n) { showSlide(n); };
     setInterval(() => showSlide(slideIndex + 1), 5000);
 
-    // ADMIN (basitleştirilmiş)
+    // ADMIN (kısa)
     function openAdmin() { document.getElementById('adminWrap').style.display = 'block'; document.getElementById('adminLoginScreen').style.display = 'block'; document.getElementById('adminLayout').style.display = 'none'; }
     function closeAdmin() { document.getElementById('adminWrap').style.display = 'none'; }
     function doLogin() { let cfg = LS.get('ads_config'); if (document.getElementById('loginEmail').value === cfg.email && document.getElementById('loginPass').value === cfg.password) { document.getElementById('adminLoginScreen').style.display = 'none'; document.getElementById('adminLayout').style.display = 'flex'; renderDashboard(); renderCRM(); } else { document.getElementById('loginErr').style.display = 'block'; } }
     function doLogout() { document.getElementById('adminLayout').style.display = 'none'; document.getElementById('adminLoginScreen').style.display = 'block'; }
     function setAdmSec(sec) { document.querySelectorAll('.a-ni').forEach(n => n.classList.toggle('on', n.dataset.sec === sec)); document.querySelectorAll('.a-sec').forEach(s => s.classList.remove('active')); document.getElementById('sec-'+sec).classList.add('active'); document.getElementById('admTitle').innerText = sec; if(sec==='dashboard') renderDashboard(); if(sec==='crm') renderCRM(); if(sec==='musteri-detay') loadMusteriListesi(); }
-    function renderDashboard() { let subs = LS.get('ads_subs') || []; let blogs = LS.get('ads_blogs') || []; let team = LS.get('ads_team') || []; document.getElementById('dashStats').innerHTML = `<div class="s-box"><div class="s-num">${blogs.length}</div>Blog</div><div class="s-box"><div class="s-num">${team.length}</div>Ekip</div><div class="s-box"><div class="s-num">${subs.length}</div>Başvuru</div>`; let last = subs.slice(-5).reverse().map(s => `<tr><td>${s.tarih||''}</td><td>${s.ad||''}</td><td>${s.hizmet||''}</td><td><button class="btn-view btn-sm" onclick="viewSub(${s.id})">👁️</button></td></tr>`).join(''); document.getElementById('dashLastSubs').innerHTML = `<table class="a-tbl">${last||'<tr><td>Yok</td></tr>'}</table>`; }
-    function renderCRM() { let subs = LS.get('ads_subs') || []; let html = subs.map(s => `<tr><td>${s.id}</td><td>${s.ad||''}</td><td>${s.hizmet||''}</td><td>${s.durum||''}</td><td><button class="btn-view btn-sm" onclick="viewSub(${s.id})">👁️</button><button class="btn-del btn-sm" onclick="deleteSub(${s.id})">🗑️</button></td></tr>`).join(''); document.getElementById('crmListesi').innerHTML = `<table class="a-tbl"><thead><tr><th>ID</th><th>Müşteri</th><th>Hizmet</th><th>Durum</th><th>İşlem</th></tr></thead><tbody>${html||'<tr><td colspan="5">Kayıt yok</td></tr>'}</tbody></table>`; }
-    function filterCRM() { let search = document.getElementById('crmSearch').value.toLowerCase(); let subs = LS.get('ads_subs') || []; let filtered = subs.filter(s => (s.ad||'').toLowerCase().includes(search)||(s.hizmet||'').toLowerCase().includes(search)); let html = filtered.map(s => `<tr><td>${s.id}</td><td>${s.ad||''}</td><td>${s.hizmet||''}</td><td>${s.durum||''}</td><td><button class="btn-view btn-sm" onclick="viewSub(${s.id})">👁️</button><button class="btn-del btn-sm" onclick="deleteSub(${s.id})">🗑️</button></td></tr>`).join(''); document.getElementById('crmListesi').innerHTML = `<table class="a-tbl"><thead><tr><th>ID</th><th>Müşteri</th><th>Hizmet</th><th>Durum</th><th>İşlem</th></tr></thead><tbody>${html||'<tr><td colspan="5">Eşleşen yok</td></tr>'}</tbody></table>`; }
-    function viewSub(id) { let s = LS.get('ads_subs').find(x=>x.id==id); if(s) alert(JSON.stringify(s,null,2)); }
-    function deleteSub(id) { if(confirm('Sil?')) { let s = LS.get('ads_subs').filter(x=>x.id!=id); LS.set('ads_subs',s); renderCRM(); } }
-    function loadMusteriListesi() { let subs = LS.get('ads_subs') || []; document.getElementById('musteriSelect').innerHTML = '<option value="">Seçiniz</option>' + subs.map(s => `<option value="${s.id}">${s.ad} - ${s.hizmet}</option>`).join(''); }
-    function loadMusteriDetay() { let id = document.getElementById('musteriSelect').value; if(!id) return; let m = LS.get('ads_subs').find(x=>x.id==id); if(!m) return; document.getElementById('musteriDetayIcerik').innerHTML = `<pre>${JSON.stringify(m, null, 2)}</pre>`; document.getElementById('musteriDetayKart').style.display = 'block'; }
+    function renderDashboard() {
+        let subs = LS.get('ads_subs') || [];
+        let blogs = LS.get('ads_blogs') || [];
+        let team = LS.get('ads_team') || [];
+        document.getElementById('dashStats').innerHTML = `<div class="s-box"><div class="s-num">${blogs.length}</div>Blog</div><div class="s-box"><div class="s-num">${team.length}</div>Ekip</div><div class="s-box"><div class="s-num">${subs.length}</div>Başvuru</div>`;
+        let last = subs.slice(-5).reverse().map(s => `tr><td>${s.tarih||''}</td><td>${s.adSoyad||''}</td><td>${s.hizmet||''}</td><td><button class="btn-view btn-sm" onclick="viewSub(${s.id})">Detay</button></td></tr>`).join('');
+        document.getElementById('dashLastSubs').innerHTML = `<table class="a-tbl">${last||'<tr><td colspan="4">Kayıt yok</td></tr>'}</table>`;
+    }
+    function renderCRM() {
+        let subs = LS.get('ads_subs') || [];
+        let html = subs.map(s => `<tr><td>${s.id}</td><td>${s.adSoyad||''}</td><td>${s.hizmet||''}</td><td>${s.durum||'Yeni'}</td><td><button class="btn-view btn-sm" onclick="viewSub(${s.id})">Detay</button><button class="btn-del btn-sm" onclick="deleteSub(${s.id})">Sil</button></td></tr>`).join('');
+        document.getElementById('crmListesi').innerHTML = `<table class="a-tbl"><thead><tr><th>ID</th><th>Müşteri</th><th>Hizmet</th><th>Durum</th><th>İşlem</th></tr></thead><tbody>${html||'<tr><td colspan="5">Kayıt yok</td></tr>'}</tbody></table>`;
+    }
+    function filterCRM() {
+        let search = document.getElementById('crmSearch').value.toLowerCase();
+        let subs = LS.get('ads_subs') || [];
+        let filtered = subs.filter(s => (s.adSoyad||'').toLowerCase().includes(search) || (s.hizmet||'').toLowerCase().includes(search));
+        let html = filtered.map(s => `<tr><td>${s.id}</td><td>${s.adSoyad||''}</td><td>${s.hizmet||''}</td><td>${s.durum||'Yeni'}</td><td><button class="btn-view btn-sm" onclick="viewSub(${s.id})">Detay</button><button class="btn-del btn-sm" onclick="deleteSub(${s.id})">Sil</button></td></tr>`).join('');
+        document.getElementById('crmListesi').innerHTML = `<table class="a-tbl"><thead><tr><th>ID</th><th>Müşteri</th><th>Hizmet</th><th>Durum</th><th>İşlem</th></tr></thead><tbody>${html||'<tr><td colspan="5">Eşleşen yok</td></tr>'}</tbody></table>`;
+    }
+    function viewSub(id) {
+        let s = LS.get('ads_subs').find(x=>x.id==id);
+        if(s) showDetailModal(s);
+    }
+    function showDetailModal(sub) {
+        const modal = document.getElementById('detailModal');
+        const bodyDiv = document.getElementById('detailModalBody');
+        const title = document.getElementById('detailModalTitle');
+        title.innerText = `${sub.hizmet} Detayı (ID: ${sub.id})`;
+        let answersHtml = `<table class="detail-table">`;
+        if (sub.tumCevaplar) {
+            for (let [key, val] of Object.entries(sub.tumCevaplar)) {
+                let valStr = Array.isArray(val) ? val.join(', ') : val;
+                answersHtml += `<tr><th>${key}</th><td>${valStr || '-'}</td></tr>`;
+            }
+        } else { answersHtml += `<tr><td colspan="2">Detay bilgisi bulunamadı.</td></tr>`; }
+        answersHtml += `</table>`;
+        bodyDiv.innerHTML = answersHtml;
+        const exportBtn = document.getElementById('exportDetailExcelBtn');
+        const newExportBtn = exportBtn.cloneNode(true);
+        exportBtn.parentNode.replaceChild(newExportBtn, exportBtn);
+        newExportBtn.onclick = () => exportSingleToExcel(sub);
+        const printBtn = document.getElementById('printDetailBtn');
+        const newPrintBtn = printBtn.cloneNode(true);
+        printBtn.parentNode.replaceChild(newPrintBtn, printBtn);
+        newPrintBtn.onclick = () => { const w = window.open('','_blank'); w.document.write('<html><head><title>Başvuru Detayı</title><style>body{font-family:Arial;margin:20px}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ddd;padding:8px}</style></head><body><h2>'+title.innerText+'</h2>'+answersHtml+'</body></html>'); w.document.close(); w.print(); };
+        modal.classList.add('show');
+    }
+    function closeDetailModal() { document.getElementById('detailModal').classList.remove('show'); }
+    function exportSingleToExcel(sub) {
+        const data = [];
+        if (sub.tumCevaplar) { for (let [key, val] of Object.entries(sub.tumCevaplar)) { let valStr = Array.isArray(val) ? val.join(', ') : val; data.push([key, valStr]); } }
+        const ws = XLSX.utils.aoa_to_sheet(data);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, `Basvuru_${sub.id}`);
+        XLSX.writeFile(wb, `Basvuru_${sub.id}.xlsx`);
+    }
+    function exportAllToExcel() {
+        const subs = LS.get('ads_subs') || [];
+        if (subs.length === 0) { alert('Kayıtlı başvuru yok.'); return; }
+        const wb = XLSX.utils.book_new();
+        subs.forEach(sub => {
+            const data = [];
+            if (sub.tumCevaplar) { for (let [key, val] of Object.entries(sub.tumCevaplar)) { let valStr = Array.isArray(val) ? val.join(', ') : val; data.push([key, valStr]); } }
+            const ws = XLSX.utils.aoa_to_sheet(data);
+            XLSX.utils.book_append_sheet(wb, ws, `Basvuru_${sub.id}`);
+        });
+        XLSX.writeFile(wb, `Tum_Basvurular.xlsx`);
+    }
+    function exportAllToWord() {
+        const subs = LS.get('ads_subs') || [];
+        if (subs.length === 0) { alert('Kayıtlı başvuru yok.'); return; }
+        let html = `<html><head><meta charset="UTF-8"><title>Tüm Başvurular</title><style>body{font-family:Arial;margin:20px}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ddd;padding:8px}</style></head><body><h1>Tüm Başvurular</h1>`;
+        subs.forEach(sub => {
+            html += `<h2>Başvuru ID: ${sub.id} - Tarih: ${sub.tarih}</h2><table>`;
+            if (sub.tumCevaplar) { for (let [key, val] of Object.entries(sub.tumCevaplar)) { let valStr = Array.isArray(val) ? val.join(', ') : val; html += `<tr><th>${key}</th><td>${valStr}</td></tr>`; } }
+            html += `</table><hr>`;
+        });
+        html += `</body></html>`;
+        const blob = new Blob([html], { type: 'application/msword' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = `Tum_Basvurular.doc`;
+        link.click();
+        URL.revokeObjectURL(link.href);
+    }
+    function deleteSub(id) {
+        if (confirm('Sil?')) { let subs = LS.get('ads_subs').filter(x=>x.id!=id); LS.set('ads_subs', subs); renderCRM(); if (document.getElementById('sec-dashboard').classList.contains('active')) renderDashboard(); }
+    }
+    function loadMusteriListesi() {
+        let subs = LS.get('ads_subs') || [];
+        document.getElementById('musteriSelect').innerHTML = '<option value="">Seçiniz</option>' + subs.map(s => `<option value="${s.id}">${s.adSoyad||''} - ${s.hizmet||''}</option>`).join('');
+    }
+    function loadMusteriDetay() {
+        let id = document.getElementById('musteriSelect').value;
+        if(!id) return;
+        let m = LS.get('ads_subs').find(x=>x.id==id);
+        if(!m) return;
+        document.getElementById('musteriDetayIcerik').innerHTML = `<pre>${JSON.stringify(m, null, 2)}</pre>`;
+        document.getElementById('musteriDetayKart').style.display = 'block';
+    }
     function duzenleMusteri() { alert('Düzenleme henüz eklenmedi.'); }
     function silMusteri() { let id = document.getElementById('musteriSelect').value; if(id && confirm('Sil?')) { let subs = LS.get('ads_subs').filter(x=>x.id!=id); LS.set('ads_subs',subs); loadMusteriListesi(); document.getElementById('musteriDetayKart').style.display = 'none'; } }
-    function raporOlustur(tip) { alert(tip.toUpperCase()+' rapor oluşturuldu (simülasyon)'); }
     function changePassword() { alert('Şifre değiştirildi (simülasyon)'); }
 
     document.addEventListener('DOMContentLoaded', () => { renderMenu(); renderAnaSayfa(); renderTeam(); renderDokumanKartlari(); renderDuyuruKartlari(); });
